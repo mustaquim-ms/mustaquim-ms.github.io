@@ -670,21 +670,17 @@
         overflow: hidden;
       }
 
-      .project-card:nth-child(1) {
-        top: 100px;
-      }
-      .project-card:nth-child(2) {
-        top: 130px;
-      }
-      .project-card:nth-child(3) {
-        top: 160px;
-      }
-      .project-card:nth-child(4) {
-        top: 190px;
-      }
-      .project-card:nth-child(5) {
-        top: 220px;
-      }
+      /* FIXED STICKY OFFSETS FOR UP TO 10 CARDS */
+      .project-card:nth-child(1) { top: 100px; }
+      .project-card:nth-child(2) { top: 130px; }
+      .project-card:nth-child(3) { top: 160px; }
+      .project-card:nth-child(4) { top: 190px; }
+      .project-card:nth-child(5) { top: 220px; }
+      .project-card:nth-child(6) { top: 250px; }
+      .project-card:nth-child(7) { top: 280px; }
+      .project-card:nth-child(8) { top: 310px; }
+      .project-card:nth-child(9) { top: 340px; }
+      .project-card:nth-child(10) { top: 370px; }
 
       .project-index {
         font-family: var(--font-mono);
@@ -1333,6 +1329,9 @@
         .global-mesh-wrapper {
           grid-template-columns: 1fr;
         }
+        .nav-links {
+            display: none;
+        }
       }
     </style>
   </head>
@@ -1448,7 +1447,6 @@
       <h2 class="section-title reveal-up">
         Technical <span>Capabilities</span>
       </h2>
-      <!-- Node 1: 95% = 14.15 -->
       <div class="capabilities-matrix">
         <div class="cap-node reveal-up reveal-graph">
           <div class="cap-ring-wrapper">
@@ -1471,7 +1469,6 @@
           </div>
         </div>
 
-        <!-- Node 1: 95% = 14.15 -->
         <div class="cap-node reveal-up reveal-graph">
           <div class="cap-ring-wrapper">
             <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1492,7 +1489,6 @@
           </div>
         </div>
 
-        <!-- Node 2: 90% = 28.3 -->
         <div
           class="cap-node reveal-up reveal-graph"
           style="transition-delay: 0.1s"
@@ -1516,7 +1512,6 @@
           </div>
         </div>
 
-        <!-- Node 3: 92% = 22.64 -->
         <div
           class="cap-node reveal-up reveal-graph"
           style="transition-delay: 0.2s"
@@ -1540,7 +1535,6 @@
           </div>
         </div>
 
-        <!-- Node: 90% = 28.3 -->
         <div class="cap-node reveal-up reveal-graph">
           <div class="cap-ring-wrapper">
             <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1562,7 +1556,6 @@
           </div>
         </div>
 
-        <!-- Node 4: 85% = 42.45 -->
         <div class="cap-node reveal-up reveal-graph">
           <div class="cap-ring-wrapper">
             <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1583,7 +1576,6 @@
           </div>
         </div>
 
-        <!-- Node 5: 95% = 14.15 -->
         <div
           class="cap-node reveal-up reveal-graph"
           style="transition-delay: 0.1s"
@@ -1607,7 +1599,6 @@
           </div>
         </div>
 
-        <!-- Node 6: 88% = 33.96 -->
         <div
           class="cap-node reveal-up reveal-graph"
           style="transition-delay: 0.2s"
@@ -1701,11 +1692,40 @@
           </div>
         </article>
 
-        <!-- Project 03: Octate Odyssey Clinic Management -->
+        <!-- Project 03: Octesy Helix EDR -->
         <article class="project-card reveal-up">
           <div class="project-index">03</div>
           <div class="p-content">
-            <h3>Octate Odyssey Clinic Management WebApp</h3>
+            <h3>Octesy Helix EDR</h3>
+            <div class="p-tags">
+              <span>Python</span> <span>Electron</span> <span>Cybersecurity</span>
+            </div>
+            <p>
+              An advanced behavioral EDR and Process Guard suite. It features a Python-driven
+              engine for real-time process lineage tracking and egress bandwidth monitoring,
+              paired with a high-fidelity glassmorphic dashboard for automated AES-128 threat containment.
+            </p>
+            <div class="btn-outline ui-interact" style="
+              margin-left: 0;
+              padding: 12px 24px;
+              display: inline-flex;
+              opacity: 0.6;
+              cursor: not-allowed;
+            ">
+              Private Repository
+              <i class="fas fa-lock" style="margin-left: 8px"></i>
+            </div>
+          </div>
+          <div class="p-image">
+            <img src="assets/images/projects/3.png" alt="Octesy Helix EDR Interface" />
+          </div>
+        </article>
+
+        <!-- Project 04: Octesy Clinic Management -->
+        <article class="project-card reveal-up">
+          <div class="project-index">04</div>
+          <div class="p-content">
+            <h3>Octesy Clinic Management WebApp</h3>
             <div class="p-tags">
               <span>SaaS Dashboard</span> <span>Healthcare IT</span>
               <span>Secure Auth</span>
@@ -1715,46 +1735,13 @@
               operations, including patient records, staff management, and
               appointment scheduling within an intuitive dashboard environment.
             </p>
-            <a
-              href="https://octate-odyssey-clinic-saas.vercel.app/login"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-outline"
-              style="margin-left: 0; padding: 12px 24px; display: inline-flex"
-              >Visit Live App
-              <i class="fas fa-external-link-alt" style="margin-left: 8px"></i
-            ></a>
           </div>
           <div class="p-image">
-            <img
-              src="assets/images/projects/3.jpg"
-              alt="Clinic Management WebApp"
-            />
+            <img src="assets/images/projects/4.jpg" alt="Clinic Management WebApp" />
           </div>
         </article>
 
-        <!-- Project 04: OmniCare Signage -->
-        <article class="project-card reveal-up">
-          <div class="project-index">04</div>
-          <div class="p-content">
-            <h3>OmniCare Signage System</h3>
-            <div class="p-tags">
-              <span>Python</span> <span>LAN/WLAN</span> <span>FFmpeg</span>
-            </div>
-            <p>
-              Architected a cost-effective, centralized advertisement
-              broadcasting system across a multi-floor building, managing
-              concurrent video streaming for 10+ Smart TVs via custom
-              multi-threaded Python servers.
-            </p>
-            <!-- Link removed as requested -->
-          </div>
-          <div class="p-image">
-            <img src="assets/images/projects/4.jpg" alt="OmniCare Signage" />
-          </div>
-        </article>
-
-        <!-- NEW Project 05: SSH Sentinel Alert -->
+        <!-- Project 05: SSH Sentinel Alert -->
         <article class="project-card reveal-up">
           <div class="project-index">05</div>
           <div class="p-content">
@@ -1780,7 +1767,6 @@
             ></a>
           </div>
           <div class="p-image">
-            <!-- Image path set exactly as requested -->
             <img
               src="assets/images/projects/5.png"
               alt="SSH Sentinel Alert Script"
@@ -1795,35 +1781,46 @@
             <h3>OctaGuard Prime</h3>
             <div class="p-tags">
               <span>Next.js</span> <span>Node.js</span> <span>Python</span>
-              <span>Cybersecurity</span>
             </div>
             <p>
               A sophisticated production-level endpoint security suite featuring
               remote USB sentinel control, automated offline lockdown protocols,
               and live forensic metadata logging. To protect proprietary
-              security logic and system integrity, the source code for this
-              enterprise-grade infrastructure remains private.
+              security logic, the source code remains private.
             </p>
-            <div
-              class="btn-outline ui-interact"
-              style="
-                margin-left: 0;
-                padding: 12px 24px;
-                display: inline-flex;
-                opacity: 0.6;
-                cursor: not-allowed;
-              "
-            >
+            <div class="btn-outline ui-interact" style="
+              margin-left: 0;
+              padding: 12px 24px;
+              display: inline-flex;
+              opacity: 0.6;
+              cursor: not-allowed;
+            ">
               Private Repository
               <i class="fas fa-lock" style="margin-left: 8px"></i>
             </div>
           </div>
           <div class="p-image">
-            <!-- Image path set to 6.png as requested -->
-            <img
-              src="assets/images/projects/6.jpg"
-              alt="OctaGuard Prime Endpoint Security"
-            />
+            <img src="assets/images/projects/6.jpg" alt="OctaGuard Prime Endpoint Security" />
+          </div>
+        </article>
+
+        <!-- Project 07: OmniCare Signage -->
+        <article class="project-card reveal-up">
+          <div class="project-index">07</div>
+          <div class="p-content">
+            <h3>OmniCare Signage System</h3>
+            <div class="p-tags">
+              <span>Python</span> <span>LAN/WLAN</span> <span>FFmpeg</span>
+            </div>
+            <p>
+              Architected a cost-effective, centralized advertisement
+              broadcasting system across a multi-floor building, managing
+              concurrent video streaming for 10+ Smart TVs via custom
+              multi-threaded Python servers.
+            </p>
+          </div>
+          <div class="p-image">
+            <img src="assets/images/projects/7.jpg" alt="OmniCare Signage" />
           </div>
         </article>
       </div>
@@ -1833,7 +1830,6 @@
     <section id="research" class="section">
       <h2 class="section-title reveal-up">Published <span>Research</span></h2>
       <div class="research-grid">
-        <!-- Paper 1 -->
         <a
           href="https://zenodo.org/records/18813175"
           target="_blank"
@@ -1850,7 +1846,6 @@
             Access Repository <i class="fas fa-arrow-right"></i>
           </div>
         </a>
-        <!-- Paper 2 -->
         <a
           href="https://zenodo.org/records/18477902"
           target="_blank"
@@ -1867,7 +1862,6 @@
             Access Repository <i class="fas fa-arrow-right"></i>
           </div>
         </a>
-        <!-- Paper 3 -->
         <a
           href="https://doi.org/10.5281/zenodo.19229515"
           target="_blank"
@@ -1892,7 +1886,6 @@
       <h2 class="section-title reveal-up">Active <span>Defense Mesh</span></h2>
 
       <div class="global-mesh-wrapper reveal-up">
-        <!-- Visual Node Sphere -->
         <div class="mesh-visual">
           <div class="globe-spinner">
             <div class="node-pulse n1"></div>
@@ -1901,17 +1894,14 @@
           </div>
         </div>
 
-        <!-- Live Security Log Terminal -->
         <div class="mesh-logs">
-          <div
-            style="
-              border-bottom: 1px solid var(--border-glass);
-              padding-bottom: 10px;
-              margin-bottom: 15px;
-              color: var(--accent-cyan);
-              font-weight: 700;
-            "
-          >
+          <div style="
+                border-bottom: 1px solid var(--border-glass);
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+                color: var(--accent-cyan);
+                font-weight: 700;
+              ">
             LIVE TELEMETRY FEED
           </div>
           <div class="log-stream" id="log-stream">
@@ -1932,8 +1922,7 @@
           </div>
           <div class="ct-content">
             <div class="ct-header">
-              <span class="ct-date">Jan 2025 - Present</span
-              ><span class="ct-company">Omnicare Diagnostic Ltd.</span>
+              <span class="ct-date">Jan 2025 - Present</span><span class="ct-company">Omnicare Diagnostic Ltd.</span>
             </div>
             <h3 class="ct-role">Information Technology Officer</h3>
             <p class="ct-desc">
@@ -1950,8 +1939,7 @@
           </div>
           <div class="ct-content">
             <div class="ct-header">
-              <span class="ct-date">Jan 2024 - Jul 2024</span
-              ><span class="ct-company">1000fix Services Ltd.</span>
+              <span class="ct-date">Jan 2024 - Jul 2024</span><span class="ct-company">1000fix Services Ltd.</span>
             </div>
             <h3 class="ct-role">Technical Support Specialist</h3>
             <p class="ct-desc">
@@ -1968,8 +1956,7 @@
           </div>
           <div class="ct-content">
             <div class="ct-header">
-              <span class="ct-date">Feb 2021 - Dec 2023</span
-              ><span class="ct-company">Entrust Global Ltd.</span>
+              <span class="ct-date">Feb 2021 - Dec 2023</span><span class="ct-company">Entrust Global Ltd.</span>
             </div>
             <h3 class="ct-role">Sr. IT Support Engineer</h3>
             <p class="ct-desc">
@@ -1986,8 +1973,7 @@
           </div>
           <div class="ct-content">
             <div class="ct-header">
-              <span class="ct-date">Dec 2017 - Dec 2020</span
-              ><span class="ct-company">M/S Shahin International</span>
+              <span class="ct-date">Dec 2017 - Dec 2020</span><span class="ct-company">M/S Shahin International</span>
             </div>
             <h3 class="ct-role">IT Engineer</h3>
             <p class="ct-desc">
@@ -2004,8 +1990,7 @@
           </div>
           <div class="ct-content">
             <div class="ct-header">
-              <span class="ct-date">Jan 2016 - Jan 2017</span
-              ><span class="ct-company">GrameenPhone Ltd.</span>
+              <span class="ct-date">Jan 2016 - Jan 2017</span><span class="ct-company">GrameenPhone Ltd.</span>
             </div>
             <h3 class="ct-role">Assistant IT Engineer</h3>
             <p class="ct-desc">
