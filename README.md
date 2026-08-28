@@ -55,19 +55,6 @@ This repository houses my digital portfolio. Just as I believe in lightweight, s
 - **"System OS" Experience:** Features a fully draggable terminal overlay and simulated active-defense event logs to mimic a real Network Operations Center (NOC).
 - **CTF Easter Egg:** The site contains a hidden Capture The Flag element for fellow engineers to discover via the UI terminal.
 
-### Local Setup
-
-To run this portfolio locally, no package managers (NPM/Yarn) are required. Simply clone the repository and open the file in your browser:
-
-```bash
-git clone [https://github.com/mustaquim-ms/portfolio.git](https://github.com/mustaquim-ms/portfolio.git)
-cd portfolio
-open index.html
-
-📬 Initiate Connection
-Whether you are looking to overhaul your enterprise infrastructure, migrate to modern endpoint management, or implement Zero-Trust security, let's talk.
-
-Bash
 ➜  ~ contact --protocol email
 Opening secure channel to: mustaquimmahmad@gmail.com...
 Email: mustaquimmahmad@gmail.com
