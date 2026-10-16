@@ -1620,7 +1620,7 @@
             }
         }
 
-        /* --- Scroll Reveals --- */
+        /* --- Reveals --- */
         .reveal-up {
             opacity: 0;
             transform: translateY(40px);
@@ -1679,7 +1679,6 @@
 
     <!-- Smooth Ambient Mouse Glow -->
     <div class="ambient-glow" id="ambient-glow"></div>
-    <div class="ambient-glow-core" id="ambient-glow-core"></div>
 
     <!-- PURE CYBER PRELOADER -->
     <div id="preloader" class="cyber-loader-wrapper">
@@ -1688,7 +1687,7 @@
             <div class="cyber-ring-2"></div>
             <div class="cyber-core"></div>
         </div>
-        <div class="cyber-status-text" id="loader-text">Initializing Systems</div>
+        <div class="loader-message" id="loader-text">Initializing Systems</div>
     </div>
 
     <!-- UI Audio Toggle & Go To Top -->
@@ -1722,31 +1721,30 @@
 
         <!-- REWRITTEN POWER HERO -->
         <header class="hero" id="about">
-        <div class="hero-glow-orb"></div>
-        <div class="hero-text-container" style="flex: 1.5; max-width: 1000px;">
-            <!-- Widened container to give text more room -->
-            <div class="hero-badge reveal-up">
-                <i class="fas fa-shield-alt"></i> IT Infrastructure Engineer & Cyber Analyst
+            <div class="hero-glow-orb"></div>
+            <div class="hero-text-container" style="flex: 1.5; max-width: 1000px;">
+                <div class="hero-badge reveal-up">
+                    <i class="fas fa-shield-alt"></i> IT Infrastructure Engineer & Cyber Analyst
+                </div>
+
+                <h1 class="hero-title reveal-up"
+                    style="transition-delay: 0.1s; font-size: clamp(2rem, 3.5vw, 4rem); line-height: 1.2;">
+                    <span class="hollow">Building Secure, Cyber-Resilient & Reliable Systems.</span><br>
+                    <span class="neon">That Just Work.</span>
+                </h1>
+
+                <p class="hero-desc reveal-up" style="transition-delay: 0.2s;">
+                    I specialize in combining modern cybersecurity, smart AI tools, and practical IT strategy.
+                    My focus is on creating self-sustaining infrastructure that keeps your data safe while helping your
+                    business run smoother and faster.
+                </p>
+
+                <div class="hero-actions reveal-up" style="transition-delay: 0.3s;">
+                    <a href="#projects" class="btn-cyber ui-interact">View Projects</a>
+                    <a href="assets/pdf/resume.pdf" target="_blank" class="btn-cyber alt ui-interact">Download
+                        Resume</a>
+                </div>
             </div>
-        
-            <!-- ENHANCED: Scaled down font size to force a clean two-liner -->
-            <h1 class="hero-title reveal-up"
-                style="transition-delay: 0.1s; font-size: clamp(2rem, 3.5vw, 4rem); line-height: 1.2;">
-                <span class="hollow">Building Secure, Cyber-Resilient & Reliable Systems.</span><br>
-                <span class="neon">That Just Work.</span>
-            </h1>
-        
-            <p class="hero-desc reveal-up" style="transition-delay: 0.2s;">
-                I specialize in combining modern cybersecurity, smart AI tools, and practical IT strategy.
-                My focus is on creating self-sustaining infrastructure that keeps your data safe while helping your business run
-                smoother and faster.
-            </p>
-        
-            <div class="hero-actions reveal-up" style="transition-delay: 0.3s;">
-                <a href="#projects" class="btn-cyber ui-interact">View Projects</a>
-                <a href="assets/pdf/resume.pdf" target="_blank" class="btn-cyber alt ui-interact">Download Resume</a>
-            </div>
-        </div>
 
             <!-- The Interactive Multi-State 3D Rubik's Cube -->
             <div class="hero-cube-container reveal-up" style="transition-delay: 0.4s;">
@@ -1838,7 +1836,7 @@
                     <h3 class="cap-title">Endpoint Ops</h3>
                     <div class="cap-tags"><span>Intune</span><span>Azure AD</span><span>Autopilot</span></div>
                 </div>
-
+        
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.1s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1851,7 +1849,7 @@
                     <h3 class="cap-title">Net Security</h3>
                     <div class="cap-tags"><span>Zero-Trust</span><span>Firewalls</span><span>Cisco</span></div>
                 </div>
-
+        
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.2s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1864,7 +1862,7 @@
                     <h3 class="cap-title">Service Mgt</h3>
                     <div class="cap-tags"><span>ITIL v4</span><span>ServiceNow</span><span>SLA</span></div>
                 </div>
-
+        
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.3s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1877,7 +1875,7 @@
                     <h3 class="cap-title">Automation</h3>
                     <div class="cap-tags"><span>Python</span><span>PowerShell</span><span>AIOps</span></div>
                 </div>
-
+        
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.4s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1888,10 +1886,9 @@
                         <i class="fas fa-server cap-icon"></i>
                     </div>
                     <h3 class="cap-title">Systems Admin</h3>
-                    <div class="cap-tags"><span>Windows Server</span><span>Active Directory</span><span>SCCM</span>
-                    </div>
+                    <div class="cap-tags"><span>Windows Server</span><span>Active Directory</span><span>SCCM</span></div>
                 </div>
-
+        
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.5s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1905,6 +1902,20 @@
                     <div class="cap-tags"><span>LAN/WAN</span><span>Monitoring</span><span>PRTG</span></div>
                 </div>
 
+                <div class="cap-node reveal-up reveal-graph">
+                    <div class="cap-ring-wrapper">
+                        <svg class="cap-ring" viewBox="0 0 100 100">
+                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 22.64"></circle>
+                        </svg>
+                        <div class="cap-percent">92<span>%</span></div>
+                        <!-- Python Icon with hover transition effect -->
+                        <i class="fab fa-python cap-icon" style="transition: transform 0.3s ease, color 0.3s ease;"></i>
+                    </div>
+                    <h3 class="cap-title">Python Dev</h3>
+                    <div class="cap-tags"><span>Python</span><span>Automation</span><span>Scripting</span></div>
+                </div>
+        
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.6s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1918,6 +1929,19 @@
                     <div class="cap-tags"><span>Microsoft 365</span><span>Azure</span><span>GitHub</span></div>
                 </div>
 
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.1s;">
+                    <div class="cap-ring-wrapper">
+                        <svg class="cap-ring" viewBox="0 0 100 100">
+                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 28.3"></circle>
+                        </svg>
+                        <div class="cap-percent">90<span>%</span></div>
+                        <i class="fas fa-database cap-icon"></i>
+                    </div>
+                    <h3 class="cap-title">Database SQL</h3>
+                    <div class="cap-tags"><span>SQL</span><span>Queries</span><span>Supabase</span></div>
+                </div>
+        
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.7s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1938,70 +1962,69 @@
                             <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 18.0"></circle>
                         </svg>
                         <div class="cap-percent">95<span>%</span></div>
-                        <i class="fas fa-user-shield cap-icon"></i>
-                    </div>
-                    <h3 class="cap-title">Cybersecurity</h3>
-                    <div class="cap-tags"><span>EDR</span><span>Threat Intel</span><span>Forensics</span></div>
-                </div>
-
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.9s;">
-                    <div class="cap-ring-wrapper">
-                        <svg class="cap-ring" viewBox="0 0 100 100">
-                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 24.0"></circle>
-                        </svg>
-                        <div class="cap-percent">90<span>%</span></div>
                         <i class="fas fa-project-diagram cap-icon"></i>
                     </div>
                     <h3 class="cap-title">Project Mgmt</h3>
                     <div class="cap-tags"><span>Agile</span><span>Scrum</span><span>Kanban</span></div>
                 </div>
 
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.9s;">
+                    <div class="cap-ring-wrapper">
+                        <svg class="cap-ring" viewBox="0 0 100 100">
+                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 40.0"></circle>
+                        </svg>
+                        <div class="cap-percent">80<span>%</span></div>
+                        <i class="fas fa-network-wired cap-icon"></i>
+                    </div>
+                    <h3 class="cap-title">Networking</h3>
+                    <div class="cap-tags"><span>LAN/WAN</span><span>Routing</span><span>Switching</span></div>
+                </div>
+
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.2s;">
+                    <div class="cap-ring-wrapper">
+                        <svg class="cap-ring" viewBox="0 0 100 100">
+                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 18.0"></circle>
+                        </svg>
+                        <div class="cap-percent">93<span>%</span></div>
+                        <i class="fas fa-id-badge cap-icon" style="transition: transform 0.3s ease, color 0.3s ease;"></i>
+                    </div>
+                    <h3 class="cap-title">IAM Security</h3>
+                    <div class="cap-tags"><span>Identity</span><span>Access</span><span>Azure AD</span></div>
+                </div>
+                
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.3s;">
+                    <div class="cap-ring-wrapper">
+                        <svg class="cap-ring" viewBox="0 0 100 100">
+                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 25.0"></circle>
+                        </svg>
+                        <div class="cap-percent">90<span>%</span></div>
+                        <i class="fas fa-desktop cap-icon" style="transition: transform 0.3s ease, color 0.3s ease;"></i>
+                    </div>
+                    <h3 class="cap-title">SCCM / MECM</h3>
+                    <div class="cap-tags"><span>Deployment</span><span>Endpoints</span><span>Patching</span></div>
+                </div>
+
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 1s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 21.0"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 32.0"></circle>
                         </svg>
-                        <div class="cap-percent">92<span>%</span></div>
-                        <i class="fas fa-code cap-icon"></i>
+                        <div class="cap-percent">84<span>%</span></div>
+                        <i class="fas fa-user-shield cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Web Development</h3>
-                    <div class="cap-tags"><span>HTML/CSS</span><span>Next JS</span><span>React</span></div>
-                </div>
-
-                <div class="cap-node reveal-up reveal-graph">
-                    <div class="cap-ring-wrapper">
-                        <svg class="cap-ring" viewBox="0 0 100 100">
-                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 22.64"></circle>
-                        </svg>
-                        <div class="cap-percent">92<span>%</span></div>
-                        <!-- Python Icon with hover transition effect -->
-                        <i class="fab fa-python cap-icon" style="transition: transform 0.3s ease, color 0.3s ease;"></i>
-                    </div>
-                    <h3 class="cap-title">Python Dev</h3>
-                    <div class="cap-tags"><span>Python</span><span>Automation</span><span>Scripting</span></div>
-                </div>
-
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.1s;">
-                    <div class="cap-ring-wrapper">
-                        <svg class="cap-ring" viewBox="0 0 100 100">
-                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 28.3"></circle>
-                        </svg>
-                        <div class="cap-percent">90<span>%</span></div>
-                        <i class="fas fa-database cap-icon"></i>
-                    </div>
-                    <h3 class="cap-title">Database SQL</h3>
-                    <div class="cap-tags"><span>SQL</span><span>Queries</span><span>Supabase</span></div>
+                    <h3 class="cap-title">Cybersecurity</h3>
+                    <div class="cap-tags"><span>Pen Testing</span><span>EDR</span><span>Threat Intel</span></div>
                 </div>
             </div>
         </section>
 
-        <!-- STICKY PROJECT CARDS (ALL 7) -->
+        <!-- STICKY PROJECT CARDS -->
         <section id="projects" class="section">
-            <h2 class="section-title reveal-up">Live <span>Deployments</span></h2>
+            <h2 class="section-title reveal-up">Featured <span>Projects</span></h2>
             <div class="projects-wrapper">
 
                 <!-- Project 01 -->
@@ -2011,10 +2034,10 @@
                         <h3>Raudatul Quran</h3>
                         <div class="p-tags"><span>Web App</span> <span>UI/UX</span> <span>Typography</span></div>
                         <p>A minimal, immersive digital platform designed for deep Quranic reflection and linguistic
-                            study.
-                            Engineered with focus on fluid typography.</p>
+                            study. Engineered with focus on fluid typography.</p>
                         <a href="https://raudatul-quran-silk.vercel.app/" target="_blank" rel="noopener noreferrer"
-                            class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Launch App</a>
+                            class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Visit Live
+                            Site</a>
                     </div>
                     <div class="p-image"><img src="assets/images/projects/1.jpg" alt="Raudatul Quran"></div>
                 </article>
@@ -2027,10 +2050,10 @@
                         <div class="p-tags"><span>Next.js</span> <span>Tailwind CSS</span> <span>Framer Motion</span>
                         </div>
                         <p>A high-performance, modern corporate landing page featuring smooth scroll animations,
-                            responsive design,
-                            and a sleek user interface.</p>
+                            responsive design, and a sleek user interface.</p>
                         <a href="https://octate-odyssey.vercel.app/" target="_blank" rel="noopener noreferrer"
-                            class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Launch App</a>
+                            class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Visit Live
+                            Site</a>
                     </div>
                     <div class="p-image"><img src="assets/images/projects/2.jpg" alt="Octesy Webpage"></div>
                 </article>
@@ -2042,8 +2065,7 @@
                         <h3>Octesy Helix EDR</h3>
                         <div class="p-tags"><span>Python</span> <span>Electron</span> <span>Cybersecurity</span></div>
                         <p>An advanced behavioral EDR suite featuring real-time process lineage tracking, egress
-                            monitoring, and
-                            automated AES-128 threat containment.</p>
+                            monitoring, and automated AES-128 threat containment.</p>
                         <a href="javascript:void(0)" class="btn-cyber alt"
                             style="margin-left:0; align-self:flex-start; cursor: not-allowed; opacity: 0.5;">Private
                             Repo <i class="fas fa-lock"></i></a>
@@ -2058,8 +2080,7 @@
                         <h3>OctaGuard Prime</h3>
                         <div class="p-tags"><span>Next.js</span> <span>Node.js</span> <span>Python</span></div>
                         <p>A sophisticated production-level endpoint security suite featuring remote USB sentinel
-                            control, automated
-                            offline lockdown protocols, and live forensic metadata logging.</p>
+                            control, automated offline lockdown protocols, and live forensic metadata logging.</p>
                         <a href="javascript:void(0)" class="btn-cyber alt"
                             style="margin-left:0; align-self:flex-start; cursor: not-allowed; opacity: 0.5;">Private
                             Repo <i class="fas fa-lock"></i></a>
@@ -2075,11 +2096,10 @@
                         <div class="p-tags"><span>SaaS Dashboard</span> <span>Healthcare IT</span> <span>Auth</span>
                         </div>
                         <p>A comprehensive, secure SaaS platform for managing clinic operations, including patient
-                            records, staff
-                            management, and appointment scheduling.</p>
+                            records, staff management, and appointment scheduling.</p>
                         <a href="https://octate-odyssey-clinic-saas.vercel.app/login" target="_blank"
                             rel="noopener noreferrer" class="btn-cyber ui-interact"
-                            style="margin-left:0; align-self:flex-start;">Launch App</a>
+                            style="margin-left:0; align-self:flex-start;">Visit Live App</a>
                     </div>
                     <div class="p-image"><img src="assets/images/projects/4.jpg" alt="Clinic Mgmt WebApp"></div>
                 </article>
@@ -2091,11 +2111,10 @@
                         <h3>SSH Sentinel</h3>
                         <div class="p-tags"><span>Python</span> <span>Cybersecurity</span> <span>Automation</span></div>
                         <p>Automated defensive security script monitoring SSH authentication logs in real-time.
-                            Instantly detects
-                            brute-force attempts and triggers mitigation alerts.</p>
+                            Instantly detects brute-force attempts and triggers mitigation alerts.</p>
                         <a href="https://github.com/mustaquim-ms/SSH-Sentinel-Alert" target="_blank"
                             rel="noopener noreferrer" class="btn-cyber ui-interact"
-                            style="margin-left:0; align-self:flex-start;">Access Source</a>
+                            style="margin-left:0; align-self:flex-start;">View on GitHub</a>
                     </div>
                     <div class="p-image"><img src="assets/images/projects/5.png" alt="SSH Sentinel"></div>
                 </article>
@@ -2107,8 +2126,8 @@
                         <h3>OmniCare Signage</h3>
                         <div class="p-tags"><span>Python</span> <span>LAN/WLAN</span> <span>FFmpeg</span></div>
                         <p>Architected a cost-effective, centralized advertisement broadcasting system across a
-                            multi-floor
-                            building, managing 10+ Smart TVs via Python servers.</p>
+                            multi-floor building, managing concurrent video streaming for 10+ Smart TVs via custom
+                            multi-threaded Python servers.</p>
                     </div>
                     <div class="p-image"><img src="assets/images/projects/7.jpg" alt="OmniCare Signage"></div>
                 </article>
@@ -2188,12 +2207,10 @@
                     </div>
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Jan 2025 - Present</span><span
-                                class="ct-company">Omnicare
-                                Diagnostic Ltd.</span></div>
+                                class="ct-company">Omnicare Diagnostic Ltd.</span></div>
                         <h3 class="ct-role">Information Technology Officer</h3>
                         <p class="ct-desc">Managing full IT asset lifecycle (500+ nodes). Administering HMS systems and
-                            optimizing
-                            multi-WAN architectures.</p>
+                            optimizing multi-WAN architectures.</p>
                     </div>
                 </div>
 
@@ -2204,12 +2221,10 @@
                     </div>
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Jan 2024 - Jul 2024</span><span
-                                class="ct-company">1000fix
-                                Services Ltd.</span></div>
+                                class="ct-company">1000fix Services Ltd.</span></div>
                         <h3 class="ct-role">Tech Support Spec</h3>
                         <p class="ct-desc">Administered Azure AD and Intune. Executed proactive network monitoring via
-                            PRTG,
-                            isolating anomalies and reducing downtime by 20%.</p>
+                            PRTG, isolating anomalies and reducing downtime by 20%.</p>
                     </div>
                 </div>
 
@@ -2220,12 +2235,10 @@
                     </div>
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Feb 2021 - Dec 2023</span><span
-                                class="ct-company">Entrust
-                                Global Ltd.</span></div>
+                                class="ct-company">Entrust Global Ltd.</span></div>
                         <h3 class="ct-role">Senior IT Engineer</h3>
                         <p class="ct-desc">Supported UAE Gov infrastructure. Engineered Root Cause Analysis (RCA)
-                            protocols inside
-                            ServiceNow, cutting recurring issues by 30%.</p>
+                            protocols inside ServiceNow, cutting recurring issues by 30%.</p>
                     </div>
                 </div>
 
@@ -2236,12 +2249,10 @@
                     </div>
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Dec 2017 - Dec 2020</span><span
-                                class="ct-company">M/S Shahin
-                                International</span></div>
+                                class="ct-company">M/S Shahin International</span></div>
                         <h3 class="ct-role">IT Engineer</h3>
                         <p class="ct-desc">Maintained 98% systems uptime. Conducted intensive traffic log analysis to
-                            eliminate
-                            packet bottlenecks and supported hardware integrations.</p>
+                            eliminate packet bottlenecks and supported hardware integrations.</p>
                     </div>
                 </div>
 
@@ -2252,12 +2263,10 @@
                     </div>
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Jan 2016 - Jan 2017</span><span
-                                class="ct-company">GrameenPhone
-                                Ltd.</span></div>
+                                class="ct-company">GrameenPhone Ltd.</span></div>
                         <h3 class="ct-role">Assistant IT Engineer</h3>
                         <p class="ct-desc">Installed and configured core hardware. Provided robust technical support to
-                            end-users,
-                            maintaining a 90% satisfaction rate.</p>
+                            end-users, maintaining a 90% satisfaction rate.</p>
                     </div>
                 </div>
 
@@ -2325,30 +2334,23 @@
                             style="color: var(--accent-cyan); font-family: var(--font-serif); font-style: italic; font-weight: 400;">Conversation.</span>
                     </h3>
                     <a href="mailto:mustaquimmahmad@gmail.com" class="btn-cyber ui-interact"
-                        style="text-decoration:none;">Reach
-                        Out</a>
+                        style="text-decoration:none;">Reach Out</a>
                 </div>
                 <div class="social-icons" style="display: flex; gap: 1rem; align-items: center;">
-                    <!-- LinkedIn -->
-                    <a href="https://www.linkedin.com/in/mustaquimahmad/" target="_blank" class="ui-interact social-btn linkedin-btn"
-                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <!-- GitHub -->
-                    <a href="https://github.com/mustaquim-ms" target="_blank" class="ui-interact social-btn github-btn"
-                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <!-- Medium -->
+                    <a href="https://www.linkedin.com/in/mustaquimahmad/" target="_blank"
+                        class="ui-interact social-btn linkedin-btn"
+                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/mustaquim-ms?tab=repositories" target="_blank"
+                        class="ui-interact social-btn github-btn"
+                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
+                            class="fab fa-github"></i></a>
                     <a href="https://medium.com/@mustaquim" target="_blank" class="ui-interact social-btn medium-btn"
-                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;">
-                        <i class="fab fa-medium-m"></i>
-                    </a>
-                    <!-- Gmail -->
+                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
+                            class="fab fa-medium-m"></i></a>
                     <a href="mailto:mustaquimmahmad@gmail.com" target="_blank" class="ui-interact social-btn email-btn"
-                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;">
-                        <i class="fas fa-envelope"></i>
-                    </a>
+                        style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
+                            class="fas fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -2366,14 +2368,8 @@
             // 1. Lenis Smooth Scrolling Setup
             let lenis;
             if (typeof Lenis !== "undefined") {
-                lenis = new Lenis({
-                    duration: 1.2,
-                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                });
-                function raf(time) {
-                    lenis.raf(time);
-                    requestAnimationFrame(raf);
-                }
+                lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+                function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
                 requestAnimationFrame(raf);
             }
 
@@ -2436,7 +2432,6 @@
             // 4. Ultra-Smooth Lerping Mouse Glow & Spiral Canvas
             let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
             let glowX = mouseX, glowY = mouseY;
-            const glowCore = document.getElementById("ambient-glow-core");
             const glowAura = document.getElementById("ambient-glow");
 
             const canvas = document.getElementById('spiral-canvas');
@@ -2461,7 +2456,6 @@
             window.addEventListener("mousemove", (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-                if (glowCore) glowCore.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
             });
 
             function animateGlowAndSpiral() {
@@ -2565,7 +2559,7 @@
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             document.querySelectorAll('.reveal-up, .reveal-graph').forEach(el => basicObserver.observe(el));
 
-            // 9. Active Defense Log Simulator & Terminals
+            // 9. Active Defense Log Simulator
             const logStream = document.getElementById('log-stream');
             if (logStream) {
                 const logs = [
@@ -2576,7 +2570,7 @@
                     { s: "ok", m: "Zero-Trust verification passed for user 'Admin'." },
                     { s: "ok", m: "SCCM Software Update Group pushed successfully." },
                     { s: "block", m: "Malicious payload intercepted at Firewall Edge." },
-                    { s: "ok", m: "Automated RCA generated for incident #4092." }
+                    { s: "ok", m: "Automated RCA generated for incident #4092." },
                     { s: "warn", m: "Network latency spike detected on VLAN 3." },
                     { s: "ok", m: "Backup completed for 12 critical servers." },
                     { s: "block", m: "Brute-force login attempt detected and blocked." },
@@ -2594,7 +2588,7 @@
                     { s: "ok", m: "Patch management cycle completed successfully." },
                     { s: "block", m: "Ransomware activity detected and contained." },
                     { s: "warn", m: "High network traffic volume detected on Node-C1." },
-                    { s: "ok", m: "User 'JohnDoe' granted temporary admin privileges." },
+                    { s: "ok", m: "User JohnDoe granted temporary admin privileges." },
                     { s: "block", m: "Phishing email blocked by email security gateway." },
                     { s: "warn", m: "Unauthorized application installation attempt detected." },
                     { s: "ok", m: "System audit completed with no critical findings." }
