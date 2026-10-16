@@ -2577,6 +2577,27 @@
                     { s: "ok", m: "SCCM Software Update Group pushed successfully." },
                     { s: "block", m: "Malicious payload intercepted at Firewall Edge." },
                     { s: "ok", m: "Automated RCA generated for incident #4092." }
+                    { s: "warn", m: "Network latency spike detected on VLAN 3." },
+                    { s: "ok", m: "Backup completed for 12 critical servers." },
+                    { s: "block", m: "Brute-force login attempt detected and blocked." },
+                    { s: "warn", m: "Disk space low on Node-C2." },
+                    { s: "ok", m: "New device enrolled in MDM successfully." },
+                    { s: "ok", m: "TLS certificate renewed for 'api.example.com'." },
+                    { s: "block", m: "Suspicious outbound traffic blocked (IP: 10.0.0.5)." },
+                    { s: "warn", m: "CPU temperature threshold exceeded on Node-A1." },
+                    { s: "ok", m: "Firewall ruleset updated and applied." },
+                    { s: "block", m: "Unauthorized USB device blocked on Node-D3." },
+                    { s: "warn", m: "Failed login attempts exceeded threshold for user 'Guest'." },
+                    { s: "ok", m: "System health check completed with no issues." },
+                    { s: "block", m: "Malware signature detected and quarantined." },
+                    { s: "warn", m: "VPN connection dropped unexpectedly on Node-B2." },
+                    { s: "ok", m: "Patch management cycle completed successfully." },
+                    { s: "block", m: "Ransomware activity detected and contained." },
+                    { s: "warn", m: "High network traffic volume detected on Node-C1." },
+                    { s: "ok", m: "User 'JohnDoe' granted temporary admin privileges." },
+                    { s: "block", m: "Phishing email blocked by email security gateway." },
+                    { s: "warn", m: "Unauthorized application installation attempt detected." },
+                    { s: "ok", m: "System audit completed with no critical findings." }
                 ];
                 setInterval(() => {
                     const log = logs[Math.floor(Math.random() * logs.length)];
