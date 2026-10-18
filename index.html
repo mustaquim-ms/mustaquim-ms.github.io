@@ -18,6 +18,10 @@
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 
+    <!-- Three.js for 3D Globe -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
     <!-- SEO Tags -->
     <meta name="description"
         content="Mustaquim Ahmad - Architecting intelligent, Zero-Trust IT environments and AIOps solutions.">
@@ -25,21 +29,42 @@
 
     <style>
         /* =========================================
-           ULTRA-PREMIUM DEEP CYBER DESIGN SYSTEM
+           ULTRA-3D CYBER DESIGN SYSTEM 
            ========================================= */
         :root {
             --bg-base: #010308;
             --bg-glass: rgba(10, 15, 30, 0.65);
-            --bg-card: #0B1120;
+            --bg-card: rgba(11, 17, 32, 0.7);
             --border-glass: rgba(0, 240, 255, 0.15);
             --text-main: #F8FAFC;
             --text-muted: #8B9BB4;
-            --accent-cyan: #00F0FF;
-            --accent-purple: #B026FF;
+            --accent-green: #7ed957;
+            --accent-gold: #ffb423;
             --accent-emerald: #00FF88;
             --font-sans: 'Inter', sans-serif;
             --font-serif: 'Playfair Display', serif;
             --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* --- DEFCON 1 OVERRIDES --- */
+        body.defcon-active {
+            --accent-green: #FF003C !important;
+            --accent-gold: #FF4500 !important;
+            --accent-emerald: #FF003C !important;
+            --border-glass: rgba(255, 0, 60, 0.3) !important;
+            animation: defconFlash 2s infinite;
+        }
+
+        @keyframes defconFlash {
+
+            0%,
+            100% {
+                background-color: var(--bg-base);
+            }
+
+            50% {
+                background-color: #1a0000;
+            }
         }
 
         * {
@@ -53,15 +78,22 @@
             scroll-behavior: auto;
         }
 
-        /* Deep, grid-less background */
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            font-family: var(--font-sans);
+        body { 
+            background-color: var(--bg-base); color: var(--text-main); font-family: var(--font-sans); 
             overflow-x: hidden;
-            background-image:
-                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.04), transparent 30%),
-                radial-gradient(circle at 90% 80%, rgba(176, 38, 255, 0.03), transparent 30%);
+            /* Added background sizing for movement */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(176, 38, 255, 0.04), transparent 40%);
+            background-size: 200% 200%;
+            animation: ambientBreathe 15s ease-in-out infinite alternate;
+        }
+
+         /* The Breathing Animation */
+        @keyframes ambientBreathe {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 100%; }
         }
 
         ::-webkit-scrollbar {
@@ -78,23 +110,22 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-cyan);
+            background: var(--accent-green);
         }
 
-        /* --- IMMERSIVE SCROLL PROGRESS BAR --- */
         .scroll-progress {
             position: fixed;
             top: 0;
             left: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold));
             width: 0%;
             z-index: 999999;
-            box-shadow: 0 0 10px var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-green);
             transition: width 0.1s ease-out;
         }
 
-        /* --- FLAWLESS CYBER PRELOADER --- */
+        /* --- PRELOADER --- */
         .cyber-loader-wrapper {
             position: fixed;
             top: 0;
@@ -127,9 +158,9 @@
         .cyber-core {
             width: 25px;
             height: 25px;
-            background: var(--accent-cyan);
+            background: var(--accent-green);
             border-radius: 50%;
-            box-shadow: 0 0 40px var(--accent-cyan), 0 0 80px var(--accent-cyan);
+            box-shadow: 0 0 40px var(--accent-green), 0 0 80px var(--accent-green);
             animation: corePulse 1s infinite alternate;
         }
 
@@ -143,22 +174,22 @@
         .cyber-ring-1 {
             width: 80px;
             height: 80px;
-            border-top: 2px solid var(--accent-cyan);
-            border-bottom: 2px solid var(--accent-cyan);
+            border-top: 2px solid var(--accent-green);
+            border-bottom: 2px solid var(--accent-green);
             animation: spin3D 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
         }
 
         .cyber-ring-2 {
             width: 120px;
             height: 120px;
-            border-left: 2px solid var(--accent-purple);
-            border-right: 2px solid var(--accent-purple);
+            border-left: 2px solid var(--accent-gold);
+            border-right: 2px solid var(--accent-gold);
             animation: spin3D 2.5s linear infinite reverse;
         }
 
         .loader-message {
             margin-top: 40px;
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             font-family: var(--font-mono);
             font-size: 0.9rem;
             letter-spacing: 3px;
@@ -209,7 +240,7 @@
             mix-blend-mode: screen;
         }
 
-        /* --- FIXED UTILITY BUTTONS (Sound & Top) --- */
+        /* --- FIXED UTILITY BUTTONS --- */
         .fixed-utils {
             position: fixed;
             bottom: 30px;
@@ -224,9 +255,9 @@
             width: 50px;
             height: 50px;
             background: rgba(1, 3, 8, 0.8);
-            border: 2px solid var(--accent-cyan);
+            border: 2px solid var(--accent-green);
             border-radius: 50%;
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             font-size: 1.2rem;
             cursor: pointer;
             display: flex;
@@ -238,16 +269,29 @@
         }
 
         .util-btn:hover {
-            background: var(--accent-cyan);
+            background: var(--accent-green);
             color: #000;
-            box-shadow: 0 0 30px var(--accent-cyan);
+            box-shadow: 0 0 30px var(--accent-green);
             transform: scale(1.1);
         }
 
         .sound-toggle.active {
-            color: var(--accent-purple);
-            border-color: var(--accent-purple);
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
             box-shadow: 0 0 15px rgba(176, 38, 255, 0.4);
+        }
+
+        /* DEFCON BUTTON */
+        #defcon-btn {
+            color: #FF003C;
+            border-color: #FF003C;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+        }
+
+        #defcon-btn:hover {
+            background: #FF003C;
+            color: #fff;
+            box-shadow: 0 0 30px #FF003C;
         }
 
         #go-top {
@@ -262,154 +306,59 @@
 
         /* --- ADVANCED GHOST-BLADE NAVBAR --- */
         .navbar {
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            padding: 12px 30px;
-            background: rgba(1, 3, 8, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            border-radius: 4px;
-            box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05), 0 10px 40px rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 40px; align-items: center; padding: 12px 30px;
+            width: 95%; max-width: 1000px; /* Explicit width for smooth shrinking */
+            background: rgba(1, 3, 8, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 240, 255, 0.15); border-radius: 4px;
+            box-shadow: inset 0 0 20px rgba(0,240,255,0.05), 0 10px 40px rgba(0,0,0,0.8);
+            z-index: 10000; transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
+        .navbar::before, .navbar::after { content: ''; position: absolute; width: 15px; height: 15px; border: 2px solid var(--accent-cyan); transition: 0.3s;}
+        .navbar::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .navbar::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
 
-        .navbar::before,
-        .navbar::after {
-            content: '';
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            border: 2px solid var(--accent-cyan);
-            transition: 0.3s;
-        }
+        /* Custom Image Logo Default State */
+        .nav-logo { font-weight: 900; color: var(--text-main); text-decoration: none; font-size: 1.4rem; letter-spacing: -1px; text-transform: uppercase; font-family: var(--font-mono); display: flex; align-items: center; gap: 12px; transition: all 0.5s ease;}
+        .custom-logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(0,240,255,0.5); box-shadow: 0 0 10px rgba(0,240,255,0.4); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .logo-text { transition: all 0.4s ease; overflow: hidden; white-space: nowrap; text-shadow: 0 0 10px rgba(0,240,255,0.5);}
+        
+        .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; transition: 0.4s; position: relative;}
+        .nav-slider { position: absolute; height: 100%; top: 0; left: 0; background: rgba(0, 240, 255, 0.1); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 4px; z-index: 0; opacity: 0; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none;}
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; position: relative; z-index: 1; padding: 5px 10px;}
+        .nav-links a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan);}
+        .nav-btn-wrapper { transition: 0.4s; display: flex;}
 
-        .navbar::before {
-            top: -2px;
-            left: -2px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .navbar::after {
-            bottom: -2px;
-            right: -2px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .nav-logo {
-            font-weight: 900;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 1.4rem;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            font-family: var(--font-mono);
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.4s;
-        }
-
-        .nav-logo i {
-            color: var(--accent-cyan);
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            transition: 0.4s;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .nav-slider {
-            position: absolute;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 4px;
-            z-index: 0;
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            pointer-events: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            position: relative;
-            z-index: 1;
-            padding: 5px 10px;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-cyan);
-            text-shadow: 0 0 10px var(--accent-cyan);
-        }
-
-        .nav-btn-wrapper {
-            transition: 0.4s;
-            overflow: hidden;
-            display: flex;
-        }
-
-        /* Navbar Scrolled State */
+        /* --- NAVBAR SCROLLED STATE (Shrinks to Round Logo) --- */
         .navbar.scrolled {
-            max-width: 250px;
-            top: 15px;
-            padding: 10px 25px;
-            border-radius: 50px;
-            background: #010308;
-            box-shadow: 0 0 30px rgba(176, 38, 255, 0.3);
-            gap: 0;
+            max-width: 80px; /* Shrinks the bar tightly around the logo */
+            top: 20px; 
+            padding: 8px; 
+            border-radius: 50%; /* Makes the entire navbar a perfect circle */
+            background: rgba(1, 3, 8, 0.95); 
+            box-shadow: 0 0 30px rgba(176, 38, 255, 0.4); 
+            gap: 0; 
             border-color: var(--accent-purple);
+            justify-content: center;
         }
-
-        .navbar.scrolled::before,
-        .navbar.scrolled::after {
-            opacity: 0;
+        
+        /* Hide borders, links, buttons, and logo text */
+        .navbar.scrolled::before, .navbar.scrolled::after { opacity: 0; display: none; }
+        .navbar.scrolled .nav-links, .navbar.scrolled .nav-btn-wrapper { max-width: 0; opacity: 0; display: none; }
+        .navbar.scrolled .logo-text { max-width: 0; opacity: 0; display: none; }
+        
+        /* Enlarge and rotate the image logo */
+        .navbar.scrolled .custom-logo { 
+            width: 55px; 
+            height: 55px; 
+            border-color: var(--accent-purple); 
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.6); 
+            transform: rotate(360deg); /* Cool spinning effect as it shrinks */
         }
+        .navbar.scrolled .nav-logo { gap: 0; justify-content: center;}
 
-        .navbar.scrolled .nav-links,
-        .navbar.scrolled .nav-btn-wrapper {
-            max-width: 0;
-            opacity: 0;
-            pointer-events: none;
-            padding: 0;
-            margin: 0;
-        }
 
-        .navbar.scrolled .nav-logo {
-            text-shadow: 0 0 20px var(--accent-purple);
-            color: var(--accent-purple);
-        }
-
-        .navbar.scrolled .nav-logo i {
-            display: none;
-        }
-
-        /* --- CYBER SKEW BUTTONS --- */
+        /* --- CYBER BUTTONS --- */
         .btn-cyber {
             position: relative;
             display: inline-flex;
@@ -417,7 +366,7 @@
             justify-content: center;
             gap: 10px;
             padding: 14px 30px;
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             font-family: var(--font-mono);
             font-weight: 700;
             text-transform: uppercase;
@@ -436,7 +385,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            border: 1px solid var(--accent-cyan);
+            border: 1px solid var(--accent-green);
             transform: skewX(-15deg);
             transition: 0.3s;
             z-index: -1;
@@ -446,7 +395,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: var(--accent-cyan);
+            background: var(--accent-green);
             transform: scaleX(0) skewX(-15deg);
             transform-origin: left;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -479,7 +428,7 @@
             transform: scaleX(1);
         }
 
-        /* --- VIEWPORT FADE IN (Triggered after preloader) --- */
+        /* --- LAYOUT WRAPPERS --- */
         #viewport-3d {
             width: 100%;
             opacity: 0;
@@ -492,7 +441,6 @@
             transform: translateY(0);
         }
 
-        /* --- REFINED SECTIONS & SPACING --- */
         .section {
             padding: 120px 5% 40px;
             max-width: 1400px;
@@ -510,15 +458,17 @@
             color: transparent;
             -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
             position: relative;
+            transition: 0.3s;
         }
 
         .section-title span {
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             -webkit-text-stroke: 0;
             text-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+            transition: 0.3s;
         }
 
-        /* --- HERO SECTION WITH 3D CUBE --- */
+        /* --- HERO --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -549,11 +499,13 @@
         .hero-title .hollow {
             color: transparent;
             -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
+            transition: 0.3s;
         }
 
         .hero-title .neon {
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             text-shadow: 0 0 50px rgba(0, 240, 255, 0.6);
+            transition: 0.3s;
         }
 
         .hero-desc {
@@ -563,8 +515,9 @@
             line-height: 1.6;
             margin-bottom: 40px;
             font-family: var(--font-mono);
-            border-left: 3px solid var(--accent-purple);
+            border-left: 3px solid var(--accent-gold);
             padding-left: 20px;
+            transition: 0.3s;
         }
 
         .hero-actions {
@@ -573,7 +526,7 @@
             flex-wrap: wrap;
         }
 
-        /* --- THE 4-STATE INTERACTIVE RUBIK'S CUBE --- */
+        /* RUBIK'S CUBE */
         .hero-cube-container {
             flex: 0.8;
             display: flex;
@@ -592,9 +545,9 @@
             cursor: crosshair;
             transition: transform 0.5s ease;
             --z-dist: 100px;
-            --border-color: var(--accent-cyan);
+            --border-color: var(--accent-green);
             --bg-color: rgba(0, 240, 255, 0.05);
-            --core-color: var(--accent-cyan);
+            --core-color: var(--accent-green);
             --rot-x: 0deg;
             --rot-y: 0deg;
             --rot-z: 0deg;
@@ -667,9 +620,9 @@
 
         .cube.state-1 {
             --z-dist: 180px;
-            --border-color: var(--accent-purple);
+            --border-color: var(--accent-gold);
             --bg-color: rgba(176, 38, 255, 0.1);
-            --core-color: var(--accent-purple);
+            --core-color: var(--accent-gold);
         }
 
         .cube.state-2 {
@@ -690,7 +643,7 @@
             --rot-z: 45deg;
         }
 
-        /* --- BOXLESS TECHNICAL RINGS --- */
+        /* --- CAPABILITIES --- */
         .capabilities-matrix {
             display: flex;
             flex-wrap: wrap;
@@ -767,10 +720,10 @@
             transform: translate(-50%, -50%) scale(0) rotate(-45deg);
             opacity: 0;
             font-size: 3rem;
-            color: var(--accent-purple);
+            color: var(--accent-gold);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
-            text-shadow: 0 0 20px var(--accent-purple);
+            text-shadow: 0 0 20px var(--accent-gold);
         }
 
         .cap-node:hover .cap-percent {
@@ -787,10 +740,11 @@
         .cap-title {
             font-size: 1.1rem;
             font-weight: 800;
-            color: var(--accent-purple);
+            color: var(--accent-gold);
             margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: 0.3s;
         }
 
         .cap-tags span {
@@ -807,7 +761,7 @@
             transform: translateX(5px);
         }
 
-        /* --- PERFECTLY FIXED STICKY PROJECTS --- */
+        /* --- STICKY PROJECTS --- */
         .projects-wrapper {
             position: relative;
             padding-bottom: 50px;
@@ -825,11 +779,10 @@
             grid-template-columns: 1.2fr 1fr;
             gap: 50px;
             box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s;
             overflow: hidden;
-            /* transition: transform removed to preserve sticky integrity */
         }
 
-        /* The exact math offsets to make them stack like folders */
         .project-card:nth-child(1) {
             top: 100px;
             z-index: 1;
@@ -863,6 +816,11 @@
         .project-card:nth-child(7) {
             top: 280px;
             z-index: 7;
+        }
+
+        .project-card:nth-child(8) {
+            top: 310px;
+            z-index: 8;
         }
 
         .project-index {
@@ -908,12 +866,13 @@
 
         .p-tags span {
             background: rgba(0, 240, 255, 0.05);
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             border: 1px solid rgba(0, 240, 255, 0.2);
             padding: 6px 16px;
             border-radius: 50px;
             font-size: 0.8rem;
             font-family: var(--font-mono);
+            transition: 0.3s;
         }
 
         .p-image {
@@ -923,6 +882,7 @@
             height: 100%;
             min-height: 350px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
         }
 
         .p-image img {
@@ -938,7 +898,7 @@
             transform: scale(1.05);
         }
 
-        /* --- HOLOGRAM RESEARCH CARDS --- */
+        /* --- RESEARCH --- */
         .research-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -948,7 +908,7 @@
         .research-hologram {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
-            border-top: 2px solid var(--accent-cyan);
+            border-top: 2px solid var(--accent-green);
             border-radius: 16px;
             padding: 35px 30px;
             text-decoration: none;
@@ -975,7 +935,7 @@
 
         .research-hologram:hover {
             transform: translateY(-10px);
-            border-color: var(--accent-cyan);
+            border-color: var(--accent-green);
             box-shadow: 0 15px 40px rgba(0, 240, 255, 0.15);
         }
 
@@ -995,6 +955,7 @@
             border-radius: 4px;
             margin-bottom: 20px;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
         .research-hologram h3 {
@@ -1009,11 +970,11 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             font-family: var(--font-mono);
             font-size: 0.85rem;
             font-weight: 700;
-            margin-top: auto;
+            transition: 0.3s;
         }
 
         .research-hologram:hover .rh-link i {
@@ -1021,7 +982,7 @@
             transition: 0.3s;
         }
 
-        /* --- ACTIVE DEFENSE MESH --- */
+        /* --- 3D WEBGL GLOBE DEFENSE MESH --- */
         .global-mesh-wrapper {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -1031,6 +992,7 @@
             border-radius: 24px;
             padding: 40px;
             margin-top: 20px;
+            transition: 0.3s;
         }
 
         .mesh-visual {
@@ -1043,30 +1005,35 @@
             border-radius: 16px;
             border: 1px solid rgba(0, 240, 255, 0.1);
             overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.05);
         }
 
-        .globe-spinner {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* The Three.js container */
+        #webgl-globe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 2;
+            cursor: grab;
         }
 
-        .radar-sweep {
+        #webgl-globe:active {
+            cursor: grabbing;
+        }
+
+        /* Keep a subtle radar overlay on top of the 3D globe for style */
+        .radar-sweep-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 110px;
-            height: 110px;
-            background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.4) 0%, transparent 60%);
+            width: 150px;
+            height: 150px;
+            background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.2) 0%, transparent 60%);
             transform-origin: 0 0;
             animation: radarSpin 4s linear infinite;
             border-radius: 0 100% 0 0;
-            z-index: 1;
+            z-index: 3;
+            pointer-events: none;
         }
 
         @keyframes radarSpin {
@@ -1075,45 +1042,18 @@
             }
         }
 
-        .node-pulse {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 15px var(--accent-cyan);
-            animation: pulse 2s infinite;
-            z-index: 2;
-        }
-
-        .n1 {
-            top: 25%;
-            left: 35%;
-        }
-
-        .n2 {
-            bottom: 35%;
-            right: 25%;
-            animation-delay: 1s;
-        }
-
-        .n3 {
-            top: 55%;
-            right: 45%;
-            animation-delay: 0.5s;
-        }
-
         .live-metrics-overlay {
             position: absolute;
             top: 15px;
             left: 15px;
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             display: flex;
             flex-direction: column;
             gap: 5px;
-            z-index: 3;
+            z-index: 4;
+            pointer-events: none;
         }
 
         .live-metrics-overlay span {
@@ -1133,6 +1073,7 @@
             display: flex;
             flex-direction: column;
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+            transition: 0.3s;
         }
 
         .mesh-logs-header {
@@ -1142,6 +1083,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: 0.3s;
         }
 
         .mesh-logs-header .dots {
@@ -1171,6 +1113,7 @@
             font-family: var(--font-mono);
             font-size: 0.75rem;
             color: var(--text-muted);
+            transition: 0.3s;
         }
 
         .mesh-logs-body {
@@ -1198,8 +1141,9 @@
         }
 
         .log-time {
-            color: var(--accent-purple);
+            color: var(--accent-gold);
             min-width: 80px;
+            transition: 0.3s;
         }
 
         .log-status.ok {
@@ -1212,6 +1156,7 @@
 
         .log-status.block {
             color: #EF4444;
+            transition: 0.3s;
         }
 
         @keyframes slideUpLog {
@@ -1226,7 +1171,82 @@
             }
         }
 
-        /* --- CAREER TIMELINE (Linear Track) --- */
+        /* --- DEFCON OVERLAY --- */
+        .defcon-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 100000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #FF003C;
+            font-family: var(--font-mono);
+        }
+
+        body.defcon-active .defcon-overlay {
+            display: flex;
+        }
+
+        .defcon-terminal {
+            background: #0A0000;
+            border: 1px solid #FF003C;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(255, 0, 60, 0.4), inset 0 0 20px rgba(255, 0, 60, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .defcon-terminal h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+            animation: pulseText 1s infinite;
+            text-shadow: 0 0 10px #FF003C;
+        }
+
+        .defcon-terminal p {
+            color: #FF4500;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .defcon-input-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 0, 60, 0.1);
+            padding: 15px;
+            border: 1px dashed #FF003C;
+        }
+
+        .defcon-input-line span {
+            font-weight: bold;
+        }
+
+        #defcon-input {
+            background: transparent;
+            border: none;
+            color: #FFF;
+            font-family: var(--font-mono);
+            font-size: 1.2rem;
+            outline: none;
+            text-align: left;
+            width: 150px;
+            text-transform: lowercase;
+        }
+
+        /* --- CAREER TIMELINE --- */
         .cyber-timeline {
             position: relative;
             max-width: 900px;
@@ -1253,7 +1273,7 @@
             width: 16px;
             height: 16px;
             background: var(--bg-base);
-            border: 2px solid var(--accent-cyan);
+            border: 2px solid var(--accent-green);
             border-radius: 50%;
             z-index: 2;
             margin-top: 30px;
@@ -1263,15 +1283,16 @@
 
         .ct-line {
             width: 2px;
-            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-purple));
+            background: linear-gradient(to bottom, var(--accent-green), var(--accent-gold));
             flex-grow: 1;
             margin-top: 10px;
             margin-bottom: -40px;
             opacity: 0.5;
+            transition: 0.3s;
         }
 
         .ct-item:last-child .ct-line {
-            background: linear-gradient(to bottom, var(--accent-cyan), transparent);
+            background: linear-gradient(to bottom, var(--accent-green), transparent);
         }
 
         .ct-content {
@@ -1293,7 +1314,7 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: var(--accent-cyan);
+            background: var(--accent-green);
             opacity: 0;
             transition: 0.3s;
         }
@@ -1309,7 +1330,7 @@
         }
 
         .ct-item:hover .ct-node {
-            background: var(--accent-cyan);
+            background: var(--accent-green);
             transform: scale(1.3);
         }
 
@@ -1330,6 +1351,7 @@
             padding: 4px 12px;
             border-radius: 50px;
             border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: 0.3s;
         }
 
         .ct-company {
@@ -1338,6 +1360,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 700;
+            transition: 0.3s;
         }
 
         .ct-role {
@@ -1345,12 +1368,14 @@
             color: var(--text-main);
             margin-bottom: 10px;
             font-weight: 800;
+            transition: 0.3s;
         }
 
         .ct-desc {
             color: var(--text-muted);
             font-size: 1rem;
             line-height: 1.6;
+            transition: 0.3s;
         }
 
         /* --- CERTIFICATIONS --- */
@@ -1372,7 +1397,7 @@
         }
 
         .cert-card:hover {
-            border-color: var(--accent-cyan);
+            border-color: var(--accent-green);
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
@@ -1408,6 +1433,7 @@
             margin-bottom: 10px;
             line-height: 1.4;
             font-weight: 600;
+            transition: 0.3s;
         }
 
         .cert-issuer {
@@ -1415,10 +1441,11 @@
             font-size: 0.8rem;
             font-family: var(--font-mono);
             margin-bottom: 20px;
+            transition: 0.3s;
         }
 
         .verify-btn {
-            color: var(--accent-cyan);
+            color: var(--accent-green);
             font-weight: 600;
             font-size: 0.85rem;
             display: flex;
@@ -1426,15 +1453,17 @@
             gap: 8px;
             margin-top: auto;
             font-family: var(--font-mono);
+            transition: 0.3s;
         }
 
-        /* --- FOOTER (UNTOUCHED GLITCH EFFECT) --- */
+        /* --- FOOTER (GLITCH UNTOUCHED) --- */
         .footer {
             padding: 100px 5% 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             margin-top: 80px;
             position: relative;
             overflow: hidden;
+            transition: 0.3s;
         }
 
         .footer-grid {
@@ -1447,6 +1476,7 @@
             position: relative;
             max-width: 1400px;
             margin: 0 auto;
+            transition: 0.3s;
         }
 
         .social-icons {
@@ -1667,12 +1697,27 @@
 
 <body>
 
+    <!-- DEFCON 1 LOCKDOWN OVERLAY -->
+    <div id="defcon-overlay" class="defcon-overlay">
+        <div class="defcon-terminal">
+            <h2 class="giant-name" data-text="SYSTEM LOCKDOWN"
+                style="color: #FF003C; font-size: 3rem; white-space: normal;">SYSTEM LOCKDOWN</h2>
+            <p>CRITICAL THREAT DETECTED. ENTER OVERRIDE CODE:</p>
+            <div class="defcon-input-line">
+                <span class="prompt">root@system:~#</span>
+                <input type="password" id="defcon-input" autocomplete="off" autofocus placeholder="Type 'override'">
+            </div>
+            <p id="defcon-error" style="color: #FF003C; margin-top: 15px; font-size: 0.8rem; display: none;">ACCESS
+                DENIED.</p>
+        </div>
+    </div>
+
     <!-- Invisible SVG for Circular Gradients -->
     <svg style="width: 0; height: 0; position: absolute" aria-hidden="true" focusable="false">
         <defs>
             <linearGradient id="cap-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#00F0FF" />
-                <stop offset="100%" stop-color="#B026FF" />
+                <stop offset="0%" stop-color="var(--accent-green)" />
+                <stop offset="100%" stop-color="var(--accent-gold)" />
             </linearGradient>
         </defs>
     </svg>
@@ -1680,7 +1725,7 @@
     <!-- Smooth Ambient Mouse Glow -->
     <div class="ambient-glow" id="ambient-glow"></div>
 
-    <!-- PURE CYBER PRELOADER -->
+    <!-- FLAWLESS CYBER PRELOADER -->
     <div id="preloader" class="cyber-loader-wrapper">
         <div class="cyber-core-container">
             <div class="cyber-ring-1"></div>
@@ -1690,10 +1735,12 @@
         <div class="loader-message" id="loader-text">Initializing Systems</div>
     </div>
 
-    <!-- UI Audio Toggle & Go To Top -->
+    <!-- Fixed Utility Buttons (Sound, Go Top, DEFCON) -->
     <div class="fixed-utils">
         <button id="sound-toggle" class="util-btn ui-interact" title="Toggle UI Sounds"><i
                 class="fas fa-volume-mute"></i></button>
+        <button id="defcon-btn" class="util-btn ui-interact" title="DEFCON 1 Protocol"><i
+                class="fas fa-skull"></i></button>
         <button id="go-top" class="util-btn ui-interact" onclick="window.scrollTo({top:0, behavior:'smooth'})"
             title="Return to Top"><i class="fas fa-chevron-up"></i></button>
     </div>
@@ -1703,7 +1750,10 @@
 
     <!-- ADVANCED GHOST-BLADE NAVBAR -->
     <nav class="navbar" id="navbar">
-        <a href="#" class="nav-logo ui-interact"><i class="fas fa-satellite-dish"></i> MUSTAQUIM_</a>
+        <a href="#about" class="nav-logo ui-interact" title="Return to Top">
+            <img src="assets/images/logo.png" alt="Logo" h="" class="custom-logo">
+            <span class="logo-text">MUSTAQUIM</span>
+        </a>
         <ul class="nav-links">
             <div class="nav-slider"></div>
             <li><a href="#about" class="ui-interact">Home</a></li>
@@ -1719,7 +1769,7 @@
     <!-- GLOBAL WRAPPER FOR FADE-IN -->
     <div id="viewport-3d">
 
-        <!-- REWRITTEN POWER HERO -->
+        <!-- POWER HERO -->
         <header class="hero" id="about">
             <div class="hero-glow-orb"></div>
             <div class="hero-text-container" style="flex: 1.5; max-width: 1000px;">
@@ -1824,6 +1874,8 @@
         <section class="section" id="skills">
             <h2 class="section-title reveal-up">Sys <span>Capabilities</span></h2>
             <div class="capabilities-matrix">
+        
+                <!-- 1. IT Support -->
                 <div class="cap-node reveal-up reveal-graph">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
@@ -1833,11 +1885,26 @@
                         <div class="cap-percent">95<span>%</span></div>
                         <i class="fas fa-laptop-code cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Endpoint Ops</h3>
-                    <div class="cap-tags"><span>Intune</span><span>Azure AD</span><span>Autopilot</span></div>
+                    <h3 class="cap-title">IT Support Specialist</h3>
+                    <div class="cap-tags"><span>Tier 2 Escalations</span><span>Microsoft 365</span><span>ServiceNow</span></div>
                 </div>
         
+                <!-- 2. Cloud & Endpoint -->
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.1s;">
+                    <div class="cap-ring-wrapper">
+                        <svg class="cap-ring" viewBox="0 0 100 100">
+                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 14.15"></circle>
+                        </svg>
+                        <div class="cap-percent">95<span>%</span></div>
+                        <i class="fas fa-cloud cap-icon"></i>
+                    </div>
+                    <h3 class="cap-title">Cloud & Endpoint</h3>
+                    <div class="cap-tags"><span>Azure AD</span><span>Intune</span><span>Autopilot</span></div>
+                </div>
+        
+                <!-- 3. Network & Security -->
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.2s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
@@ -1846,11 +1913,12 @@
                         <div class="cap-percent">90<span>%</span></div>
                         <i class="fas fa-shield-alt cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Net Security</h3>
-                    <div class="cap-tags"><span>Zero-Trust</span><span>Firewalls</span><span>Cisco</span></div>
+                    <h3 class="cap-title">Network & Security</h3>
+                    <div class="cap-tags"><span>Cisco</span><span>Zero-Trust</span><span>Firewalls</span></div>
                 </div>
         
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.2s;">
+                <!-- 4. ITSM & Operations -->
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.3s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
@@ -1859,11 +1927,26 @@
                         <div class="cap-percent">92<span>%</span></div>
                         <i class="fas fa-cogs cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Service Mgt</h3>
-                    <div class="cap-tags"><span>ITIL v4</span><span>ServiceNow</span><span>SLA</span></div>
+                    <h3 class="cap-title">ITSM & Operations</h3>
+                    <div class="cap-tags"><span>ServiceNow</span><span>ITIL v4</span><span>SLA Mgmt</span></div>
                 </div>
         
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.3s;">
+                <!-- 5. Defensive Security -->
+                <div class="cap-node reveal-up reveal-graph">
+                    <div class="cap-ring-wrapper">
+                        <svg class="cap-ring" viewBox="0 0 100 100">
+                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 28.3"></circle>
+                        </svg>
+                        <div class="cap-percent">90<span>%</span></div>
+                        <i class="fas fa-user-shield cap-icon"></i>
+                    </div>
+                    <h3 class="cap-title">Defensive Security</h3>
+                    <div class="cap-tags"><span>Zero-Trust</span><span>Endpoint</span><span>MFA/IAM</span></div>
+                </div>
+        
+                <!-- 6. Automation & Scripting -->
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.1s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
@@ -1872,64 +1955,40 @@
                         <div class="cap-percent">85<span>%</span></div>
                         <i class="fas fa-terminal cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Automation</h3>
-                    <div class="cap-tags"><span>Python</span><span>PowerShell</span><span>AIOps</span></div>
+                    <h3 class="cap-title">Automation & Scripting</h3>
+                    <div class="cap-tags"><span>Python</span><span>PowerShell</span><span>Bash</span></div>
                 </div>
         
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.4s;">
+                <!-- 7. Infrastructure Mgmt -->
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.2s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 25.0"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 14.15"></circle>
                         </svg>
-                        <div class="cap-percent">90<span>%</span></div>
+                        <div class="cap-percent">95<span>%</span></div>
                         <i class="fas fa-server cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Systems Admin</h3>
-                    <div class="cap-tags"><span>Windows Server</span><span>Active Directory</span><span>SCCM</span></div>
+                    <h3 class="cap-title">Infrastructure Mgmt</h3>
+                    <div class="cap-tags"><span>Windows Server</span><span>SCCM</span><span>Procurement</span></div>
                 </div>
         
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.5s;">
+                <!-- 8. Monitoring & Telemetry -->
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.3s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 30.0"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 33.96"></circle>
                         </svg>
                         <div class="cap-percent">88<span>%</span></div>
                         <i class="fas fa-network-wired cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Infrastructure</h3>
-                    <div class="cap-tags"><span>LAN/WAN</span><span>Monitoring</span><span>PRTG</span></div>
-                </div>
-
-                <div class="cap-node reveal-up reveal-graph">
-                    <div class="cap-ring-wrapper">
-                        <svg class="cap-ring" viewBox="0 0 100 100">
-                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 22.64"></circle>
-                        </svg>
-                        <div class="cap-percent">92<span>%</span></div>
-                        <!-- Python Icon with hover transition effect -->
-                        <i class="fab fa-python cap-icon" style="transition: transform 0.3s ease, color 0.3s ease;"></i>
-                    </div>
-                    <h3 class="cap-title">Python Dev</h3>
-                    <div class="cap-tags"><span>Python</span><span>Automation</span><span>Scripting</span></div>
+                    <h3 class="cap-title">Monitoring & Telemetry</h3>
+                    <div class="cap-tags"><span>PRTG</span><span>MRTG</span><span>Log Analytics</span></div>
                 </div>
         
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.6s;">
-                    <div class="cap-ring-wrapper">
-                        <svg class="cap-ring" viewBox="0 0 100 100">
-                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 20.0"></circle>
-                        </svg>
-                        <div class="cap-percent">94<span>%</span></div>
-                        <i class="fas fa-cloud cap-icon"></i>
-                    </div>
-                    <h3 class="cap-title">Cloud & M365</h3>
-                    <div class="cap-tags"><span>Microsoft 365</span><span>Azure</span><span>GitHub</span></div>
-                </div>
-
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.1s;">
+                <!-- 9. Database Mgmt -->
+                <div class="cap-node reveal-up reveal-graph">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
@@ -1938,91 +1997,71 @@
                         <div class="cap-percent">90<span>%</span></div>
                         <i class="fas fa-database cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Database SQL</h3>
-                    <div class="cap-tags"><span>SQL</span><span>Queries</span><span>Supabase</span></div>
+                    <h3 class="cap-title">Database Mgmt</h3>
+                    <div class="cap-tags"><span>SQL Server</span><span>MySQL</span><span>PostgreSQL</span></div>
                 </div>
         
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.7s;">
+                <!-- 10. AIOps & ML (NEW) -->
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.1s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 35.0"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 33.96"></circle>
                         </svg>
-                        <div class="cap-percent">86<span>%</span></div>
-                        <i class="fas fa-tools cap-icon"></i>
+                        <div class="cap-percent">88<span>%</span></div>
+                        <i class="fas fa-brain cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">SecOps & Tools</h3>
-                    <div class="cap-tags"><span>Wireshark</span><span>SIEM</span><span>Linux</span></div>
-                </div>
-
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.8s;">
-                    <div class="cap-ring-wrapper">
-                        <svg class="cap-ring" viewBox="0 0 100 100">
-                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 18.0"></circle>
-                        </svg>
-                        <div class="cap-percent">95<span>%</span></div>
-                        <i class="fas fa-project-diagram cap-icon"></i>
+                    <h3 class="cap-title">AIOps & ML</h3>
+                    <div class="cap-tags"><span>LSTM Models</span><span>Data Analytics</span><span>Anomaly Detection</span>
                     </div>
-                    <h3 class="cap-title">Project Mgmt</h3>
-                    <div class="cap-tags"><span>Agile</span><span>Scrum</span><span>Kanban</span></div>
                 </div>
-
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.9s;">
-                    <div class="cap-ring-wrapper">
-                        <svg class="cap-ring" viewBox="0 0 100 100">
-                            <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 40.0"></circle>
-                        </svg>
-                        <div class="cap-percent">80<span>%</span></div>
-                        <i class="fas fa-network-wired cap-icon"></i>
-                    </div>
-                    <h3 class="cap-title">Networking</h3>
-                    <div class="cap-tags"><span>LAN/WAN</span><span>Routing</span><span>Switching</span></div>
-                </div>
-
+        
+                <!-- 11. Web Development (NEW) -->
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.2s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 18.0"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 28.3"></circle>
                         </svg>
-                        <div class="cap-percent">93<span>%</span></div>
-                        <i class="fas fa-id-badge cap-icon" style="transition: transform 0.3s ease, color 0.3s ease;"></i>
+                        <div class="cap-percent">90<span>%</span></div>
+                        <i class="fas fa-code cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">IAM Security</h3>
-                    <div class="cap-tags"><span>Identity</span><span>Access</span><span>Azure AD</span></div>
+                    <h3 class="cap-title">Web Development</h3>
+                    <div class="cap-tags"><span>Next.js</span><span>React</span><span>Tailwind CSS</span></div>
                 </div>
-                
+        
+                <!-- 12. Identity Management (NEW) -->
                 <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.3s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 25.0"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 16.98"></circle>
                         </svg>
-                        <div class="cap-percent">90<span>%</span></div>
-                        <i class="fas fa-desktop cap-icon" style="transition: transform 0.3s ease, color 0.3s ease;"></i>
+                        <div class="cap-percent">94<span>%</span></div>
+                        <i class="fas fa-fingerprint cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">SCCM / MECM</h3>
-                    <div class="cap-tags"><span>Deployment</span><span>Endpoints</span><span>Patching</span></div>
+                    <h3 class="cap-title">Identity Mgmt</h3>
+                    <div class="cap-tags"><span>Active Directory</span><span>SSO/SAML</span><span>RBAC</span></div>
                 </div>
 
-                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 1s;">
+                <!-- 13. Python -->
+                <div class="cap-node reveal-up reveal-graph" style="transition-delay: 0.4s;">
                     <div class="cap-ring-wrapper">
                         <svg class="cap-ring" viewBox="0 0 100 100">
                             <circle class="cap-bg" cx="50" cy="50" r="45"></circle>
-                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 32.0"></circle>
+                            <circle class="cap-progress" cx="50" cy="50" r="45" style="--target-offset: 28.3"></circle>
                         </svg>
-                        <div class="cap-percent">84<span>%</span></div>
-                        <i class="fas fa-user-shield cap-icon"></i>
+                        <div class="cap-percent">85<span>%</span></div>
+                        <i class="fab fa-python cap-icon"></i>
                     </div>
-                    <h3 class="cap-title">Cybersecurity</h3>
-                    <div class="cap-tags"><span>Pen Testing</span><span>EDR</span><span>Threat Intel</span></div>
+                    <h3 class="cap-title">Python</h3>
+                    <div class="cap-tags"><span>Automation</span><span>Scripting</span><span>Pandas</span></div>
                 </div>
+
             </div>
         </section>
 
-        <!-- STICKY PROJECT CARDS -->
+        <!-- PERFECTLY STICKY PROJECT CARDS -->
         <section id="projects" class="section">
             <h2 class="section-title reveal-up">Featured <span>Projects</span></h2>
             <div class="projects-wrapper">
@@ -2127,15 +2166,26 @@
                         <div class="p-tags"><span>Python</span> <span>LAN/WLAN</span> <span>FFmpeg</span></div>
                         <p>Architected a cost-effective, centralized advertisement broadcasting system across a
                             multi-floor building, managing concurrent video streaming for 10+ Smart TVs via custom
-                            multi-threaded Python servers.</p>
+                            Python servers.</p>
                     </div>
                     <div class="p-image"><img src="assets/images/projects/7.jpg" alt="OmniCare Signage"></div>
+                </article>
+
+                <!-- Project 08 -->
+                <article class="project-card reveal-up">
+                    <div class="project-index">08</div>
+                    <div class="p-content">
+                        <h3>Root Pulse</h3>
+                        <div class="p-tags"><span>Python</span> <span>TypeScript</span> <span>EDR</span></div>
+                        <p>Real-time telemetry suite with Wi-Fi reconnaissance and SOAR host containment.</p>
+                    </div>
+                    <div class="p-image"><img src="assets/images/projects/8.png" alt="Root Pulse"></div>
                 </article>
 
             </div>
         </section>
 
-        <!-- PUBLISHED RESEARCH (HOLOGRAM CARDS) -->
+        <!-- PUBLISHED RESEARCH -->
         <section id="research" class="section">
             <h2 class="section-title reveal-up">Published <span>Research</span></h2>
             <div class="research-grid">
@@ -2163,17 +2213,16 @@
             </div>
         </section>
 
-        <!-- ENHANCED ACTIVE DEFENSE MESH (WITH LIVE METRICS & RADAR) -->
+        <!-- 3D WEBGL ACTIVE DEFENSE MESH -->
         <section class="section">
             <h2 class="section-title reveal-up">Active <span>Defense Mesh</span></h2>
             <div class="global-mesh-wrapper reveal-up">
                 <div class="mesh-visual">
-                    <div class="radar-sweep"></div>
-                    <div class="globe-spinner">
-                        <div class="node-pulse n1"></div>
-                        <div class="node-pulse n2"></div>
-                        <div class="node-pulse n3"></div>
-                    </div>
+                    <!-- The 3D Three.js Globe Container -->
+                    <div id="webgl-globe" style="width: 100%; height: 100%; position: absolute; z-index: 2;"></div>
+
+                    <div class="radar-sweep-overlay"></div>
+
                     <div class="live-metrics-overlay">
                         <div>CPU: <span id="mesh-cpu">12</span>%</div>
                         <div>RAM: <span id="mesh-ram">45</span>%</div>
@@ -2222,7 +2271,7 @@
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Jan 2024 - Jul 2024</span><span
                                 class="ct-company">1000fix Services Ltd.</span></div>
-                        <h3 class="ct-role">Tech Support Spec</h3>
+                        <h3 class="ct-role">IT Support Specialist</h3>
                         <p class="ct-desc">Administered Azure AD and Intune. Executed proactive network monitoring via
                             PRTG, isolating anomalies and reducing downtime by 20%.</p>
                     </div>
@@ -2236,7 +2285,7 @@
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Feb 2021 - Dec 2023</span><span
                                 class="ct-company">Entrust Global Ltd.</span></div>
-                        <h3 class="ct-role">Senior IT Engineer</h3>
+                        <h3 class="ct-role">Senior Information Technology Engineer</h3>
                         <p class="ct-desc">Supported UAE Gov infrastructure. Engineered Root Cause Analysis (RCA)
                             protocols inside ServiceNow, cutting recurring issues by 30%.</p>
                     </div>
@@ -2250,7 +2299,7 @@
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Dec 2017 - Dec 2020</span><span
                                 class="ct-company">M/S Shahin International</span></div>
-                        <h3 class="ct-role">IT Engineer</h3>
+                        <h3 class="ct-role">Information Technology Engineer</h3>
                         <p class="ct-desc">Maintained 98% systems uptime. Conducted intensive traffic log analysis to
                             eliminate packet bottlenecks and supported hardware integrations.</p>
                     </div>
@@ -2264,7 +2313,7 @@
                     <div class="ct-content ui-interact">
                         <div class="ct-header"><span class="ct-date">Jan 2016 - Jan 2017</span><span
                                 class="ct-company">GrameenPhone Ltd.</span></div>
-                        <h3 class="ct-role">Assistant IT Engineer</h3>
+                        <h3 class="ct-role">Assistant Information Technology Engineer</h3>
                         <p class="ct-desc">Installed and configured core hardware. Provided robust technical support to
                             end-users, maintaining a 90% satisfaction rate.</p>
                     </div>
@@ -2324,31 +2373,30 @@
             </div>
         </section>
 
-        <!-- FOOTER (GLITCH UNTOUCHED) -->
+        <!-- FOOTER -->
         <footer class="footer" id="contact">
             <div class="footer-grid">
                 <div>
                     <h3
                         style="font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; letter-spacing: -1px; color: var(--text-main);">
                         Start A <span
-                            style="color: var(--accent-cyan); font-family: var(--font-serif); font-style: italic; font-weight: 400;">Conversation.</span>
+                            style="color: var(--accent-green); font-family: var(--font-serif); font-style: italic; font-weight: 400;">Conversation.</span>
                     </h3>
                     <a href="mailto:mustaquimmahmad@gmail.com" class="btn-cyber ui-interact"
                         style="text-decoration:none;">Reach Out</a>
                 </div>
                 <div class="social-icons" style="display: flex; gap: 1rem; align-items: center;">
-                    <a href="https://www.linkedin.com/in/mustaquimahmad/" target="_blank"
-                        class="ui-interact social-btn linkedin-btn"
+                    <a href="https://www.linkedin.com/in/mustaquimahmad/" target="_blank" class="ui-interact social-btn"
                         style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
                             class="fab fa-linkedin-in"></i></a>
                     <a href="https://github.com/mustaquim-ms?tab=repositories" target="_blank"
-                        class="ui-interact social-btn github-btn"
+                        class="ui-interact social-btn"
                         style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
                             class="fab fa-github"></i></a>
-                    <a href="https://medium.com/@mustaquim" target="_blank" class="ui-interact social-btn medium-btn"
+                    <a href="https://medium.com/@mustaquim" target="_blank" class="ui-interact social-btn"
                         style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
                             class="fab fa-medium-m"></i></a>
-                    <a href="mailto:mustaquimmahmad@gmail.com" target="_blank" class="ui-interact social-btn email-btn"
+                    <a href="mailto:mustaquimmahmad@gmail.com" target="_blank" class="ui-interact social-btn"
                         style="color: #a0a0a0; font-size: 1.2rem; transition: all 0.3s ease;"><i
                             class="fas fa-envelope"></i></a>
                 </div>
@@ -2373,7 +2421,7 @@
                 requestAnimationFrame(raf);
             }
 
-            // 2. Preloader Logic (Fixed ID matching and Reveal Flow)
+            // 2. Preloader Logic 
             const preloader = document.getElementById("preloader");
             const viewport3d = document.getElementById("viewport-3d");
             const statusEl = document.getElementById("loader-text");
@@ -2403,6 +2451,7 @@
             const soundBtn = document.getElementById('sound-toggle');
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             let audioCtx;
+            let defconSiren; // To hold siren interval
 
             if (soundBtn) {
                 soundBtn.addEventListener('click', () => {
@@ -2425,11 +2474,118 @@
                 osc.start(); osc.stop(audioCtx.currentTime + 0.05);
             }
 
+            function startSiren() {
+                if (!soundEnabled || !audioCtx) return;
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                let isHigh = false;
+                defconSiren = setInterval(() => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.connect(gain); gain.connect(audioCtx.destination);
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(isHigh ? 600 : 400, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.5);
+                    isHigh = !isHigh;
+                }, 500);
+            }
+
+            function stopSiren() { clearInterval(defconSiren); }
+
             document.querySelectorAll('.ui-interact').forEach(el => {
                 el.addEventListener('mouseenter', playTick);
             });
 
-            // 4. Ultra-Smooth Lerping Mouse Glow & Spiral Canvas
+            // 4. DEFCON 1 LOCKDOWN PROTOCOL
+            const defconBtn = document.getElementById("defcon-btn");
+            const defconInput = document.getElementById("defcon-input");
+            const defconError = document.getElementById("defcon-error");
+
+            if (defconBtn) {
+                defconBtn.addEventListener("click", () => {
+                    document.body.classList.add("defcon-active");
+                    startSiren();
+                    setTimeout(() => defconInput.focus(), 100);
+                });
+            }
+
+            if (defconInput) {
+                defconInput.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        if (defconInput.value.toLowerCase() === "override" || defconInput.value.toLowerCase() === "exit") {
+                            document.body.classList.remove("defcon-active");
+                            stopSiren();
+                            defconInput.value = "";
+                            defconError.style.display = "none";
+                        } else {
+                            defconError.style.display = "block";
+                            defconInput.value = "";
+                        }
+                    }
+                });
+            }
+
+            // 5. THREE.JS 3D WEBGL GLOBE
+            const globeContainer = document.getElementById('webgl-globe');
+            if (globeContainer && typeof THREE !== 'undefined') {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(45, globeContainer.clientWidth / globeContainer.clientHeight, 0.1, 1000);
+                camera.position.z = 4;
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer.setSize(globeContainer.clientWidth, globeContainer.clientHeight);
+                globeContainer.appendChild(renderer.domElement);
+
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true; controls.enableZoom = false; controls.autoRotate = true; controls.autoRotateSpeed = 2.0;
+
+                const geometry = new THREE.SphereGeometry(1.4, 32, 32);
+                const material = new THREE.MeshBasicMaterial({ color: 0x00F0FF, wireframe: true, transparent: true, opacity: 0.2 });
+                const globe = new THREE.Mesh(geometry, material);
+                scene.add(globe);
+
+                const pointsMat = new THREE.PointsMaterial({ color: 0xB026FF, size: 0.05 });
+                const points = new THREE.Points(geometry, pointsMat);
+                scene.add(points);
+
+                // Attack Lines (Red Lasers)
+                const attackGeo = new THREE.BufferGeometry();
+                const attackMat = new THREE.LineBasicMaterial({ color: 0xFF003C, transparent: true, opacity: 0 });
+                const attackLine = new THREE.LineSegments(attackGeo, attackMat);
+                scene.add(attackLine);
+
+                // Randomly flash attack lines
+                setInterval(() => {
+                    const isDefcon = document.body.classList.contains('defcon-active');
+                    if (isDefcon || Math.random() > 0.5) {
+                        const pts = [];
+                        for (let i = 0; i < 4; i++) {
+                            pts.push(new THREE.Vector3((Math.random() - 0.5) * 3, (Math.random() - 0.5) * 3, (Math.random() - 0.5) * 3));
+                        }
+                        attackGeo.setFromPoints(pts);
+                        attackMat.opacity = 0.8;
+                        setTimeout(() => { attackMat.opacity = 0; }, 200);
+                    }
+                }, 1000);
+
+                window.addEventListener('resize', () => {
+                    camera.aspect = globeContainer.clientWidth / globeContainer.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(globeContainer.clientWidth, globeContainer.clientHeight);
+                });
+
+                function animateGlobe() {
+                    requestAnimationFrame(animateGlobe);
+                    controls.update();
+                    // React to DEFCON variable
+                    const isDefcon = document.body.classList.contains('defcon-active');
+                    material.color.setHex(isDefcon ? 0xFF003C : 0x00F0FF);
+                    pointsMat.color.setHex(isDefcon ? 0xFF4500 : 0xB026FF);
+                    renderer.render(scene, camera);
+                }
+                animateGlobe();
+            }
+
+            // 6. Ultra-Smooth Lerping Mouse Glow & Spiral Canvas
             let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
             let glowX = mouseX, glowY = mouseY;
             const glowAura = document.getElementById("ambient-glow");
@@ -2454,8 +2610,7 @@
             }
 
             window.addEventListener("mousemove", (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
+                mouseX = e.clientX; mouseY = e.clientY;
             });
 
             function animateGlowAndSpiral() {
@@ -2466,6 +2621,8 @@
                 if (ctx) {
                     ctx.clearRect(0, 0, width, height);
                     time += 1;
+                    const isDefcon = document.body.classList.contains('defcon-active');
+
                     particles.forEach((p, index) => {
                         p.radius = p.baseRadius + Math.sin(time * 0.05 + index) * 15;
                         const currentAngle = p.angle + (time * p.speed);
@@ -2473,7 +2630,8 @@
                         const y = glowY + Math.sin(currentAngle) * p.radius;
 
                         ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2);
-                        const hue = 180 + (index * 2.5);
+                        // Shift color to red if DEFCON active
+                        const hue = isDefcon ? (340 + index) : (180 + (index * 2.5));
                         ctx.fillStyle = `hsla(${hue}, 100%, 50%, ${1 - (index / 40)})`; ctx.fill();
 
                         if (index > 0) {
@@ -2490,7 +2648,7 @@
             }
             animateGlowAndSpiral();
 
-            // 5. Shrinking Navbar & Go To Top
+            // 7. Shrinking Navbar & Go To Top
             const navbar = document.getElementById("navbar");
             const goTopBtn = document.getElementById("go-top");
             if (navbar) {
@@ -2524,7 +2682,7 @@
                 navLinksContainer.addEventListener("mouseleave", () => (navSlider.style.opacity = "0"));
             }
 
-            // 6. The 4-State Interactive Rubik's Cube
+            // 8. The 4-State Interactive Rubik's Cube
             const cube = document.getElementById("interactive-cube");
             let cubeState = 0;
             if (cube) {
@@ -2534,7 +2692,7 @@
                 });
             }
 
-            // 7. Scroll Progress Bar
+            // 9. Scroll Progress Bar
             const progressBar = document.getElementById("scroll-progress");
             function handleScroll() {
                 if (progressBar) {
@@ -2551,7 +2709,7 @@
             }
             if (lenis) { lenis.on('scroll', handleScroll); } else { window.addEventListener('scroll', handleScroll); }
 
-            // 8. General Scroll Reveal Observers
+            // 10. General Scroll Reveal Observers
             const basicObserver = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) { entry.target.classList.add('active'); }
@@ -2559,7 +2717,7 @@
             }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             document.querySelectorAll('.reveal-up, .reveal-graph').forEach(el => basicObserver.observe(el));
 
-            // 9. Active Defense Log Simulator
+            // 11. Active Defense Log Simulator
             const logStream = document.getElementById('log-stream');
             if (logStream) {
                 const logs = [
@@ -2601,6 +2759,13 @@
                     el.innerHTML = `<span class="log-time">[${time}]</span> <span class="log-status ${log.s}">[${log.s.toUpperCase()}]</span> <span>${log.m}</span>`;
                     logStream.appendChild(el);
                     if (logStream.children.length > 8) logStream.removeChild(logStream.firstChild);
+
+                    const cpu = document.getElementById('mesh-cpu');
+                    const ram = document.getElementById('mesh-ram');
+                    const net = document.getElementById('mesh-net');
+                    if (cpu) cpu.innerText = Math.floor(Math.random() * 20) + 10;
+                    if (ram) ram.innerText = Math.floor(Math.random() * 40) + 30;
+                    if (net) net.innerText = Math.floor(Math.random() * 200) + 750;
                 }, 2000);
             }
         });
