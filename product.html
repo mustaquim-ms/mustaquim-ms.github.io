@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Storefront | Mustaquim Ahmad - IT & Systems Assets</title>
+
+    <!-- Icons & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External Scripts - Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- SEO Tags -->
+    <meta name="description"
+        content="Digital Storefront by Mustaquim Ahmad - Premium Excel Workbooks, ATS-Friendly Resumes, and Automated Productivity Tools.">
+    <meta name="author" content="Mustaquim Ahmad">
+
+    <style>
+        :root {
+            --bg-base: #010308;
+            --bg-glass: rgba(10, 15, 30, 0.65);
+            --bg-card: rgba(11, 17, 32, 0.7);
+            --border-glass: rgba(0, 240, 255, 0.15);
+            --text-main: #F8FAFC;
+            --text-muted: #8B9BB4;
+            --accent-green: #7ed957;
+            --accent-gold: #ffb423;
+            --accent-emerald: #00FF88;
+            --accent-cyan: #00f0ff;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        html {
+            background: var(--bg-base);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05), transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(126, 217, 87, 0.04), transparent 40%);
+            background-size: 200% 200%;
+        }
+
+        body.modal-open {
+            overflow: hidden !important;
+            height: 100vh;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 240, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-green);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold));
+            width: 0%;
+            z-index: 999999;
+            box-shadow: 0 0 10px var(--accent-green);
+            transition: width 0.1s ease-out;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            padding: 12px 30px;
+            width: 95%;
+            max-width: 900px;
+            background: rgba(1, 3, 8, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-weight: 900;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .custom-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid rgba(0, 240, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* --- BUTTONS --- */
+        .btn-cyber {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            color: var(--accent-green);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            z-index: 1;
+        }
+
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--accent-green);
+            transform: skewX(-15deg);
+            transition: 0.3s;
+            z-index: -1;
+        }
+
+        .btn-cyber::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--accent-green);
+            transform: scaleX(0) skewX(-15deg);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -2;
+        }
+
+        .btn-cyber:hover {
+            color: #000;
+            box-shadow: 0 0 20px rgba(126, 217, 87, 0.5);
+        }
+
+        .btn-cyber:hover::after {
+            transform: scaleX(1);
+        }
+
+        .btn-primary-action {
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+            background: linear-gradient(135deg, var(--accent-green), #00cc66);
+            color: #010308;
+            font-weight: 900;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(126, 217, 87, 0.4);
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: var(--font-mono);
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+
+        .btn-primary-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(126, 217, 87, 0.7);
+        }
+
+        /* --- LAYOUT --- */
+        .section {
+            padding: 140px 5% 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .shop-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .shop-header h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .shop-header h1 span {
+            color: var(--accent-green);
+            text-shadow: 0 0 20px rgba(126, 217, 87, 0.4);
+        }
+
+        .shop-header p {
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            border-left: 4px solid var(--accent-green);
+            padding-left: 15px;
+        }
+
+        /* --- PRODUCT GRID --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-green);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.15);
+        }
+
+        .product-card-media {
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+        }
+
+        .product-card-media video,
+        .product-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s ease;
+            filter: grayscale(10%);
+        }
+
+        .product-card:hover .product-card-media video,
+        .product-card:hover .product-card-media img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(1, 3, 8, 0.85);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .product-card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-card-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .product-card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 20px;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--accent-green);
+        }
+
+        /* --- NEW: BUYER METRIC --- */
+        .buyer-metric {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .live-pulse {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse-green 1.5s infinite;
+        }
+
+        /* Transition for the live number update */
+        .live-user-count,
+        #modal-user-count {
+            transition: all 0.5s ease;
+        }
+
+        @keyframes pulse-green {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(126, 217, 87, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 6px rgba(126, 217, 87, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(126, 217, 87, 0);
+            }
+        }
+
+        /* --- PRODUCT DETAILS MODAL --- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(1, 3, 8, 0.92);
+            backdrop-filter: blur(15px);
+            z-index: 100000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-backdrop.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background: #050914;
+            border: 1px solid rgba(126, 217, 87, 0.4);
+            border-radius: 24px;
+            max-width: 1050px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 0 60px rgba(0, 240, 255, 0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            overscroll-behavior: contain;
+        }
+
+        .modal-backdrop.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.1rem;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #FF003C;
+            border-color: #FF003C;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        @media(max-width: 900px) {
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* SCREENSHOT TAB VIEWER INSIDE MODAL */
+        .tab-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(1, 3, 8, 0.6);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--accent-green);
+            color: #010308;
+            border-color: var(--accent-green);
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .tab-pane img,
+        .tab-pane video {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            height: 260px;
+            object-fit: cover;
+            background: #000;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-pane img:hover {
+            border-color: var(--accent-green);
+            filter: brightness(1.1);
+        }
+
+        /* LIGHTBOX FOR CLICK-TO-ENLARGE IMAGES */
+        .lightbox-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 95vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+
+        .psych-box {
+            background: linear-gradient(135deg, rgba(255, 180, 35, 0.08), rgba(0, 240, 255, 0.05));
+            border-left: 3px solid var(--accent-gold);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #e2e8f0;
+            font-style: italic;
+        }
+
+        /* CHECKOUT FORM IN MODAL */
+        .checkout-box {
+            background: rgba(1, 3, 8, 0.6);
+            border: 1px solid var(--border-glass);
+            padding: 25px;
+            border-radius: 16px;
+        }
+
+        .bkash-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #e2136e;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .bkash-logo {
+            background: #fff;
+            color: #e2136e;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            margin-bottom: 5px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(1, 3, 8, 0.9);
+            border: 1px solid var(--border-glass);
+            border-radius: 6px;
+            color: #fff;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(126, 217, 87, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="assets/images/logo.png" alt="Logo" class="custom-logo">
+            <span>MUSTAQUIM</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#projects">Deployments</a></li>
+            <li><a href="product.html" class="active">Products</a></li>
+        </ul>
+        <a href="mailto:mustaquimmahmad@gmail.com" class="btn-cyber"
+            style="padding: 8px 18px; font-size: 0.75rem;">Connect</a>
+    </nav>
+
+    <!-- SHOP HEADER -->
+    <section class="section shop-header" style="padding-bottom: 20px;">
+        <h1>Digital <span>Marketplace</span></h1>
+        <p>High-performance Excel workbooks, automated productivity templates, and technical assets built to scale your
+            workflow and wealth.</p>
+    </section>
+
+    <!-- AVAILABLE PRODUCTS SECTION -->
+    <section class="section" style="padding-top: 0;">
+        <h2 class="category-title">Available Digital Assets</h2>
+        <div class="products-grid">
+
+            <!-- PRODUCT 1: SONCHOY 360 -->
+            <!-- ADDED: data-product-id attribute to tie the card to the JS object -->
+            <div class="product-card" data-product-id="sonchoy">
+                <div class="product-card-media">
+                    <span class="product-badge">Excel & Sheets</span>
+                    <video src="business/Sonchoy/sonchoy.mp4" poster="business/Sonchoy/1.png" autoplay muted loop
+                        playsinline preload="auto"></video>
+                </div>
+                <div class="product-card-body">
+                    <h3 class="product-card-title">SONCHOY 360° Personal Finance Command Center</h3>
+                    <p class="product-card-desc">An automated wealth tracker custom-tailored with native BDT Lakh/Crore
+                        formatting, expense logs, debt manager, and annual matrix.</p>
+
+                    <!-- BUYER METRIC & PRICE IN FOOTER -->
+                    <div class="product-card-footer" style="flex-wrap: wrap; gap: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 5px;">
+                            <div class="product-price">৳599 <span
+                                    style="font-size:0.8rem; color:var(--text-muted); font-weight:normal;">BDT</span>
+                            </div>
+                            <div class="buyer-metric">
+                                <!-- MODIFIED: Removed hardcoded number, wrapped in span for JS updates -->
+                                <span class="live-pulse"></span> <span class="live-user-count">...</span>+ Active Users
+                            </div>
+                        </div>
+                        <button class="btn-cyber" onclick="openProductModal('sonchoy')">View Details <i
+                                class="fas fa-arrow-right" style="margin-left: 5px;"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- UPCOMING PRODUCTS SECTION -->
+        <h2 class="category-title" style="margin-top: 60px; border-left-color: var(--accent-gold);">Upcoming Products
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal; margin-left: 10px;">(In
+                Development)</span>
+        </h2>
+        <div class="products-grid">
+            <div class="product-card" style="opacity: 0.65;">
+                <div class="product-card-media">
+                    <span class="product-badge"
+                        style="border-color: var(--accent-gold); color: var(--accent-gold);">Coming Soon</span>
+                    <img src="https://via.placeholder.com/600x400/0b1120/ffb423?text=ATS+Resume+Toolkit"
+                        alt="Upcoming Product">
+                </div>
+                <div class="product-card-body">
+                    <h3 class="product-card-title">ATS-Optimized Executive Resume Toolkit</h3>
+                    <p class="product-card-desc">Professional parser-friendly resume frameworks and cover letter systems
+                        engineered specifically for IT and engineering professionals.</p>
+                    <div class="product-card-footer">
+                        <div class="product-price" style="color: var(--accent-gold); font-size: 1.1rem;">In Pipeline
+                        </div>
+                        <button class="btn-cyber" style="color: var(--accent-gold); opacity: 0.6; cursor: not-allowed;"
+                            disabled>Locked <i class="fas fa-lock" style="margin-left: 5px;"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" style="opacity: 0.65;">
+                <div class="product-card-media">
+                    <span class="product-badge"
+                        style="border-color: var(--accent-gold); color: var(--accent-gold);">Coming Soon</span>
+                    <img src="https://via.placeholder.com/600x400/0b1120/ffb423?text=Python+Admin+Suite"
+                        alt="Upcoming Product">
+                </div>
+                <div class="product-card-body">
+                    <h3 class="product-card-title">IT Infrastructure Automation Python Scripting Suite</h3>
+                    <p class="product-card-desc">Ready-to-deploy modular scripts for Windows Server automated
+                        maintenance, log parsing, and endpoint telemetry alerts.</p>
+                    <div class="product-card-footer">
+                        <div class="product-price" style="color: var(--accent-gold); font-size: 1.1rem;">In Pipeline
+                        </div>
+                        <button class="btn-cyber" style="color: var(--accent-gold); opacity: 0.6; cursor: not-allowed;"
+                            disabled>Locked <i class="fas fa-lock" style="margin-left: 5px;"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" style="opacity: 0.65;">
+                <div class="product-card-media">
+                    <span class="product-badge"
+                        style="border-color: var(--accent-gold); color: var(--accent-gold);">Coming Soon</span>
+                    <img src="https://via.placeholder.com/600x400/0b1120/ffb423?text=ITSM+SLA+Calculator"
+                        alt="Upcoming Product">
+                </div>
+                <div class="product-card-body">
+                    <h3 class="product-card-title">ITSM Incident & SLA Performance Tracker</h3>
+                    <p class="product-card-desc">An advanced operations matrix template to track Tier 1/2 escalations,
+                        ticket resolution times, and team KPIs automatically.</p>
+                    <div class="product-card-footer">
+                        <div class="product-price" style="color: var(--accent-gold); font-size: 1.1rem;">In Pipeline
+                        </div>
+                        <button class="btn-cyber" style="color: var(--accent-gold); opacity: 0.6; cursor: not-allowed;"
+                            disabled>Locked <i class="fas fa-lock" style="margin-left: 5px;"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAILS MODAL -->
+    <div id="productModal" class="modal-backdrop">
+        <div class="modal-container" data-lenis-prevent>
+            <button class="modal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+            <div id="modal-content-body"></div>
+        </div>
+    </div>
+
+    <!-- IMAGE LIGHTBOX ZOOM VIEW -->
+    <div id="imageLightbox" class="lightbox-overlay" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img id="lightboxImg" src="" alt="Enlarged View">
+    </div>
+
+    <!-- FOOTER -->
+    <footer
+        style="padding: 60px 5% 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 80px; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem;">
+        <p>&copy; 2026 Mustaquim Ahmad. All rights reserved. Secure Digital Storefront.</p>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // MASTER PRODUCT DATA OBJECT (Change the usersCount here, and it updates everywhere automatically)
+        const productsData = {
+            'sonchoy': {
+                title: "SONCHOY 360° Personal Finance Command Center",
+                price: "599 BDT",
+                originalPrice: "2,500 BDT",
+                usersCount: "62", // <--- UPDATE THIS NUMBER OVER TIME
+                subtitle: "The ultimate wealth management template built for Google Sheets & Microsoft Excel with BDT Lakh/Crore formatting.",
+                psychHook: "৳599 is less than the cost of one fast-food meal in Dhaka, but it will save you thousands of Taka in impulse leaks and give you absolute financial clarity for life.",
+                features: [
+                    "Works seamlessly in both Microsoft Excel & Google Sheets",
+                    "100% automated dynamic formulas (zero manual math)",
+                    "Custom tailored BDT Lakh and Crore numeric formatting",
+                    "Includes dedicated modules for Debt tracking and Zakat calculations"
+                ],
+                mediaTabs: [
+                    { name: "Overview Video", type: "video", src: "business/Sonchoy/sonchoy.mp4", poster: "business/Sonchoy/1.png", desc: "A complete visual walkthrough demonstrating automated formulas and tracking workflows." },
+                    { name: "1. Dashboard", type: "img", src: "business/Sonchoy/1.png", desc: "Real-time net worth summary, monthly savings velocity, and asset allocation breakdown. (Click image to expand)" },
+                    { name: "2. Transactions", type: "img", src: "business/Sonchoy/2.png", desc: "Granular categorized income/expense logging with automated filters. (Click image to expand)" },
+                    { name: "3. Festivals / Zakat", type: "img", src: "business/Sonchoy/3.png", desc: "Automated Nisab calculation, Zakat due tracker, and targeted festival budgets. (Click image to expand)" },
+                    { name: "4. Debt / Loan", type: "img", src: "business/Sonchoy/4.png", desc: "Track personal lendings, borrowings, repayment timelines, and interest statuses. (Click image to expand)" },
+                    { name: "5. Annual Matrix", type: "img", src: "business/Sonchoy/5.png", desc: "Year-over-year financial performance macro view for long-term fiscal planning. (Click image to expand)" }
+                ],
+                googleFormAction: "https://forms.gle/oF6yiDPqRXg4dkc96"
+            }
+        };
+
+        let lenis;
+        document.addEventListener("DOMContentLoaded", () => {
+            // Ultra-Smooth Lenis Setup
+            if (typeof Lenis !== "undefined") {
+                lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    smoothWheel: true
+                });
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+            }
+
+            // AUTO-POPULATE LIVE USER COUNTS ON MAIN PAGE LOAD
+            document.querySelectorAll('[data-product-id]').forEach(card => {
+                const pid = card.getAttribute('data-product-id');
+                if (productsData[pid]) {
+                    const countSpan = card.querySelector('.live-user-count');
+                    if (countSpan) countSpan.innerText = productsData[pid].usersCount;
+                }
+            });
+
+            // FORCE AUTOPLAY ON ALL MAIN PAGE VIDEOS
+            const cardVideos = document.querySelectorAll('.product-card-media video');
+            cardVideos.forEach(video => {
+                video.muted = true;
+                video.defaultMuted = true;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('autoplay', '');
+                video.setAttribute('loop', '');
+
+                let playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(err => {
+                        console.log("Autoplay initially blocked. Retrying...", err);
+                        setTimeout(() => {
+                            video.muted = true;
+                            video.play().catch(e => console.warn("Browser strictly blocking autoplay.", e));
+                        }, 150);
+                    });
+                }
+            });
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener("scroll", () => {
+            const progressBar = document.getElementById("scroll-progress");
+            if (progressBar) {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                let scrollPercent = (scrollTop / docHeight) * 100;
+                progressBar.style.width = `${Math.max(0, Math.min(scrollPercent, 100))}%`;
+            }
+        });
+
+        // MODAL LOGIC
+        function openProductModal(productId) {
+            const product = productsData[productId];
+            if (!product) return;
+
+            let modalBody = `
+                <span class="product-badge" style="position:static; display:inline-block; margin-bottom:15px;">Active Digital Asset</span>
+                <h2 style="font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; line-height: 1.2;">${product.title}</h2>
+                
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap;">
+                    <span style="font-size: 1.8rem; font-weight: 900; color: var(--accent-green); font-family: var(--font-mono);">${product.price}</span>
+                    <span style="font-size: 1rem; color: var(--text-muted); text-decoration: line-through;">${product.originalPrice}</span>
+                    <span style="background: rgba(255, 180, 35, 0.15); color: var(--accent-gold); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-family: var(--font-mono);">60% OFF</span>
+                    
+                    <div class="buyer-metric" style="margin-left: auto;">
+                        <span class="live-pulse"></span> <span id="modal-user-count" class="live-user-count-modal">${product.usersCount}</span>+ Active Users
+                    </div>
+                </div>
+
+                <p style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem; margin-bottom: 15px;">${product.subtitle}</p>
+                
+                <div class="psych-box">${product.psychHook}</div>
+
+                <div class="modal-grid">
+                    <div>
+                        <h4 style="font-size: 0.9rem; margin-bottom: 10px; color: var(--accent-cyan); font-family: var(--font-mono); text-transform: uppercase;"><i class="fas fa-check-circle"></i> What's Inside</h4>
+                        <ul style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.7; padding-left: 18px; font-family: var(--font-mono); margin-bottom: 20px;">
+                            ${product.features.map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+
+                        <h4 style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-main); font-family: var(--font-mono);">Interactive Product Previews:</h4>
+                        <div class="tab-buttons">
+                            ${product.mediaTabs.map((m, idx) => `
+                                <button class="tab-btn ${idx === 0 ? 'active' : ''}" onclick="switchModalTab(event, 'modal-pane-${idx}')">${m.name}</button>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 10px;">
+                            ${product.mediaTabs.map((m, idx) => `
+                                <div id="modal-pane-${idx}" class="tab-pane ${idx === 0 ? 'active' : ''}">
+                                    ${m.type === 'video'
+                    ? `<video src="${m.src}" poster="${m.poster || ''}" autoplay muted loop playsinline preload="auto" style="width:100%; height:260px; border-radius:8px; object-fit:cover;"></video>`
+                    : `<img src="${m.src}" alt="${m.name}" onclick="openLightbox('${m.src}')" title="Click to enlarge image">`
+                }
+                                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; font-family: var(--font-mono);">${m.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="checkout-box">
+                            <div class="bkash-banner">F
+                                <span>Pay via bKash Personal / Merchant</span>
+                                <div class="bkash-logo">bKash</div>
+                            </div>
+                            <p style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--text-muted); line-height: 1.6; margin-bottom: 15px;">
+                                <strong>Step 1:</strong> Send exact <strong style="color:#fff;">${product.price}</strong> to bKash or Nagad: <strong style="color:var(--accent-green);">01627562313</strong><br>
+                                <strong>Step 2:</strong> Fill the verification details below to trigger automated template delivery within 1 hour.
+                            </p>
+                            <form action="${product.googleFormAction}" target="_blank" method="GET">
+                                <div class="form-group">
+                                    <label>Your Name</label>
+                                    <input type="text" class="form-control fomo-trigger" placeholder="Your Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email (For Template Delivery)</label>
+                                    <input type="email" class="form-control fomo-trigger" placeholder="name@mail.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>bKash Sender Mobile Number</label>
+                                    <input type="text" class="form-control fomo-trigger" placeholder="01712345678" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>bKash Transaction ID (TrxID)</label>
+                                    <input type="text" class="form-control fomo-trigger" placeholder="e.g. 9G74H82K1" required style="border-color:var(--accent-green);">
+                                </div>
+                                <button type="submit" class="btn-primary-action" style="margin-top: 5px; padding: 12px; font-size: 0.9rem;">
+                                    <i class="fas fa-lock"></i> Submit & Claim Access
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modal-content-body').innerHTML = modalBody;
+            document.getElementById('productModal').classList.add('active');
+
+            if (lenis) lenis.stop();
+            document.body.classList.add('modal-open');
+
+            // Play video inside modal
+            setTimeout(() => {
+                const activeVideo = document.querySelector('#modal-pane-0 video');
+                if (activeVideo) {
+                    activeVideo.muted = true;
+                    activeVideo.setAttribute('playsinline', '');
+                    let playPromise = activeVideo.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(err => {
+                            setTimeout(() => activeVideo.play(), 50);
+                        });
+                    }
+                }
+            }, 150);
+
+            // INITIALIZE FOMO "LIVE INCREMENT" LOGIC
+            attachFOMOScript(productId);
+        }
+
+        // --- FOMO SCRIPT (Increments user count live when they start typing) ---
+        function attachFOMOScript(productId) {
+            const formInputs = document.querySelectorAll('#productModal .fomo-trigger');
+            let hasIncremented = false;
+
+            formInputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    // Prevent it from happening multiple times
+                    if (hasIncremented) return;
+                    hasIncremented = true;
+
+                    // Wait 3.5 seconds after they click an input, then trigger "purchase"
+                    setTimeout(() => {
+                        // 1. Update backend data object
+                        let newCount = parseInt(productsData[productId].usersCount) + 1;
+                        productsData[productId].usersCount = newCount;
+
+                        // 2. Update Modal Counter visually
+                        const modalCountSpan = document.getElementById('modal-user-count');
+                        if (modalCountSpan) {
+                            modalCountSpan.innerText = newCount;
+                            modalCountSpan.style.color = "var(--accent-green)";
+                            modalCountSpan.style.textShadow = "0 0 10px var(--accent-green)";
+
+                            // Revert color back after flash
+                            setTimeout(() => {
+                                modalCountSpan.style.color = "";
+                                modalCountSpan.style.textShadow = "";
+                            }, 2000);
+                        }
+
+                        // 3. Update Main Page Card Counter visually (so when they close modal, it's updated there too)
+                        const mainCardCountSpan = document.querySelector(`[data-product-id="${productId}"] .live-user-count`);
+                        if (mainCardCountSpan) {
+                            mainCardCountSpan.innerText = newCount;
+                        }
+
+                    }, 3500); // 3.5 seconds delay
+                });
+            });
+        }
+
+        function closeProductModal() {
+            document.querySelectorAll('#productModal video').forEach(v => v.pause());
+            document.getElementById('productModal').classList.remove('active');
+
+            document.body.classList.remove('modal-open');
+            if (lenis) lenis.start();
+        }
+
+        function switchModalTab(evt, paneId) {
+            document.querySelectorAll('#productModal video').forEach(v => v.pause());
+
+            const panes = evt.target.closest('.modal-grid').querySelectorAll('.tab-pane');
+            panes.forEach(p => p.classList.remove('active'));
+
+            const buttons = evt.target.closest('div').querySelectorAll('.tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+
+            const targetPane = document.getElementById(paneId);
+            targetPane.classList.add('active');
+            evt.currentTarget.classList.add('active');
+
+            const paneVideo = targetPane.querySelector('video');
+            if (paneVideo) {
+                paneVideo.muted = true;
+                paneVideo.currentTime = 0;
+                paneVideo.play().catch(e => console.log("Tab switch video play error:", e));
+            }
+        }
+
+        function openLightbox(imgSrc) {
+            document.getElementById('lightboxImg').src = imgSrc;
+            document.getElementById('imageLightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('imageLightbox').classList.remove('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('productModal');
+            if (e.target === modal) {
+                closeProductModal();
+            }
+        });
+    </script>
+</body>
+
+</html>

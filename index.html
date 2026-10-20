@@ -761,142 +761,38 @@
             transform: translateX(5px);
         }
 
-        /* --- STICKY PROJECTS --- */
-        .projects-wrapper {
-            position: relative;
-            padding-bottom: 50px;
+        /* --- STICKY PROJECT CARDS (SOLID FIX) --- */
+        .projects-wrapper { position: relative; padding-bottom: 50px; }
+        .project-card { 
+            position: sticky; 
+            background: #050914; /* SOLID COLOR: Stops bleed-through */
+            border: 1px solid var(--border-glass); 
+            border-top: 2px solid rgba(0, 240, 255, 0.5); 
+            border-radius: 24px; padding: 50px; margin-bottom: 40px; 
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px;
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.8); 
+            overflow: hidden; 
         }
 
-        .project-card {
-            position: sticky;
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-top: 2px solid rgba(0, 240, 255, 0.3);
-            border-radius: 24px;
-            padding: 50px;
-            margin-bottom: 40px;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 50px;
-            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-            transition: border-color 0.3s;
-            overflow: hidden;
-        }
+        /* Fixed Math Offsets for Stacking up to 10 cards */
+        .project-card:nth-child(1) { top: 100px; z-index: 1;}
+        .project-card:nth-child(2) { top: 130px; z-index: 2;}
+        .project-card:nth-child(3) { top: 160px; z-index: 3;}
+        .project-card:nth-child(4) { top: 190px; z-index: 4;}
+        .project-card:nth-child(5) { top: 220px; z-index: 5;}
+        .project-card:nth-child(6) { top: 250px; z-index: 6;}
+        .project-card:nth-child(7) { top: 280px; z-index: 7;}
+        .project-card:nth-child(8) { top: 310px; z-index: 8;}
 
-        .project-card:nth-child(1) {
-            top: 100px;
-            z-index: 1;
-        }
-
-        .project-card:nth-child(2) {
-            top: 130px;
-            z-index: 2;
-        }
-
-        .project-card:nth-child(3) {
-            top: 160px;
-            z-index: 3;
-        }
-
-        .project-card:nth-child(4) {
-            top: 190px;
-            z-index: 4;
-        }
-
-        .project-card:nth-child(5) {
-            top: 220px;
-            z-index: 5;
-        }
-
-        .project-card:nth-child(6) {
-            top: 250px;
-            z-index: 6;
-        }
-
-        .project-card:nth-child(7) {
-            top: 280px;
-            z-index: 7;
-        }
-
-        .project-card:nth-child(8) {
-            top: 310px;
-            z-index: 8;
-        }
-
-        .project-index {
-            font-family: var(--font-mono);
-            font-size: 5rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.03);
-            position: absolute;
-            right: 40px;
-            top: 20px;
-            line-height: 1;
-        }
-
-        .p-content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .p-content h3 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-            color: var(--text-main);
-        }
-
-        .p-content p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 35px;
-            font-weight: 400;
-        }
-
-        .p-tags {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .p-tags span {
-            background: rgba(0, 240, 255, 0.05);
-            color: var(--accent-green);
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-family: var(--font-mono);
-            transition: 0.3s;
-        }
-
-        .p-image {
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-glass);
-            height: 100%;
-            min-height: 350px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-
-        .p-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(20%);
-            transition: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .project-card:hover .p-image img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
+        .project-index { font-family: var(--font-mono); font-size: 5rem; font-weight: 900; color: rgba(255, 255, 255, 0.03); position: absolute; right: 40px; top: 20px; line-height: 1;}
+        .p-content { display: flex; flex-direction: column; justify-content: center; z-index: 2;}
+        .p-content h3 { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; color: var(--text-main);}
+        .p-content p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 35px; font-weight: 400;}
+        .p-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+        .p-tags span { background: rgba(0, 240, 255, 0.05); color: var(--accent-cyan); border: 1px solid rgba(0, 240, 255, 0.2); padding: 6px 16px; border-radius: 50px; font-size: 0.8rem; font-family: var(--font-mono); }
+        .p-image { border-radius: 16px; overflow: hidden; border: 1px solid var(--border-glass); height: 100%; min-height: 350px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); }
+        .p-image img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+        .project-card:hover .p-image img { filter: grayscale(0%); transform: scale(1.05); }
 
         /* --- RESEARCH --- */
         .research-grid {
@@ -1759,8 +1655,8 @@
             <li><a href="#about" class="ui-interact">Home</a></li>
             <li><a href="#skills" class="ui-interact">Skills</a></li>
             <li><a href="#projects" class="ui-interact">Deployments</a></li>
-            <li><a href="#experience" class="ui-interact">Career Path</a></li>
-        </ul>
+            <li><a href="product.html" class="ui-interact">Products</a></li>
+            <li><a href="#experience" class="ui-interact">Career Path</a></li>        </ul>
         <div class="nav-btn-wrapper">
             <a href="mailto:mustaquimmahmad@gmail.com" class="btn-cyber ui-interact">Connect</a>
         </div>
@@ -1791,8 +1687,9 @@
 
                 <div class="hero-actions reveal-up" style="transition-delay: 0.3s;">
                     <a href="#projects" class="btn-cyber ui-interact">View Projects</a>
-                    <a href="assets/pdf/resume.pdf" target="_blank" class="btn-cyber alt ui-interact">Download
+                    <a href="assets/pdf/resume.pdf" target="_blank" class="btn-cyber ui-interact">Download
                         Resume</a>
+                    <a href="./product.html" class="btn-cyber ui-interact">View My Products</a>
                 </div>
             </div>
 
@@ -2061,129 +1958,129 @@
             </div>
         </section>
 
-        <!-- PERFECTLY STICKY PROJECT CARDS -->
-        <section id="projects" class="section">
-            <h2 class="section-title reveal-up">Featured <span>Projects</span></h2>
-            <div class="projects-wrapper">
-
-                <!-- Project 01 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">01</div>
-                    <div class="p-content">
-                        <h3>Raudatul Quran</h3>
-                        <div class="p-tags"><span>Web App</span> <span>UI/UX</span> <span>Typography</span></div>
-                        <p>A minimal, immersive digital platform designed for deep Quranic reflection and linguistic
-                            study. Engineered with focus on fluid typography.</p>
-                        <a href="https://raudatul-quran-silk.vercel.app/" target="_blank" rel="noopener noreferrer"
-                            class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Visit Live
-                            Site</a>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/1.jpg" alt="Raudatul Quran"></div>
-                </article>
-
-                <!-- Project 02 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">02</div>
-                    <div class="p-content">
-                        <h3>Octesy Webpage</h3>
-                        <div class="p-tags"><span>Next.js</span> <span>Tailwind CSS</span> <span>Framer Motion</span>
+            <!-- PERFECTLY FIXED STICKY PROJECTS -->
+            <section id="projects" class="section">
+                <h2 class="section-title reveal-up">Live <span>Deployments</span></h2>
+                <div class="projects-wrapper">
+            
+                    <!-- Project 01: SSH Sentinel Alert -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">01</div>
+                        <div class="p-content">
+                            <h3>SSH Sentinel Alert</h3>
+                            <div class="p-tags">
+                                <span>Python</span> <span>Cybersecurity</span> <span>Server Automation</span>
+                            </div>
+                            <p>An automated defensive security script that continuously monitors SSH authentication logs in
+                                real-time. It instantly detects brute-force access attempts or unauthorized root logins and triggers
+                                immediate alerts to mitigate network threats.</p>
+                            <a href="https://github.com/mustaquim-ms/SSH-Sentinel-Alert" target="_blank" rel="noopener noreferrer"
+                                class="btn-outline ui-interact" style="margin-left:0; padding: 12px 24px; display:inline-flex;">View
+                                on GitHub <i class="fab fa-github" style="margin-left: 8px;"></i></a>
                         </div>
-                        <p>A high-performance, modern corporate landing page featuring smooth scroll animations,
-                            responsive design, and a sleek user interface.</p>
-                        <a href="https://octate-odyssey.vercel.app/" target="_blank" rel="noopener noreferrer"
-                            class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Visit Live
-                            Site</a>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/2.jpg" alt="Octesy Webpage"></div>
-                </article>
-
-                <!-- Project 03 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">03</div>
-                    <div class="p-content">
-                        <h3>Octesy Helix EDR</h3>
-                        <div class="p-tags"><span>Python</span> <span>Electron</span> <span>Cybersecurity</span></div>
-                        <p>An advanced behavioral EDR suite featuring real-time process lineage tracking, egress
-                            monitoring, and automated AES-128 threat containment.</p>
-                        <a href="javascript:void(0)" class="btn-cyber alt"
-                            style="margin-left:0; align-self:flex-start; cursor: not-allowed; opacity: 0.5;">Private
-                            Repo <i class="fas fa-lock"></i></a>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/3.png" alt="Octesy Helix EDR"></div>
-                </article>
-
-                <!-- Project 04 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">04</div>
-                    <div class="p-content">
-                        <h3>OctaGuard Prime</h3>
-                        <div class="p-tags"><span>Next.js</span> <span>Node.js</span> <span>Python</span></div>
-                        <p>A sophisticated production-level endpoint security suite featuring remote USB sentinel
-                            control, automated offline lockdown protocols, and live forensic metadata logging.</p>
-                        <a href="javascript:void(0)" class="btn-cyber alt"
-                            style="margin-left:0; align-self:flex-start; cursor: not-allowed; opacity: 0.5;">Private
-                            Repo <i class="fas fa-lock"></i></a>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/6.jpg" alt="OctaGuard Prime"></div>
-                </article>
-
-                <!-- Project 05 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">05</div>
-                    <div class="p-content">
-                        <h3>Clinic Mgmt SaaS</h3>
-                        <div class="p-tags"><span>SaaS Dashboard</span> <span>Healthcare IT</span> <span>Auth</span>
+                        <div class="p-image">
+                            <img src="assets/images/projects/5.png" alt="SSH Sentinel Alert Script">
                         </div>
-                        <p>A comprehensive, secure SaaS platform for managing clinic operations, including patient
-                            records, staff management, and appointment scheduling.</p>
-                        <a href="https://octate-odyssey-clinic-saas.vercel.app/login" target="_blank"
-                            rel="noopener noreferrer" class="btn-cyber ui-interact"
-                            style="margin-left:0; align-self:flex-start;">Visit Live App</a>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/4.jpg" alt="Clinic Mgmt WebApp"></div>
-                </article>
-
-                <!-- Project 06 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">06</div>
-                    <div class="p-content">
-                        <h3>SSH Sentinel</h3>
-                        <div class="p-tags"><span>Python</span> <span>Cybersecurity</span> <span>Automation</span></div>
-                        <p>Automated defensive security script monitoring SSH authentication logs in real-time.
-                            Instantly detects brute-force attempts and triggers mitigation alerts.</p>
-                        <a href="https://github.com/mustaquim-ms/SSH-Sentinel-Alert" target="_blank"
-                            rel="noopener noreferrer" class="btn-cyber ui-interact"
-                            style="margin-left:0; align-self:flex-start;">View on GitHub</a>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/5.png" alt="SSH Sentinel"></div>
-                </article>
-
-                <!-- Project 07 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">07</div>
-                    <div class="p-content">
-                        <h3>OmniCare Signage</h3>
-                        <div class="p-tags"><span>Python</span> <span>LAN/WLAN</span> <span>FFmpeg</span></div>
-                        <p>Architected a cost-effective, centralized advertisement broadcasting system across a
-                            multi-floor building, managing concurrent video streaming for 10+ Smart TVs via custom
-                            Python servers.</p>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/7.jpg" alt="OmniCare Signage"></div>
-                </article>
-
-                <!-- Project 08 -->
-                <article class="project-card reveal-up">
-                    <div class="project-index">08</div>
-                    <div class="p-content">
-                        <h3>Root Pulse</h3>
-                        <div class="p-tags"><span>Python</span> <span>TypeScript</span> <span>EDR</span></div>
-                        <p>Real-time telemetry suite with Wi-Fi reconnaissance and SOAR host containment.</p>
-                    </div>
-                    <div class="p-image"><img src="assets/images/projects/8.png" alt="Root Pulse"></div>
-                </article>
-
-            </div>
-        </section>
+                    </article>
+            
+                    <!-- Project 02 -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">02</div>
+                        <div class="p-content">
+                            <h3>Raudatul Quran</h3>
+                            <div class="p-tags"><span>Web App</span> <span>UI/UX</span> <span>Typography</span></div>
+                            <p>A minimal, immersive digital platform designed for deep Quranic reflection and linguistic study.
+                                Engineered with focus on fluid typography.</p>
+                            <a href="https://raudatul-quran-silk.vercel.app/" target="_blank" rel="noopener noreferrer"
+                                class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Visit Live Site</a>
+                        </div>
+                        <div class="p-image"><img src="assets/images/projects/1.jpg" alt="Raudatul Quran"></div>
+                    </article>
+            
+                    <!-- Project 03 -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">03</div>
+                        <div class="p-content">
+                            <h3>Octesy Webpage</h3>
+                            <div class="p-tags"><span>Next.js</span> <span>Tailwind CSS</span> <span>Framer Motion</span></div>
+                            <p>A high-performance, modern corporate landing page featuring smooth scroll animations, responsive
+                                design, and a sleek user interface.</p>
+                            <a href="https://octate-odyssey.vercel.app/" target="_blank" rel="noopener noreferrer"
+                                class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Visit Live Site</a>
+                        </div>
+                        <div class="p-image"><img src="assets/images/projects/2.jpg" alt="Octesy Webpage"></div>
+                    </article>
+            
+                    <!-- Project 04 -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">04</div>
+                        <div class="p-content">
+                            <h3>Octesy Helix EDR</h3>
+                            <div class="p-tags"><span>Python</span> <span>Electron</span> <span>Cybersecurity</span></div>
+                            <p>An advanced behavioral EDR suite featuring real-time process lineage tracking, egress monitoring, and
+                                automated AES-128 threat containment.</p>
+                            <a href="javascript:void(0)" class="btn-cyber alt"
+                                style="margin-left:0; align-self:flex-start; cursor: not-allowed; opacity: 0.5;">Private Repo <i
+                                    class="fas fa-lock"></i></a>
+                        </div>
+                        <div class="p-image"><img src="assets/images/projects/3.png" alt="Octesy Helix EDR"></div>
+                    </article>
+            
+                    <!-- Project 05 -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">05</div>
+                        <div class="p-content">
+                            <h3>OctaGuard Prime</h3>
+                            <div class="p-tags"><span>Next.js</span> <span>Node.js</span> <span>Python</span></div>
+                            <p>A sophisticated production-level endpoint security suite featuring remote USB sentinel control,
+                                automated offline lockdown protocols, and live forensic metadata logging.</p>
+                            <a href="javascript:void(0)" class="btn-cyber alt"
+                                style="margin-left:0; align-self:flex-start; cursor: not-allowed; opacity: 0.5;">Private Repo <i
+                                    class="fas fa-lock"></i></a>
+                        </div>
+                        <div class="p-image"><img src="assets/images/projects/6.jpg" alt="OctaGuard Prime"></div>
+                    </article>
+            
+                    <!-- Project 06 -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">06</div>
+                        <div class="p-content">
+                            <h3>Clinic Mgmt SaaS</h3>
+                            <div class="p-tags"><span>SaaS Dashboard</span> <span>Healthcare IT</span> <span>Auth</span></div>
+                            <p>A comprehensive, secure SaaS platform for managing clinic operations, including patient records,
+                                staff management, and appointment scheduling.</p>
+                            <a href="https://octate-odyssey-clinic-saas.vercel.app/login" target="_blank" rel="noopener noreferrer"
+                                class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">Visit Live App</a>
+                        </div>
+                        <div class="p-image"><img src="assets/images/projects/4.jpg" alt="Clinic Mgmt WebApp"></div>
+                    </article>
+            
+                    <!-- Project 07 -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">07</div>
+                        <div class="p-content">
+                            <h3>OmniCare Signage</h3>
+                            <div class="p-tags"><span>Python</span> <span>LAN/WLAN</span> <span>FFmpeg</span></div>
+                            <p>Architected a cost-effective, centralized advertisement broadcasting system across a multi-floor
+                                building, managing concurrent video streaming for 10+ Smart TVs via custom Python servers.</p>
+                        </div>
+                        <div class="p-image"><img src="assets/images/projects/7.jpg" alt="OmniCare Signage"></div>
+                    </article>
+            
+                    <!-- Project 08 -->
+                    <article class="project-card reveal-up">
+                        <div class="project-index">08</div>
+                        <div class="p-content">
+                            <h3>Root Pulse</h3>
+                            <div class="p-tags"><span>Python</span> <span>TypeScript</span> <span>EDR</span></div>
+                            <p>Real-time telemetry suite with Wi-Fi reconnaissance and SOAR host containment.</p>
+                            <a href="https://github.com/mustaquim-ms" target="_blank" rel="noopener noreferrer"
+                                class="btn-cyber ui-interact" style="margin-left:0; align-self:flex-start;">View on GitHub</a>
+                        </div>
+                        <div class="p-image"><img src="assets/images/projects/8.png" alt="Root Pulse"></div>
+                    </article>
+                </div>
+            </section>
 
         <!-- PUBLISHED RESEARCH -->
         <section id="research" class="section">
