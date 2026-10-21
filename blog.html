@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knowledge Base & Logs | Mustaquim Ahmad - IT Strategy</title>
+    <title>Blogs & Logs | Mustaquim Ahmad - IT Strategy</title>
 
     <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -139,20 +139,6 @@
             position: relative;
         }
 
-        .nav-slider {
-            position: absolute;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 4px;
-            z-index: 0;
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            pointer-events: none;
-        }
-
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
@@ -169,6 +155,10 @@
         .nav-links a:hover {
             color: var(--accent-cyan);
             text-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .nav-links a.active {
+            color: var(--accent-cyan);
         }
 
         .nav-btn-wrapper {
@@ -373,13 +363,13 @@
             line-height: 1.6;
         }
 
-        /* --- EXTRAORDINARY FEATURE: MUSTAQUIM'S LIVE PULSE & RADAR TICKER --- */
+        /* --- EXTRAORDINARY FEATURE 1: COMMAND CENTER & GEO TICKER --- */
         .pulse-command-center {
             background: linear-gradient(135deg, rgba(11, 17, 32, 0.85), rgba(1, 3, 8, 0.95));
             border: 1px solid var(--accent-purple);
             border-radius: 20px;
             padding: 25px 35px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             box-shadow: 0 0 40px rgba(176, 38, 255, 0.15);
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -490,6 +480,31 @@
             transition: all 0.4s ease;
         }
 
+        /* --- EXTRAORDINARY FEATURE 2: GLOBAL GEO NODE MAP BANNER --- */
+        .geo-ticker-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            padding: 10px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .geo-ping {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
         /* --- ANALYTICS & NEWSLETTER BAR --- */
         .analytics-banner {
             display: flex;
@@ -544,6 +559,13 @@
             padding-bottom: 20px;
         }
 
+        .action-bar-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         .search-input {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
@@ -561,7 +583,7 @@
             box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
         }
 
-        /* --- BLOG GRID 4x4 (4 Columns on Desktop) --- */
+        /* --- BLOG GRID 4x4 --- */
         .blogs-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -642,6 +664,33 @@
 
         .blog-card:hover .blog-cover-img {
             transform: scale(1.05);
+        }
+
+        /* Bookmark Button on Card */
+        .bookmark-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(1, 3, 8, 0.7);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .bookmark-btn:hover,
+        .bookmark-btn.saved {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
         }
 
         .blog-meta {
@@ -782,6 +831,135 @@
             font-family: var(--font-mono);
         }
 
+        /* --- READING VAULT SLIDER DRAWER --- */
+        .vault-drawer-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(1, 3, 8, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 100000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .vault-drawer-backdrop.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .vault-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 420px;
+            height: 100vh;
+            background: #050914;
+            border-left: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.9);
+            z-index: 100001;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .vault-drawer.active {
+            right: 0;
+        }
+
+        .vault-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .vault-title {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vault-close {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .vault-close:hover {
+            background: #FF003C;
+            border-color: #FF003C;
+        }
+
+        .vault-items-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-right: 5px;
+        }
+
+        .vault-item-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+        }
+
+        .vault-item-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .vault-item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
+            margin-top: 8px;
+        }
+
+        .vault-check-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            color: var(--accent-emerald);
+        }
+
+        .vault-remove {
+            background: none;
+            border: none;
+            color: #FF003C;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
         /* --- WRITE ARTICLE MODAL --- */
         .modal-backdrop {
             position: fixed;
@@ -886,7 +1064,7 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="product.html">Products</a></li>
-            <li><a href="blog.html" class="active">Knowledge Base</a></li>
+            <li><a href="blog.html" class="active">Blogs</a></li>
         </ul>
         <a href="mailto:mustaquimmahmad@gmail.com" class="btn-cyber"
             style="padding: 8px 18px; font-size: 0.75rem;">Connect</a>
@@ -894,12 +1072,12 @@
 
     <!-- BLOG HEADER -->
     <section class="section blog-header" style="padding-bottom: 20px;">
-        <h1>IT Knowledge & <span>Insights</span></h1>
+        <h1>IT Strategy & <span>Blogs</span></h1>
         <p>Operational logs, deep-dives into Zero-Trust infrastructure, AIOps methodologies, leadership frameworks, and
             cybersecurity breakdowns.</p>
     </section>
 
-    <!-- EXTRAORDINARY FEATURE: MUSTAQUIM'S LIVE PULSE & RADAR TICKER -->
+    <!-- EXTRAORDINARY FEATURE 1: COMMAND CENTER & TICKER -->
     <section class="section" style="padding-top: 0; padding-bottom: 0;">
         <div class="pulse-command-center">
             <div class="status-avatar-box">
@@ -923,8 +1101,17 @@
         </div>
     </section>
 
+    <!-- EXTRAORDINARY FEATURE 2: GLOBAL GEO NODE MAP TICKER -->
+    <section class="section" style="padding-top: 15px; padding-bottom: 0;">
+        <div class="geo-ticker-bar">
+            <i class="fas fa-globe-americas" style="color: var(--accent-cyan);"></i>
+            <span>Global Telemetry Radar:</span>
+            <span id="geo-ping-text" class="geo-ping">Connecting to secure nodes...</span>
+        </div>
+    </section>
+
     <!-- ANALYTICS & NEWSLETTER BAR -->
-    <section class="section" style="padding-top: 20px; padding-bottom: 0;">
+    <section class="section" style="padding-top: 15px; padding-bottom: 0;">
         <div class="analytics-banner">
             <div class="visitor-counter">
                 <i class="fas fa-satellite-dish" style="color:var(--accent-cyan);"></i> Live Unique Visitors: <span
@@ -945,7 +1132,13 @@
         <div class="action-bar">
             <input type="text" id="search-blog" class="search-input"
                 placeholder="Search topics (e.g., AI, Cloud, Security)..." onkeyup="filterBlogs()">
-            <button class="btn-cyber" onclick="openWriteModal()"><i class="fas fa-pen-nib"></i> Publish New Log</button>
+            <div class="action-bar-right">
+                <button class="btn-cyber" onclick="openVaultDrawer()"
+                    style="border-color: var(--accent-purple); color: var(--accent-purple);"><i
+                        class="fas fa-bookmark"></i> Reading Vault (<span id="vault-count">0</span>)</button>
+                <button class="btn-cyber" onclick="openWriteModal()"><i class="fas fa-pen-nib"></i> Publish New
+                    Log</button>
+            </div>
         </div>
 
         <!-- BLOG FEED GRID (4x4 GRID) -->
@@ -953,6 +1146,19 @@
             <!-- Populated dynamically via JS -->
         </div>
     </section>
+
+    <!-- READING VAULT SLIDER DRAWER -->
+    <div id="vaultBackdrop" class="vault-drawer-backdrop" onclick="closeVaultDrawer()"></div>
+    <div id="vaultDrawer" class="vault-drawer">
+        <div class="vault-header">
+            <div class="vault-title"><i class="fas fa-bookmark" style="color:var(--accent-cyan);"></i> Reading Vault
+            </div>
+            <button class="vault-close" onclick="closeVaultDrawer()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="vault-items-list" id="vault-items-container">
+            <!-- Populated dynamically via JS -->
+        </div>
+    </div>
 
     <!-- WRITE ARTICLE MODAL -->
     <div id="writeModal" class="modal-backdrop">
@@ -1011,6 +1217,8 @@
             }
             initVisitorCounter();
             initLiveTicker();
+            initGeoRadar();
+            updateVaultCount();
             renderBlogs();
         });
 
@@ -1039,6 +1247,31 @@
             setInterval(updateTicker, 6000);
         }
 
+        // Extraordinary Global Geo Node Map Ticker
+        const geoPings = [
+            "New Node Ping: [San Francisco, US] - Secure Handshake Verified",
+            "New Node Ping: [London, UK] - Cloud Architecture Session Active",
+            "New Node Ping: [Dhaka, BD] - Enterprise Security Telemetry Received",
+            "New Node Ping: [Tokyo, JP] - Edge Computing Node Synchronized",
+            "New Node Ping: [Frankfurt, DE] - Zero-Trust Token Validated",
+            "New Node Ping: [Singapore, SG] - AIOps Pipeline Query Logged"
+        ];
+
+        function initGeoRadar() {
+            let pingIndex = 0;
+            const geoEl = document.getElementById('geo-ping-text');
+            function updateGeo() {
+                geoEl.style.opacity = 0;
+                setTimeout(() => {
+                    geoEl.innerText = geoPings[pingIndex];
+                    geoEl.style.opacity = 1;
+                    pingIndex = (pingIndex + 1) % geoPings.length;
+                }, 300);
+            }
+            updateGeo();
+            setInterval(updateGeo, 4500);
+        }
+
         // Dynamic Unique Visitor Counter simulation
         function initVisitorCounter() {
             let count = localStorage.getItem('mustaquim_visitor_count');
@@ -1062,7 +1295,7 @@
             }
         });
 
-        // Master List of LinkedIn Articles & Deep Dives with high-tech curated default cover images
+        // Master List of LinkedIn Articles & Deep Dives
         const defaultBlogs = [
             {
                 id: "blog-1",
@@ -1291,6 +1524,82 @@
             return [...defaultBlogs, ...custom];
         }
 
+        // Reading Vault Management
+        function getSavedVault() {
+            return JSON.parse(localStorage.getItem('mustaquim_reading_vault')) || [];
+        }
+
+        function toggleBookmark(id, title, link, tag) {
+            let vault = getSavedVault();
+            const existsIndex = vault.findIndex(item => item.id === id);
+            if (existsIndex > -1) {
+                vault.splice(existsIndex, 1);
+            } else {
+                vault.push({ id, title, link, tag, completed: false });
+            }
+            localStorage.setItem('mustaquim_reading_vault', JSON.stringify(vault));
+            updateVaultCount();
+            renderVaultItems();
+            renderBlogs(document.getElementById('search-blog').value);
+        }
+
+        function toggleVaultItemComplete(id) {
+            let vault = getSavedVault();
+            const item = vault.find(i => i.id === id);
+            if (item) {
+                item.completed = !item.completed;
+                localStorage.setItem('mustaquim_reading_vault', JSON.stringify(vault));
+                renderVaultItems();
+            }
+        }
+
+        function updateVaultCount() {
+            const vault = getSavedVault();
+            document.getElementById('vault-count').innerText = vault.length;
+        }
+
+        function openVaultDrawer() {
+            document.getElementById('vaultBackdrop').classList.add('active');
+            document.getElementById('vaultDrawer').classList.add('active');
+            renderVaultItems();
+            if (lenis) lenis.stop();
+            document.body.classList.add('modal-open');
+        }
+
+        function closeVaultDrawer() {
+            document.getElementById('vaultBackdrop').classList.remove('active');
+            document.getElementById('vaultDrawer').classList.remove('active');
+            document.body.classList.remove('modal-open');
+            if (lenis) lenis.start();
+        }
+
+        function renderVaultItems() {
+            const vault = getSavedVault();
+            const container = document.getElementById('vault-items-container');
+
+            if (vault.length === 0) {
+                container.innerHTML = `<p style="color:var(--text-muted); font-family:var(--font-mono); font-size:0.8rem; text-align:center; padding:40px 0;">Your reading vault is empty. Click the bookmark icon on any article to save it here.</p>`;
+                return;
+            }
+
+            container.innerHTML = vault.map(item => `
+                <div class="vault-item-card" style="${item.completed ? 'opacity: 0.6;' : ''}">
+                    <div class="vault-item-title">${item.title}</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <a href="${item.link}" target="_blank" style="font-size:0.75rem; color:var(--accent-cyan); text-decoration:none;"><i class="fab fa-linkedin"></i> Read Article</a>
+                        <button class="vault-remove" onclick="toggleBookmark('${item.id}')"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <div class="vault-item-footer">
+                        <label class="vault-check-label">
+                            <input type="checkbox" ${item.completed ? 'checked' : ''} onchange="toggleVaultItemComplete('${item.id}')"> 
+                            ${item.completed ? 'Completed' : 'Mark Complete'}
+                        </label>
+                        <span class="blog-tag" style="font-size:0.65rem;">${item.tag}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // Get saved community notes from localStorage
         function getBlogNotes(blogId) {
             const allNotes = JSON.parse(localStorage.getItem('mustaquim_blog_notes')) || {};
@@ -1310,6 +1619,7 @@
         function renderBlogs(filter = "") {
             const container = document.getElementById('blogs-container');
             const blogs = getAllBlogs();
+            const savedVault = getSavedVault();
 
             const filtered = blogs.filter(b =>
                 b.title.toLowerCase().includes(filter.toLowerCase()) ||
@@ -1326,9 +1636,13 @@
                 const uniqueId = b.id || 'custom-' + b.title.replace(/\s+/g, '-').toLowerCase();
                 const notes = [...(b.notes || []), ...getBlogNotes(uniqueId)];
                 const coverImage = b.cover || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80";
+                const isSaved = savedVault.some(item => item.id === uniqueId);
 
                 return `
                     <article class="blog-card">
+                        <button class="bookmark-btn ${isSaved ? 'saved' : ''}" onclick="toggleBookmark('${uniqueId}', '${b.title.replace(/'/g, "\\'")}', '${b.link}', '${b.tag}')" title="Save to Reading Vault">
+                            <i class="fas fa-bookmark"></i>
+                        </button>
                         <div class="blog-image-wrapper">
                             <img src="${coverImage}" alt="${b.title}" class="blog-cover-img" loading="lazy">
                         </div>
