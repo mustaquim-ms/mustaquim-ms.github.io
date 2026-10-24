@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { soundFx } from '../utils/audio';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Shield, Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   isScrolled: boolean;
@@ -13,6 +13,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenBlogs,
   onOpenProducts,
 }) => {
+  const [logoError, setLogoError] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sliderStyle, setSliderStyle] = useState<React.CSSProperties>({ opacity: 0 });
   const navLinksRef = useRef<HTMLUListElement>(null);
@@ -72,17 +73,28 @@ export const Navbar: React.FC<NavbarProps> = ({
           title="Mustaquim Ahmad — Return to Top"
           onClick={() => soundFx.playTick(800, 0.03)}
         >
-          {/* Logo Image Emblem */}
+          {/* Logo Emblem Icon / Image */}
           <div
-            className={`relative flex items-center justify-center rounded-full overflow-hidden border border-[#00F0FF]/40 shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all duration-500 bg-[#050914] ${
-              isScrolled ? 'w-11 h-11 rotate-360 border-[#7ed957] shadow-[0_0_20px_rgba(126,217,87,0.6)]' : 'w-8 h-8 group-hover:scale-105'
+            className={`relative flex items-center justify-center rounded-full overflow-hidden bg-gradient-to-br from-[#050914] to-[#0d1627] border border-[#00F0FF]/40 shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all duration-500 ${
+              isScrolled ? 'w-11 h-11 rotate-360 border-[#7ed957] shadow-[0_0_20px_rgba(126,217,87,0.6)]' : 'w-9 h-9 group-hover:scale-105'
             }`}
           >
-            <img
-              src="/assets/logo.png"
-              alt="Mustaquim Ahmad Logo"
-              className="w-full h-full object-cover"
-            />
+            {!logoError ? (
+              <img
+                src="./assets/logo.png"
+                alt="Mustaquim Logo"
+                className="w-full h-full object-contain p-0.5"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <>
+                <Shield className={`text-[#7ed957] transition-all duration-300 ${isScrolled ? 'w-5 h-5' : 'w-4 h-4'}`} />
+                {/* Center Monogram */}
+                <span className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-black text-white">
+                  M
+                </span>
+              </>
+            )}
           </div>
 
           {/* Logo Text (hidden when scrolled into compact circular token) */}
@@ -186,8 +198,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             <X className="w-6 h-6" />
           </button>
 
-          <div className="w-16 h-16 rounded-full overflow-hidden bg-[#050914] border-2 border-[#7ed957] shadow-[0_0_25px_rgba(126,217,87,0.4)] flex items-center justify-center mb-6">
-            <img src="/assets/logo.png" alt="Mustaquim Logo" className="w-full h-full object-cover" />
+          <div className="w-16 h-16 rounded-full bg-[#050914] border-2 border-[#7ed957] shadow-[0_0_25px_rgba(126,217,87,0.4)] flex items-center justify-center mb-6">
+            <Shield className="w-8 h-8 text-[#7ed957]" />
           </div>
 
           <h2 className="text-xl font-mono font-black tracking-wider text-white mb-8">MUSTAQUIM AHMAD</h2>

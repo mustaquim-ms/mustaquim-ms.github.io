@@ -1,21 +1,146 @@
 <!doctype html>
 <html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mustaquim Ahmad | Cyber & IT Strategy 3D Portfolio</title>
-    <meta name="description" content="Award-winning 3D interactive portfolio of Mustaquim Ahmad — IT Infrastructure Engineer, Cyber Operations & Zero-Trust Architect." />
-    <meta property="og:title" content="Mustaquim Ahmad | Cyber & IT Strategy 3D Portfolio" />
-    <meta property="og:description" content="Award-winning 3D interactive portfolio of Mustaquim Ahmad — IT Infrastructure Engineer, Cyber Operations & Zero-Trust Architect." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[#010308] text-[#F8FAFC] antialiased overflow-x-hidden selection:bg-[#7ed957] selection:text-black">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mustaquim Ahmad | Cyber & IT Strategy 3D Portfolio</title>
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="title" content="Mustaquim Ahmad | Cyber & IT Strategy 3D Portfolio" />
+  <meta name="description"
+    content="Award-winning 3D interactive portfolio of Mustaquim Ahmad — IT Infrastructure Engineer, Cyber Operations & Zero-Trust Architect." />
+  <meta name="author" content="Mustaquim Ahmad" />
+  <meta name="keywords"
+    content="Mustaquim Ahmad, IT Infrastructure, Defensive Cyber Operations, Zero-Trust Architect, Cloud Endpoint, Dual-WAN, Azure AD, Intune, ServiceNow, Portfolio, 3D WebGL" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#010308" />
+
+  <!-- Canonical Link -->
+  <link rel="canonical" id="canonical-url" href="https://mustaquim-ms.github.io/" />
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <link rel="apple-touch-icon" href="/assets/logo.png" />
+
+  <!-- OpenGraph / Facebook / LinkedIn / Discord / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mustaquim Ahmad Portfolio" />
+  <meta property="og:title" id="og-title" content="Mustaquim Ahmad | Cyber & IT Strategy 3D Portfolio" />
+  <meta property="og:description" id="og-desc"
+    content="Award-winning 3D interactive portfolio of Mustaquim Ahmad — IT Infrastructure Engineer, Cyber Operations & Zero-Trust Architect." />
+  <meta property="og:url" id="og-url" content="https://mustaquim-ms.github.io/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image" id="og-image" content="https://mustaquim-ms.github.io/assets/images/og-preview.png" />
+  <meta property="og:image:secure_url" id="og-image-secure"
+    content="https://mustaquim-ms.github.io/assets/images/og-preview.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"
+    content="Mustaquim Ahmad — IT Infrastructure Engineer & Cyber Operations Portfolio Preview" />
+
+  <!-- Twitter / X Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" id="twitter-title" content="Mustaquim Ahmad | Cyber & IT Strategy 3D Portfolio" />
+  <meta name="twitter:description" id="twitter-desc"
+    content="Award-winning 3D interactive portfolio of Mustaquim Ahmad — IT Infrastructure Engineer, Cyber Operations & Zero-Trust Architect." />
+  <meta name="twitter:image" id="twitter-image" content="https://mustaquim-ms.github.io/assets/images/og-preview.png" />
+  <meta name="twitter:image:alt"
+    content="Mustaquim Ahmad — IT Infrastructure Engineer & Cyber Operations Portfolio Preview" />
+  <meta name="twitter:creator" content="@mustaquimahmad" />
+  <meta name="twitter:site" content="@mustaquimahmad" />
+
+  <!-- Schema.org JSON-LD Structured Data for Rich Snippets -->
+  <script type="application/ld+json" id="schema-ld-json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://mustaquim-ms.github.io/#person",
+          "name": "Mustaquim Ahmad",
+          "jobTitle": "Information Technology Officer & Cyber Operations Engineer",
+          "description": "IT Infrastructure Engineer specializing in dual-WAN high availability, endpoint governance, zero-trust perimeter defense, and automated telemetry.",
+          "knowsAbout": [
+            "IT Infrastructure Management",
+            "Defensive Cybersecurity",
+            "Zero-Trust Architecture",
+            "Dual-WAN Multi-ISP Failover",
+            "Healthcare HMS & EMR Systems",
+            "Active Directory & Azure AD Intune",
+            "AIOps Telemetry & Log Analytics",
+            "Linux PBX VoIP Systems"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://mustaquim-ms.github.io/#website",
+          "name": "Mustaquim Ahmad | Cyber & IT Strategy 3D Portfolio",
+          "url": "https://mustaquim-ms.github.io/",
+          "description": "Award-winning 3D interactive portfolio of Mustaquim Ahmad — IT Infrastructure Engineer, Cyber Operations & Zero-Trust Architect.",
+          "inLanguage": "en-US"
+        }
+      ]
+    }
+    </script>
+
+  <!-- Dynamic Absolute URL Resolver for Social Platforms & Crawlers -->
+  <script>
+    (function () {
+      try {
+        var origin = window.location.origin;
+        var pathname = window.location.pathname.replace(/\/+$/, '') + '/';
+        var fullUrl = origin + pathname;
+
+        // Update Canonical
+        var canLink = document.getElementById('canonical-url');
+        if (canLink) canLink.href = fullUrl;
+
+        // Resolve absolute image URL for OG and Twitter cards
+        var previewImgPath = (pathname.endsWith('/') ? pathname : pathname + '/') + 'assets/images/og-preview.png';
+        var absolutePreviewUrl = origin + previewImgPath.replace(/\/+/g, '/');
+
+        var ogUrl = document.getElementById('og-url');
+        if (ogUrl) ogUrl.setAttribute('content', fullUrl);
+
+        var ogImg = document.getElementById('og-image');
+        if (ogImg) ogImg.setAttribute('content', absolutePreviewUrl);
+
+        var ogImgSec = document.getElementById('og-image-secure');
+        if (ogImgSec) ogImgSec.setAttribute('content', absolutePreviewUrl);
+
+        var twImg = document.getElementById('twitter-image');
+        if (twImg) twImg.setAttribute('content', absolutePreviewUrl);
+
+        // Update Schema LD+JSON URLs dynamically
+        var schemaEl = document.getElementById('schema-ld-json');
+        if (schemaEl) {
+          var data = JSON.parse(schemaEl.textContent);
+          if (data && data['@graph']) {
+            data['@graph'].forEach(function (item) {
+              if (item['@type'] === 'WebSite') item.url = fullUrl;
+              if (item['@id']) item['@id'] = item['@id'].replace('https://mustaquim-ms.github.io/', fullUrl);
+            });
+            schemaEl.textContent = JSON.stringify(data);
+          }
+        }
+      } catch (e) {
+        // Fallback gracefully without breaking page render
+        console.debug('SEO dynamic tag resolver note:', e);
+      }
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="bg-[#010308] text-[#F8FAFC] antialiased overflow-x-hidden selection:bg-[#7ed957] selection:text-black">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
