@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+:root {
+  --bg-base: #010308;
+  --bg-card: #050914;
+  --bg-glass: rgba(5, 9, 20, 0.7);
+  --border-glass: rgba(0, 240, 255, 0.18);
+  --text-main: #F8FAFC;
+  --text-muted: #8B9BB4;
+  --accent-green: #7ed957;
+  --accent-cyan: #00F0FF;
+  --accent-gold: #ffb423;
+  --accent-purple: #B026FF;
+  --accent-red: #FF003C;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Playfair Display', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--bg-base);
+  min-height: 100vh;
+}
+
+/* Custom Cyber Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #010308;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-green);
+}
+
+/* Cyber Button Styling */
+.btn-cyber {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  color: var(--accent-green);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  z-index: 1;
+}
+
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--accent-green);
+  transform: skewX(-12deg);
+  transition: all 0.3s ease;
+  z-index: -1;
+  box-shadow: 0 0 10px rgba(126, 217, 87, 0.15);
+}
+
+.btn-cyber::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-green);
+  transform: scaleX(0) skewX(-12deg);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -2;
+}
+
+.btn-cyber:hover {
+  color: #010308;
+  text-shadow: none;
+}
+
+.btn-cyber:hover::after {
+  transform: scaleX(1);
+}
+
+.btn-cyber.alt {
+  color: var(--text-main);
+}
+.btn-cyber.alt::before {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
+}
+.btn-cyber.alt::after {
+  background: var(--text-main);
+}
+.btn-cyber.alt:hover {
+  color: #010308;
+}
+
+/* Massive Glitch Typography for Footer */
+.giant-glitch-name {
+  font-size: clamp(4.5rem, 15vw, 15rem);
+  line-height: 0.95;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.08);
+  letter-spacing: -0.03em;
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  display: inline-block;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+  font-family: var(--font-mono);
+}
+
+.giant-glitch-name:hover {
+  color: #F8FAFC;
+  cursor: crosshair;
+  text-shadow: 0 0 25px rgba(126, 217, 87, 0.6), 0 0 50px rgba(0, 240, 255, 0.3);
+}
+
+.giant-glitch-name:hover::before,
+.giant-glitch-name:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.giant-glitch-name:hover::before {
+  color: #00F0FF;
+  z-index: -1;
+  left: 4px;
+  animation: glitch-anim-1 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite reverse;
+}
+
+.giant-glitch-name:hover::after {
+  color: #FF003C;
+  z-index: -2;
+  left: -4px;
+  animation: glitch-anim-2 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes textGlitchJitter {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 2px); }
+  80% { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(15% 0 75% 0); transform: translate(-3px, 1px); }
+  20% { clip-path: inset(55% 0 15% 0); transform: translate(3px, -2px); }
+  40% { clip-path: inset(35% 0 45% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(75% 0 10% 0); transform: translate(3px, -1px); }
+  80% { clip-path: inset(10% 0 65% 0); transform: translate(-2px, 2px); }
+  100% { clip-path: inset(25% 0 55% 0); transform: translate(1px, -1px); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 55% 0); transform: translate(3px, -2px); }
+  20% { clip-path: inset(25% 0 25% 0); transform: translate(-3px, 2px); }
+  40% { clip-path: inset(65% 0 15% 0); transform: translate(2px, -1px); }
+  60% { clip-path: inset(15% 0 45% 0); transform: translate(-2px, 2px); }
+  80% { clip-path: inset(45% 0 35% 0); transform: translate(3px, -2px); }
+  100% { clip-path: inset(5% 0 75% 0); transform: translate(-3px, 1px); }
+}

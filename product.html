@@ -7,14 +7,12 @@
     <title>Digital Storefront | Mustaquim Ahmad - IT & Systems Assets</title>
 
     <!-- Icons & Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
-
-    <!-- External Scripts - Lenis Smooth Scroll -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
 
     <!-- SEO Tags -->
     <meta name="description"
@@ -144,8 +142,14 @@
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            object-fit: cover;
+            background: #050914;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border: 1px solid rgba(0, 240, 255, 0.5);
+            color: var(--accent-green);
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .nav-links {
@@ -323,7 +327,7 @@
             height: 220px;
             width: 100%;
             overflow: hidden;
-            background: #000;
+            background: #02040A;
             position: relative;
         }
 
@@ -397,7 +401,7 @@
             color: var(--accent-green);
         }
 
-        /* --- NEW: BUYER METRIC --- */
+        /* --- BUYER METRIC --- */
         .buyer-metric {
             display: flex;
             align-items: center;
@@ -420,7 +424,6 @@
             animation: pulse-green 1.5s infinite;
         }
 
-        /* Transition for the live number update */
         .live-user-count,
         #modal-user-count {
             transition: all 0.5s ease;
@@ -557,13 +560,14 @@
         }
 
         .tab-pane img,
-        .tab-pane video {
+        .tab-pane video,
+        .tab-pane .media-placeholder {
             width: 100%;
             border-radius: 8px;
             border: 1px solid rgba(0, 240, 255, 0.2);
             height: 260px;
             object-fit: cover;
-            background: #000;
+            background: #02040A;
             cursor: pointer;
             transition: 0.3s;
         }
@@ -689,16 +693,16 @@
 
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
-        <a href="index.html" class="nav-logo">
-            <img src="assets/images/logo.png" alt="Logo" class="custom-logo">
+        <a href="/" class="nav-logo">
+            <div class="custom-logo">M</div>
             <span>MUSTAQUIM</span>
         </a>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#skills">Skills</a></li>
-            <li><a href="index.html#projects">Deployments</a></li>
-            <li><a href="blog.html" class="ui-interact">Blogs</a></li>
-            <li><a href="product.html" class="active">Products</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/#skills">Skills</a></li>
+            <li><a href="/#projects">Deployments</a></li>
+            <li><a href="/#research">Research</a></li>
+            <li><a href="/product.html" class="active">Products</a></li>
         </ul>
         <a href="mailto:mustaquimmahmad@gmail.com" class="btn-cyber"
             style="padding: 8px 18px; font-size: 0.75rem;">Connect</a>
@@ -717,12 +721,14 @@
         <div class="products-grid">
 
             <!-- PRODUCT 1: SONCHOY 360 -->
-            <!-- ADDED: data-product-id attribute to tie the card to the JS object -->
             <div class="product-card" data-product-id="sonchoy">
-                <div class="product-card-media">
+                <div class="product-card-media" style="background: linear-gradient(135deg, #050914, #0b1728); display: flex; align-items: center; justify-content: center;">
                     <span class="product-badge">Excel & Sheets</span>
-                    <video src="business/Sonchoy/sonchoy.mp4" poster="business/Sonchoy/1.png" autoplay muted loop
-                        playsinline preload="auto"></video>
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--accent-green); margin-bottom: 10px;"></i>
+                        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #fff; font-weight: bold;">SONCHOY 360° DASHBOARD</div>
+                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">Native BDT Lakh / Crore Engine</div>
+                    </div>
                 </div>
                 <div class="product-card-body">
                     <h3 class="product-card-title">SONCHOY 360° Personal Finance Command Center</h3>
@@ -736,8 +742,7 @@
                                     style="font-size:0.8rem; color:var(--text-muted); font-weight:normal;">BDT</span>
                             </div>
                             <div class="buyer-metric">
-                                <!-- MODIFIED: Removed hardcoded number, wrapped in span for JS updates -->
-                                <span class="live-pulse"></span> <span class="live-user-count">...</span>+ Active Users
+                                <span class="live-pulse"></span> <span class="live-user-count">78</span>+ Active Users
                             </div>
                         </div>
                         <button class="btn-cyber" onclick="openProductModal('sonchoy')">View Details <i
@@ -754,12 +759,14 @@
                 Development)</span>
         </h2>
         <div class="products-grid">
-            <div class="product-card" style="opacity: 0.65;">
-                <div class="product-card-media">
+            <div class="product-card" style="opacity: 0.75;">
+                <div class="product-card-media" style="display: flex; align-items: center; justify-content: center; background: #070d1a;">
                     <span class="product-badge"
                         style="border-color: var(--accent-gold); color: var(--accent-gold);">Coming Soon</span>
-                    <img src="https://via.placeholder.com/600x400/0b1120/ffb423?text=ATS+Resume+Toolkit"
-                        alt="Upcoming Product">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="fas fa-file-invoice" style="font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 8px;"></i>
+                        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #fff;">ATS Resume Toolkit</div>
+                    </div>
                 </div>
                 <div class="product-card-body">
                     <h3 class="product-card-title">ATS-Optimized Executive Resume Toolkit</h3>
@@ -774,12 +781,14 @@
                 </div>
             </div>
 
-            <div class="product-card" style="opacity: 0.65;">
-                <div class="product-card-media">
+            <div class="product-card" style="opacity: 0.75;">
+                <div class="product-card-media" style="display: flex; align-items: center; justify-content: center; background: #070d1a;">
                     <span class="product-badge"
                         style="border-color: var(--accent-gold); color: var(--accent-gold);">Coming Soon</span>
-                    <img src="https://via.placeholder.com/600x400/0b1120/ffb423?text=Python+Admin+Suite"
-                        alt="Upcoming Product">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="fas fa-terminal" style="font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 8px;"></i>
+                        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #fff;">Python Admin Suite</div>
+                    </div>
                 </div>
                 <div class="product-card-body">
                     <h3 class="product-card-title">IT Infrastructure Automation Python Scripting Suite</h3>
@@ -794,12 +803,14 @@
                 </div>
             </div>
 
-            <div class="product-card" style="opacity: 0.65;">
-                <div class="product-card-media">
+            <div class="product-card" style="opacity: 0.75;">
+                <div class="product-card-media" style="display: flex; align-items: center; justify-content: center; background: #070d1a;">
                     <span class="product-badge"
                         style="border-color: var(--accent-gold); color: var(--accent-gold);">Coming Soon</span>
-                    <img src="https://via.placeholder.com/600x400/0b1120/ffb423?text=ITSM+SLA+Calculator"
-                        alt="Upcoming Product">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="fas fa-tachometer-alt" style="font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 8px;"></i>
+                        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #fff;">ITSM SLA Calculator</div>
+                    </div>
                 </div>
                 <div class="product-card-body">
                     <h3 class="product-card-title">ITSM Incident & SLA Performance Tracker</h3>
@@ -838,13 +849,12 @@
 
     <!-- INTERACTIVE SCRIPTS -->
     <script>
-        // MASTER PRODUCT DATA OBJECT (Change the usersCount here, and it updates everywhere automatically)
         const productsData = {
             'sonchoy': {
                 title: "SONCHOY 360° Personal Finance Command Center",
                 price: "499 BDT",
                 originalPrice: "1,500 BDT",
-                usersCount: "78", // <--- UPDATE THIS NUMBER OVER TIME
+                usersCount: "78",
                 subtitle: "The ultimate wealth management template built for Google Sheets & Microsoft Excel with BDT Lakh/Crore formatting.",
                 psychHook: "৳499 is less than the cost of one fast-food meal in Dhaka, but it will save you thousands of Taka in impulse leaks and give you absolute financial clarity for life.",
                 features: [
@@ -854,12 +864,11 @@
                     "Includes dedicated modules for Debt tracking and Zakat calculations"
                 ],
                 mediaTabs: [
-                    { name: "Overview Video", type: "video", src: "business/Sonchoy/sonchoy.mp4", poster: "business/Sonchoy/1.png", desc: "A complete visual walkthrough demonstrating automated formulas and tracking workflows." },
-                    { name: "1. Dashboard", type: "img", src: "business/Sonchoy/1.png", desc: "Real-time net worth summary, monthly savings velocity, and asset allocation breakdown. (Click image to expand)" },
-                    { name: "2. Transactions", type: "img", src: "business/Sonchoy/2.png", desc: "Granular categorized income/expense logging with automated filters. (Click image to expand)" },
-                    { name: "3. Festivals / Zakat", type: "img", src: "business/Sonchoy/3.png", desc: "Automated Nisab calculation, Zakat due tracker, and targeted festival budgets. (Click image to expand)" },
-                    { name: "4. Debt / Loan", type: "img", src: "business/Sonchoy/4.png", desc: "Track personal lendings, borrowings, repayment timelines, and interest statuses. (Click image to expand)" },
-                    { name: "5. Annual Matrix", type: "img", src: "business/Sonchoy/5.png", desc: "Year-over-year financial performance macro view for long-term fiscal planning. (Click image to expand)" }
+                    { name: "1. Dashboard", desc: "Real-time net worth summary, monthly savings velocity, and asset allocation breakdown." },
+                    { name: "2. Transactions", desc: "Granular categorized income/expense logging with automated filters." },
+                    { name: "3. Festivals / Zakat", desc: "Automated Nisab calculation, Zakat due tracker, and targeted festival budgets." },
+                    { name: "4. Debt / Loan", desc: "Track personal lendings, borrowings, repayment timelines, and interest statuses." },
+                    { name: "5. Annual Matrix", desc: "Year-over-year financial performance macro view for long-term fiscal planning." }
                 ],
                 googleFormAction: "https://forms.gle/oF6yiDPqRXg4dkc96"
             }
@@ -867,7 +876,6 @@
 
         let lenis;
         document.addEventListener("DOMContentLoaded", () => {
-            // Ultra-Smooth Lenis Setup
             if (typeof Lenis !== "undefined") {
                 lenis = new Lenis({
                     duration: 1.2,
@@ -881,33 +889,11 @@
                 requestAnimationFrame(raf);
             }
 
-            // AUTO-POPULATE LIVE USER COUNTS ON MAIN PAGE LOAD
             document.querySelectorAll('[data-product-id]').forEach(card => {
                 const pid = card.getAttribute('data-product-id');
                 if (productsData[pid]) {
                     const countSpan = card.querySelector('.live-user-count');
                     if (countSpan) countSpan.innerText = productsData[pid].usersCount;
-                }
-            });
-
-            // FORCE AUTOPLAY ON ALL MAIN PAGE VIDEOS
-            const cardVideos = document.querySelectorAll('.product-card-media video');
-            cardVideos.forEach(video => {
-                video.muted = true;
-                video.defaultMuted = true;
-                video.setAttribute('playsinline', '');
-                video.setAttribute('autoplay', '');
-                video.setAttribute('loop', '');
-
-                let playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(err => {
-                        console.log("Autoplay initially blocked. Retrying...", err);
-                        setTimeout(() => {
-                            video.muted = true;
-                            video.play().catch(e => console.warn("Browser strictly blocking autoplay.", e));
-                        }, 150);
-                    });
                 }
             });
         });
@@ -953,7 +939,7 @@
                             ${product.features.map(f => `<li>${f}</li>`).join('')}
                         </ul>
 
-                        <h4 style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-main); font-family: var(--font-mono);">Interactive Product Previews:</h4>
+                        <h4 style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-main); font-family: var(--font-mono);">Interactive Product Modules:</h4>
                         <div class="tab-buttons">
                             ${product.mediaTabs.map((m, idx) => `
                                 <button class="tab-btn ${idx === 0 ? 'active' : ''}" onclick="switchModalTab(event, 'modal-pane-${idx}')">${m.name}</button>
@@ -962,11 +948,11 @@
                         <div style="margin-top: 10px;">
                             ${product.mediaTabs.map((m, idx) => `
                                 <div id="modal-pane-${idx}" class="tab-pane ${idx === 0 ? 'active' : ''}">
-                                    ${m.type === 'video'
-                    ? `<video src="${m.src}" poster="${m.poster || ''}" autoplay muted loop playsinline preload="auto" style="width:100%; height:260px; border-radius:8px; object-fit:cover;"></video>`
-                    : `<img src="${m.src}" alt="${m.name}" onclick="openLightbox('${m.src}')" title="Click to enlarge image">`
-                }
-                                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px; font-family: var(--font-mono);">${m.desc}</p>
+                                    <div style="background:#080e1a; border: 1px solid rgba(0,240,255,0.2); border-radius:8px; padding:30px; text-align:center;">
+                                        <i class="fas fa-table" style="font-size:2.5rem; color:var(--accent-green); margin-bottom:10px;"></i>
+                                        <div style="font-family:var(--font-mono); font-weight:bold; color:#fff;">${m.name}</div>
+                                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px; font-family: var(--font-mono);">${m.desc}</p>
+                                    </div>
                                 </div>
                             `).join('')}
                         </div>
@@ -974,7 +960,7 @@
 
                     <div>
                         <div class="checkout-box">
-                            <div class="bkash-banner">F
+                            <div class="bkash-banner">
                                 <span>Pay via bKash Personal / Merchant</span>
                                 <div class="bkash-logo">bKash</div>
                             </div>
@@ -1014,78 +1000,51 @@
             if (lenis) lenis.stop();
             document.body.classList.add('modal-open');
 
-            // Play video inside modal
-            setTimeout(() => {
-                const activeVideo = document.querySelector('#modal-pane-0 video');
-                if (activeVideo) {
-                    activeVideo.muted = true;
-                    activeVideo.setAttribute('playsinline', '');
-                    let playPromise = activeVideo.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(err => {
-                            setTimeout(() => activeVideo.play(), 50);
-                        });
-                    }
-                }
-            }, 150);
-
-            // INITIALIZE FOMO "LIVE INCREMENT" LOGIC
             attachFOMOScript(productId);
         }
 
-        // --- FOMO SCRIPT (Increments user count live when they start typing) ---
         function attachFOMOScript(productId) {
             const formInputs = document.querySelectorAll('#productModal .fomo-trigger');
             let hasIncremented = false;
 
             formInputs.forEach(input => {
                 input.addEventListener('focus', () => {
-                    // Prevent it from happening multiple times
                     if (hasIncremented) return;
                     hasIncremented = true;
 
-                    // Wait 3.5 seconds after they click an input, then trigger "purchase"
                     setTimeout(() => {
-                        // 1. Update backend data object
                         let newCount = parseInt(productsData[productId].usersCount) + 1;
                         productsData[productId].usersCount = newCount;
 
-                        // 2. Update Modal Counter visually
                         const modalCountSpan = document.getElementById('modal-user-count');
                         if (modalCountSpan) {
                             modalCountSpan.innerText = newCount;
                             modalCountSpan.style.color = "var(--accent-green)";
                             modalCountSpan.style.textShadow = "0 0 10px var(--accent-green)";
 
-                            // Revert color back after flash
                             setTimeout(() => {
                                 modalCountSpan.style.color = "";
                                 modalCountSpan.style.textShadow = "";
                             }, 2000);
                         }
 
-                        // 3. Update Main Page Card Counter visually (so when they close modal, it's updated there too)
                         const mainCardCountSpan = document.querySelector(`[data-product-id="${productId}"] .live-user-count`);
                         if (mainCardCountSpan) {
                             mainCardCountSpan.innerText = newCount;
                         }
 
-                    }, 3500); // 3.5 seconds delay
+                    }, 3500);
                 });
             });
         }
 
         function closeProductModal() {
-            document.querySelectorAll('#productModal video').forEach(v => v.pause());
             document.getElementById('productModal').classList.remove('active');
-
             document.body.classList.remove('modal-open');
             if (lenis) lenis.start();
         }
 
         function switchModalTab(evt, paneId) {
-            document.querySelectorAll('#productModal video').forEach(v => v.pause());
-
             const panes = evt.target.closest('.modal-grid').querySelectorAll('.tab-pane');
             panes.forEach(p => p.classList.remove('active'));
 
@@ -1095,13 +1054,6 @@
             const targetPane = document.getElementById(paneId);
             targetPane.classList.add('active');
             evt.currentTarget.classList.add('active');
-
-            const paneVideo = targetPane.querySelector('video');
-            if (paneVideo) {
-                paneVideo.muted = true;
-                paneVideo.currentTime = 0;
-                paneVideo.play().catch(e => console.log("Tab switch video play error:", e));
-            }
         }
 
         function openLightbox(imgSrc) {
