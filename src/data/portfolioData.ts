@@ -363,7 +363,7 @@ export const PROJECTS_DATA: DeploymentProject[] = [
     description:
       'A high-performance modern corporate landing page featuring smooth scroll animations, responsive architecture, zero-latency micro-interactions, and a sleek cyber aesthetic.',
     tags: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript'],
-    image: '/assets/projects/2.jpg',
+    image: '/assets/projects/2.png',
     liveUrl: 'https://octate-odyssey.vercel.app/',
     featured: true,
     metrics: [
