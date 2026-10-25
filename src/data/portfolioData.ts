@@ -348,7 +348,7 @@ export const PROJECTS_DATA: DeploymentProject[] = [
       'A minimal, immersive digital platform designed for deep Quranic reflection and linguistic study. Engineered with focus on fluid typography, distraction-free reading, and responsive accessibility.',
     tags: ['Web App', 'UI/UX Design', 'Typography', 'Next.js'],
     image: '/assets/projects/1.jpg',
-    liveUrl: 'https://raudatul-quran-silk.vercel.app/',
+    liveUrl: 'https://raudatul-quran.vercel.app/',
     featured: true,
     metrics: [
       { label: 'Performance', value: '100% Lighthouse' },
@@ -364,7 +364,7 @@ export const PROJECTS_DATA: DeploymentProject[] = [
       'A high-performance modern corporate landing page featuring smooth scroll animations, responsive architecture, zero-latency micro-interactions, and a sleek cyber aesthetic.',
     tags: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript'],
     image: '/assets/projects/2.png',
-    liveUrl: 'https://octate-odyssey.vercel.app/',
+    liveUrl: 'https://octesy.vercel.app/',
     featured: true,
     metrics: [
       { label: 'Bundle Size', value: '<45kB Gzip' },
@@ -407,7 +407,7 @@ export const PROJECTS_DATA: DeploymentProject[] = [
       'A comprehensive, HIPAA-compliant SaaS platform for managing outpatient clinic operations, including encrypted patient records, role-based staff scheduling, and appointment queues.',
     tags: ['SaaS Dashboard', 'Healthcare IT', 'Authentication', 'PostgreSQL'],
     image: '/assets/projects/4.jpg',
-    liveUrl: 'https://octate-odyssey-clinic-saas.vercel.app/login',
+    liveUrl: 'https://octesy-clinic-saas.vercel.app/login',
     metrics: [
       { label: 'Compliance', value: 'HIPAA & GDPR' },
       { label: 'Throughput', value: '10k daily visits' },
