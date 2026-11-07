@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { SKILLS_DATA } from '../data/portfolioData';
 import { getSkillStrokeOffset } from '../utils/math';
 import { soundFx } from '../utils/audio';
@@ -61,6 +62,45 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
 export const SkillsSection: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<'All' | 'Infrastructure' | 'Cybersecurity' | 'AIOps' | 'Cloud'>('All');
 
+  // Scroll references for the new animations
+  const targetRef1 = useRef<HTMLDivElement | null>(null);
+  const targetRef2 = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress: progress1 } = useScroll({
+    target: targetRef1,
+    offset: ['start end', 'end start'],
+  });
+
+  const { scrollYProgress: progress2 } = useScroll({
+    target: targetRef2,
+    offset: ['start end', 'end start'],
+  });
+
+  // Text setup for 3D scroll animation
+  const scrollText = "see more from infrastructure stack";
+  const characters = scrollText.split("");
+  const centerIndex = Math.floor(characters.length / 2);
+
+  // Tech stack icons showcase
+  const techIcons = [
+    { name: "VS Code", icon: "💻" },
+    { name: "Docker", icon: "🐳" },
+    { name: "GitHub", icon: "🐙" },
+    { name: "Azure", icon: "☁️" },
+    { name: "Linux", icon: "🐧" },
+    { name: "Network", icon: "🌐" },
+    { name: "Postman", icon: "🚀" },
+    { name: "Figma", icon: "🎨" },
+    { name: "Next.js", icon: "⚡" },
+    { name: "Node.js", icon: "🟢" },
+    { name: "Python", icon: "🐍" },
+    { name: "Kubernetes", icon: "☸️" },
+    { name: "Terraform", icon: "🌱" },
+    { name: "Supabase", icon: "🗄️" },
+    { name: "Vercel", icon: "🚀" },
+  ];
+  const iconCenterIndex = Math.floor(techIcons.length / 2);
+
   const filtered = activeFilter === 'All'
     ? SKILLS_DATA
     : SKILLS_DATA.filter((s) => s.category === activeFilter);
@@ -99,8 +139,8 @@ export const SkillsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* 5x5 Grid Layout (5 columns on large desktop, responsive on smaller viewports) */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5">
+      {/* 5x5 Grid Layout */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 mb-24">
         {filtered.map((skill) => {
           const IconComp = iconMap[skill.iconName] || Terminal;
           const strokeOffset = getSkillStrokeOffset(skill.percentage, 42);
@@ -167,6 +207,69 @@ export const SkillsSection: React.FC = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* --- NEW INTEGRATED SCROLL ANIMATION & TECH STACK SHOWCASE --- */}
+
+      {/* 1. Scroll-driven 3D Text Reveal */}
+      <div ref={targetRef1} className="my-16 py-12 flex flex-col items-center justify-center border-t border-white/10">
+        <div className="text-xs font-mono text-[#8B9BB4] mb-8 tracking-widest uppercase">
+          ↓ Scroll to expand telemetry matrix ↓
+        </div>
+        
+        <div 
+          className="font-mono w-full max-w-4xl text-center text-3xl sm:text-5xl font-bold uppercase tracking-tighter text-white"
+          style={{ perspective: "600px" }}
+        >
+          {characters.map((char, index) => {
+            const distanceFromCenter = index - centerIndex;
+            const x = useTransform(progress1, [0, 0.6], [distanceFromCenter * 35, 0]);
+            const rotateX = useTransform(progress1, [0, 0.6], [distanceFromCenter * 30, 0]);
+
+            return (
+              <motion.span
+                key={index}
+                className={`inline-block text-[#7ed957] ${char === " " ? "w-3 sm:w-6" : ""}`}
+                style={{ x, rotateX }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 2. Scroll-driven Tech Stack Icon Convergence */}
+      <div ref={targetRef2} className="my-16 py-12 flex flex-col items-center justify-center">
+        <div className="text-xs font-mono text-[#00F0FF] mb-10 tracking-widest uppercase">
+          Integrated With Your Favorite Tech Stack
+        </div>
+
+        <div 
+          className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full max-w-4xl"
+          style={{ perspective: "800px" }}
+        >
+          {techIcons.map((item, index) => {
+            const distanceFromCenter = index - iconCenterIndex;
+            const x = useTransform(progress2, [0, 0.6], [distanceFromCenter * 45, 0]);
+            const scale = useTransform(progress2, [0, 0.6], [0.7, 1]);
+            const y = useTransform(progress2, [0, 0.6], [Math.abs(distanceFromCenter) * 20, 0]);
+
+            return (
+              <motion.div
+                key={item.name}
+                onMouseEnter={() => soundFx.playTick(1200, 0.01)}
+                className="flex flex-col items-center justify-center p-4 rounded-xl bg-[#050914] border border-[#00F0FF]/20 shadow-[0_0_15px_rgba(0,240,255,0.05)] w-24 h-24 sm:w-28 sm:h-28 hover:border-[#00F0FF] transition-colors"
+                style={{ x, scale, y, transformOrigin: "center" }}
+              >
+                <span className="text-3xl sm:text-4xl mb-2">{item.icon}</span>
+                <span className="text-[10px] sm:text-xs font-mono text-slate-300 uppercase tracking-wider">
+                  {item.name}
+                </span>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
       {/* SVG Gradient Definition */}
