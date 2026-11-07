@@ -267,7 +267,7 @@ export const CAREER_DATA: CareerExperience[] = [
     id: 'entrust',
     period: 'Feb 2021 - Dec 2023',
     company: 'Entrust Global Ltd. / e-TEK Solutions',
-    role: 'Sr. IT Support Engineer',
+    role: 'Senior IT Support Engineer',
     description:
       'Supported a high-priority Government-to-Government technology environment, resolving complex technical escalations through ServiceNow with a 90% first-call resolution rate.',
     keyHighlight: 'Maintained 90% first-call resolution rate and engineered RCA corrective actions cutting recurring issues by 30%.',
@@ -287,7 +287,7 @@ export const CAREER_DATA: CareerExperience[] = [
     id: 'shahin',
     period: 'Dec 2017 - Dec 2020',
     company: 'M/S Shahin International',
-    role: 'IT Engineer',
+    role: 'Information Technology Engineer',
     description:
       'Standardized user access controls and Active Directory permissions for 100+ users, maintaining 98% system uptime and managing core infrastructure.',
     keyHighlight: 'Maintained 98% system uptime across primary infrastructure and deployed integrated CCTV and biometric attendance arrays.',

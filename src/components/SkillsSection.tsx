@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
 import { SKILLS_DATA } from '../data/portfolioData';
 import { getSkillStrokeOffset } from '../utils/math';
 import { soundFx } from '../utils/audio';
@@ -31,6 +31,11 @@ import {
   ClipboardCheck,
 } from 'lucide-react';
 
+/**
+ * Lucide icons are used for the competency cards.
+ * Brand logos in the infrastructure showcase use Simple Icons' SVG CDN.
+ * If a logo cannot load, its short fallback label is displayed instead.
+ */
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
   Laptop,
   Cloud,
@@ -59,10 +64,148 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
   ClipboardCheck,
 };
 
-export const SkillsSection: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState<'All' | 'Infrastructure' | 'Cybersecurity' | 'AIOps' | 'Cloud'>('All');
+type TechItem = {
+  name: string;
+  icon: string;
+  fallback: string;
+};
 
-  // Scroll references for the new animations
+const techIcons: TechItem[] = [
+  { name: 'VS Code', icon: 'visualstudiocode', fallback: 'VS' },
+  { name: 'Docker', icon: 'docker', fallback: 'DK' },
+  { name: 'GitHub', icon: 'github', fallback: 'GH' },
+  { name: 'Azure', icon: 'microsoftazure', fallback: 'AZ' },
+  { name: 'Linux', icon: 'linux', fallback: 'LX' },
+  { name: 'Networking', icon: 'cisco', fallback: 'NET' },
+  { name: 'Figma', icon: 'figma', fallback: 'FG' },
+  { name: 'Next.js', icon: 'nextdotjs', fallback: 'N' },
+  { name: 'Node.js', icon: 'nodedotjs', fallback: 'JS' },
+  { name: 'Python', icon: 'python', fallback: 'PY' },
+  { name: 'Supabase', icon: 'supabase', fallback: 'SB' },
+  { name: 'Vercel', icon: 'vercel', fallback: 'VC' },
+
+  { name: 'Windows Server', icon: 'windows', fallback: 'WS' },
+  { name: 'Active Directory', icon: 'microsoft', fallback: 'AD' },
+  { name: 'PowerShell', icon: 'powershell', fallback: 'PS' },
+  { name: 'Bash', icon: 'gnubash', fallback: 'SH' },
+  { name: 'Proxmox', icon: 'proxmox', fallback: 'PX' },
+  { name: 'VMware', icon: 'vmware', fallback: 'VM' },
+  { name: 'MikroTik', icon: 'mikrotik', fallback: 'MT' },
+  { name: 'Cisco', icon: 'cisco', fallback: 'CS' },
+  { name: 'pfSense', icon: 'pfsense', fallback: 'PF' },
+  { name: 'Wireshark', icon: 'wireshark', fallback: 'WS' },
+  { name: 'Nmap', icon: 'nmap', fallback: 'NM' },
+  { name: 'PRTG', icon: 'paessler', fallback: 'PR' },
+  { name: 'GitLab', icon: 'gitlab', fallback: 'GL' },
+  { name: 'Git', icon: 'git', fallback: 'GT' },
+  { name: 'Nginx', icon: 'nginx', fallback: 'NG' },
+  { name: 'MySQL', icon: 'mysql', fallback: 'MY' },
+  { name: 'PostgreSQL', icon: 'postgresql', fallback: 'PG' },
+  { name: 'Power BI', icon: 'powerbi', fallback: 'BI' },
+  { name: 'Microsoft 365', icon: 'microsoft365', fallback: 'M365' },
+  { name: 'Intune', icon: 'microsoftintune', fallback: 'IN' },
+  { name: 'Microsoft Entra ID', icon: 'microsoftentra', fallback: 'ID' },
+  { name: 'SCCM / MECM', icon: 'microsoft', fallback: 'MECM' },
+  { name: 'ServiceNow', icon: 'servicenow', fallback: 'SN' },
+  { name: 'Kali Linux', icon: 'kalilinux', fallback: 'KL' },
+  { name: 'Vite', icon: 'vite', fallback: 'VT' },
+  { name: 'React', icon: 'react', fallback: 'RE' },
+  { name: 'Vue.js', icon: 'vuedotjs', fallback: 'VUE' },
+  { name: 'TypeScript', icon: 'typescript', fallback: 'TS' },
+  { name: 'JavaScript', icon: 'javascript', fallback: 'JS' },
+  { name: 'Tailwind CSS', icon: 'tailwindcss', fallback: 'TW' },
+  { name: 'FastAPI', icon: 'fastapi', fallback: 'FA' },
+];
+
+/**
+ * Separate child components keep Framer Motion hooks inside valid React
+ * component boundaries while preserving the original scroll-driven effect.
+ */
+const ScrollCharacter: React.FC<{
+  char: string;
+  index: number;
+  centerIndex: number;
+  progress: MotionValue<number>;
+}> = ({ char, index, centerIndex, progress }) => {
+  const distanceFromCenter = index - centerIndex;
+  const x = useTransform(
+    progress,
+    [0, 0.6],
+    [distanceFromCenter * 35, 0],
+  );
+  const rotateX = useTransform(
+    progress,
+    [0, 0.6],
+    [distanceFromCenter * 30, 0],
+  );
+
+  return (
+    <motion.span
+      className={`inline-block text-[#7ed957] ${
+        char === ' ' ? 'w-3 sm:w-6' : ''
+      }`}
+      style={{ x, rotateX }}
+    >
+      {char === ' ' ? '\u00A0' : char}
+    </motion.span>
+  );
+};
+
+const TechStackCard: React.FC<{
+  item: TechItem;
+  index: number;
+  centerIndex: number;
+  progress: MotionValue<number>;
+}> = ({ item, index, centerIndex, progress }) => {
+  const distanceFromCenter = index - centerIndex;
+  const x = useTransform(
+    progress,
+    [0, 0.6],
+    [distanceFromCenter * 45, 0],
+  );
+  const scale = useTransform(progress, [0, 0.6], [0.7, 1]);
+  const y = useTransform(
+    progress,
+    [0, 0.6],
+    [Math.abs(distanceFromCenter) * 20, 0],
+  );
+
+  return (
+    <motion.div
+      onMouseEnter={() => soundFx.playTick(1200, 0.01)}
+      className="group flex h-24 w-[104px] flex-col items-center justify-center gap-2 rounded-2xl border border-white/10 bg-[#080f1e]/90 p-3 shadow-[0_8px_30px_rgba(0,0,0,0.18)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#7ed957]/60 hover:bg-[#0c1729] hover:shadow-[0_12px_32px_rgba(126,217,87,0.10)] sm:h-28 sm:w-28"
+      style={{ x, scale, y, transformOrigin: 'center' }}
+      title={item.name}
+    >
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.04] p-1.5 transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12">
+        <img
+          src={`https://cdn.simpleicons.org/${item.icon}`}
+          alt={`${item.name} logo`}
+          loading="lazy"
+          className="h-full w-full object-contain"
+          onError={(event) => {
+            event.currentTarget.style.display = 'none';
+            const fallback = event.currentTarget.nextElementSibling as HTMLElement | null;
+            if (fallback) fallback.style.display = 'flex';
+          }}
+        />
+        <span className="hidden h-full w-full items-center justify-center rounded-lg border border-white/10 bg-white/[0.06] font-mono text-xs font-bold text-[#7ed957]">
+          {item.fallback}
+        </span>
+      </div>
+      <span className="max-w-full text-center font-mono text-[9px] font-semibold uppercase leading-tight tracking-wide text-slate-300 transition-colors group-hover:text-white sm:text-[10px]">
+        {item.name}
+      </span>
+    </motion.div>
+  );
+};
+
+export const SkillsSection: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState<
+    'All' | 'Infrastructure' | 'Cybersecurity' | 'AIOps' | 'Cloud'
+  >('All');
+
+  // Scroll references for the existing scroll-driven animations.
   const targetRef1 = useRef<HTMLDivElement | null>(null);
   const targetRef2 = useRef<HTMLDivElement | null>(null);
 
@@ -76,71 +219,71 @@ export const SkillsSection: React.FC = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Text setup for 3D scroll animation
-  const scrollText = "see more from infrastructure stack";
-  const characters = scrollText.split("");
+  // Text setup for the original 3D scroll animation.
+  const scrollText = 'see more from infrastructure stack';
+  const characters = scrollText.split('');
   const centerIndex = Math.floor(characters.length / 2);
-
-  // Tech stack icons showcase
-  const techIcons = [
-    { name: "VS Code", icon: "💻" },
-    { name: "Docker", icon: "🐳" },
-    { name: "GitHub", icon: "🐙" },
-    { name: "Azure", icon: "☁️" },
-    { name: "Linux", icon: "🐧" },
-    { name: "Network", icon: "🌐" },
-    { name: "Postman", icon: "🚀" },
-    { name: "Figma", icon: "🎨" },
-    { name: "Next.js", icon: "⚡" },
-    { name: "Node.js", icon: "🟢" },
-    { name: "Python", icon: "🐍" },
-    { name: "Kubernetes", icon: "☸️" },
-    { name: "Terraform", icon: "🌱" },
-    { name: "Supabase", icon: "🗄️" },
-    { name: "Vercel", icon: "🚀" },
-  ];
   const iconCenterIndex = Math.floor(techIcons.length / 2);
 
-  const filtered = activeFilter === 'All'
-    ? SKILLS_DATA
-    : SKILLS_DATA.filter((s) => s.category === activeFilter);
+  const filtered =
+    activeFilter === 'All'
+      ? SKILLS_DATA
+      : SKILLS_DATA.filter((skill) => skill.category === activeFilter);
 
   return (
-    <section id="skills" className="py-24 px-6 max-w-7xl mx-auto">
+    <section
+      id="skills"
+      className="relative mx-auto max-w-7xl overflow-hidden px-5 py-20 sm:px-6 sm:py-24"
+    >
+      {/* Subtle ambient background decoration */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-20 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-[#7ed957]/[0.06] blur-[100px]"
+      />
+
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div className="mb-10 flex flex-col justify-between gap-6 md:mb-12 md:flex-row md:items-end">
         <div>
-          <div className="text-xs font-mono text-[#7ed957] uppercase tracking-widest mb-2">
-            5×5 Engineered Competency Matrix (25 Capabilities)
+          <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#7ed957] sm:text-xs">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#7ed957] shadow-[0_0_10px_#7ed957]" />
+            5×5 Engineered Competency Matrix · 25 Capabilities
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black font-mono uppercase tracking-tight text-white">
+          <h2 className="font-mono text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">
             Sys <span className="text-[#7ed957]">Capabilities</span>
           </h2>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-slate-400">
+            Core technologies, platforms, and operational capabilities across
+            infrastructure, networking, cloud, and security.
+          </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center gap-1.5 p-1 bg-[#050914]/80 backdrop-blur-md border border-white/10 rounded-xl">
-          {(['All', 'Infrastructure', 'Cybersecurity', 'AIOps', 'Cloud'] as const).map((cat) => (
+        <div className="flex flex-wrap items-center gap-1.5 self-start rounded-xl border border-white/10 bg-[#050914]/80 p-1.5 shadow-lg shadow-black/10 backdrop-blur-md md:self-auto">
+          {(
+            ['All', 'Infrastructure', 'Cybersecurity', 'AIOps', 'Cloud'] as const
+          ).map((category) => (
             <button
-              key={cat}
+              key={category}
+              type="button"
               onClick={() => {
-                setActiveFilter(cat);
+                setActiveFilter(category);
                 soundFx.playTick(1000, 0.02);
               }}
-              className={`px-3 py-1.5 text-xs font-mono rounded-lg transition-all cursor-pointer ${
-                activeFilter === cat
-                  ? 'bg-[#7ed957] text-black font-bold shadow-md shadow-[#7ed957]/30'
-                  : 'text-slate-400 hover:text-white hover:bg-white/5'
+              aria-pressed={activeFilter === category}
+              className={`cursor-pointer rounded-lg px-3 py-2 font-mono text-[10px] transition-all duration-200 sm:text-xs ${
+                activeFilter === category
+                  ? 'bg-[#7ed957] font-bold text-[#07100a] shadow-md shadow-[#7ed957]/20'
+                  : 'text-slate-400 hover:bg-white/5 hover:text-white'
               }`}
             >
-              {cat}
+              {category}
             </button>
           ))}
         </div>
       </div>
 
-      {/* 5x5 Grid Layout */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5 mb-24">
+      {/* Competency Grid */}
+      <div className="mb-24 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5">
         {filtered.map((skill) => {
           const IconComp = iconMap[skill.iconName] || Terminal;
           const strokeOffset = getSkillStrokeOffset(skill.percentage, 42);
@@ -148,18 +291,25 @@ export const SkillsSection: React.FC = () => {
           return (
             <div
               key={skill.id}
-              className="group flex flex-col items-center text-center p-4 sm:p-5 rounded-2xl bg-[#050914]/70 backdrop-blur-sm border border-white/10 hover:border-[#7ed957]/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(0,240,255,0.12)] relative overflow-hidden"
               onMouseEnter={() => soundFx.playTick(1100, 0.012)}
+              className="group relative flex min-h-[218px] flex-col items-center overflow-hidden rounded-2xl border border-white/[0.09] bg-gradient-to-b from-[#0b1424]/95 to-[#050914]/95 p-4 text-center shadow-[0_8px_25px_rgba(0,0,0,0.12)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#7ed957]/50 hover:shadow-[0_14px_35px_rgba(126,217,87,0.09)] sm:min-h-[230px] sm:p-5"
             >
+              {/* Hover glow */}
+              <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[#7ed957]/0 blur-2xl transition-all duration-500 group-hover:bg-[#7ed957]/10" />
+
               {/* Circular Gauge Ring */}
-              <div className="relative w-24 h-24 mb-3 flex items-center justify-center">
-                <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+              <div className="relative mb-3 flex h-24 w-24 items-center justify-center">
+                <svg
+                  className="h-full w-full -rotate-90"
+                  viewBox="0 0 100 100"
+                  aria-hidden="true"
+                >
                   <circle
                     cx="50"
                     cy="50"
                     r="42"
                     fill="none"
-                    stroke="rgba(255, 255, 255, 0.06)"
+                    stroke="rgba(255,255,255,0.07)"
                     strokeWidth="4"
                   />
                   <circle
@@ -176,106 +326,129 @@ export const SkillsSection: React.FC = () => {
                   />
                 </svg>
 
-                {/* Percentage Text (default) */}
-                <div className="absolute inset-0 flex items-center justify-center font-mono text-xl font-black text-white group-hover:scale-125 group-hover:opacity-0 transition-all duration-300">
+                {/* Percentage Text */}
+                <div className="absolute inset-0 flex items-center justify-center font-mono text-xl font-black text-white transition-all duration-300 group-hover:scale-75 group-hover:opacity-0">
                   {skill.percentage}
-                  <span className="text-[10px] text-[#7ed957] font-semibold -mt-2">%</span>
+                  <span className="-mt-2 text-[10px] font-semibold text-[#7ed957]">
+                    %
+                  </span>
                 </div>
 
                 {/* Hover Icon Reveal */}
-                <div className="absolute inset-0 flex items-center justify-center scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 text-[#ffb423]">
-                  <IconComp className="w-8 h-8 drop-shadow-[0_0_15px_rgba(255,180,35,0.6)]" />
+                <div className="absolute inset-0 flex scale-50 items-center justify-center text-[#ffb423] opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100">
+                  <IconComp className="h-9 w-9 drop-shadow-[0_0_15px_rgba(255,180,35,0.55)]" />
                 </div>
               </div>
 
-              {/* Title */}
-              <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-white group-hover:text-[#ffb423] transition-colors mb-2 line-clamp-2 min-h-[32px] flex items-center justify-center">
+              {/* Skill Title */}
+              <h3 className="mb-2 flex min-h-[34px] items-center justify-center font-mono text-[11px] font-bold uppercase leading-5 tracking-wider text-white transition-colors group-hover:text-[#7ed957] sm:text-xs">
                 {skill.name}
               </h3>
 
-              {/* Tags */}
-              <div className="flex flex-col gap-0.5 text-[10px] font-mono text-slate-400">
-                {skill.tags.slice(0, 2).map((tag) => (
-                  <span key={tag} className="truncate max-w-[140px]">
+              {/* Skill Tags */}
+              <div className="flex flex-col gap-1 font-mono text-[9px] text-slate-400 sm:text-[10px]">
+                {skill.tags.slice(0, 2).map((tag: string) => (
+                  <span key={tag} className="max-w-[150px] truncate">
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* Corner tech notch */}
-              <span className="absolute top-0 right-0 w-2.5 h-2.5 border-t border-r border-[#7ed957]/30" />
+              {/* Corner accents */}
+              <span className="absolute right-0 top-0 h-3 w-3 border-r border-t border-[#7ed957]/40" />
+              <span className="absolute bottom-0 left-0 h-3 w-3 border-b border-l border-[#7ed957]/20" />
             </div>
           );
         })}
       </div>
 
-      {/* --- NEW INTEGRATED SCROLL ANIMATION & TECH STACK SHOWCASE --- */}
+      {/* --- SCROLL ANIMATION & INFRASTRUCTURE TECH STACK SHOWCASE --- */}
 
-      {/* 1. Scroll-driven 3D Text Reveal */}
-      <div ref={targetRef1} className="my-16 py-12 flex flex-col items-center justify-center border-t border-white/10">
-        <div className="text-xs font-mono text-[#8B9BB4] mb-8 tracking-widest uppercase">
-          ↓ Scroll to expand telemetry matrix ↓
+      {/* 1. Scroll-driven 3D Text Reveal — original scroll effect retained */}
+      <div
+        ref={targetRef1}
+        className="my-16 flex flex-col items-center justify-center border-t border-white/10 px-2 py-16 sm:py-20"
+      >
+        <div className="mb-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#8B9BB4] sm:text-xs">
+          <span className="h-px w-8 bg-[#7ed957]/50" />
+          <span>Scroll to expand telemetry matrix</span>
+          <span className="h-px w-8 bg-[#7ed957]/50" />
         </div>
-        
-        <div 
-          className="font-mono w-full max-w-4xl text-center text-3xl sm:text-5xl font-bold uppercase tracking-tighter text-white"
-          style={{ perspective: "600px" }}
+
+        <div
+          className="w-full max-w-4xl text-center font-mono text-2xl font-black uppercase tracking-tight text-white sm:text-4xl md:text-5xl"
+          style={{ perspective: '600px' }}
         >
-          {characters.map((char, index) => {
-            const distanceFromCenter = index - centerIndex;
-            const x = useTransform(progress1, [0, 0.6], [distanceFromCenter * 35, 0]);
-            const rotateX = useTransform(progress1, [0, 0.6], [distanceFromCenter * 30, 0]);
-
-            return (
-              <motion.span
-                key={index}
-                className={`inline-block text-[#7ed957] ${char === " " ? "w-3 sm:w-6" : ""}`}
-                style={{ x, rotateX }}
-              >
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            );
-          })}
+          {characters.map((char, index) => (
+            <ScrollCharacter
+              key={`${char}-${index}`}
+              char={char}
+              index={index}
+              centerIndex={centerIndex}
+              progress={progress1}
+            />
+          ))}
         </div>
+        <p className="mt-5 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500 sm:text-[10px]">
+          Infrastructure · Cloud · Security · Development
+        </p>
       </div>
 
-      {/* 2. Scroll-driven Tech Stack Icon Convergence */}
-      <div ref={targetRef2} className="my-16 py-12 flex flex-col items-center justify-center">
-        <div className="text-xs font-mono text-[#00F0FF] mb-10 tracking-widest uppercase">
-          Integrated With Your Favorite Tech Stack
+      {/* 2. Scroll-driven Tech Stack Icon Convergence — original effect retained */}
+      <div
+        ref={targetRef2}
+        className="my-12 rounded-3xl border border-white/[0.08] bg-gradient-to-b from-[#0a1424]/70 to-[#050914]/50 px-4 py-12 shadow-[0_20px_60px_rgba(0,0,0,0.16)] sm:px-8 sm:py-16"
+      >
+        <div className="mb-10 flex flex-col items-center text-center">
+          <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.22em] text-[#7ed957] sm:text-xs">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#7ed957] shadow-[0_0_10px_#7ed957]" />
+            Technology Ecosystem
+          </div>
+          <h3 className="font-mono text-xl font-bold uppercase tracking-tight text-white sm:text-2xl">
+            Integrated With My <span className="text-[#7ed957]">Tech Stack</span>
+          </h3>
+          <p className="mt-3 max-w-xl text-xs leading-6 text-slate-400 sm:text-sm">
+            A selection of platforms and tools used across infrastructure,
+            networking, cloud engineering, automation, and software development.
+          </p>
         </div>
 
-        <div 
-          className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 w-full max-w-4xl"
-          style={{ perspective: "800px" }}
+        <div
+          className="flex w-full flex-wrap items-center justify-center gap-3 sm:gap-4"
+          style={{ perspective: '800px' }}
         >
-          {techIcons.map((item, index) => {
-            const distanceFromCenter = index - iconCenterIndex;
-            const x = useTransform(progress2, [0, 0.6], [distanceFromCenter * 45, 0]);
-            const scale = useTransform(progress2, [0, 0.6], [0.7, 1]);
-            const y = useTransform(progress2, [0, 0.6], [Math.abs(distanceFromCenter) * 20, 0]);
+          {techIcons.map((item, index) => (
+            <TechStackCard
+              key={item.name}
+              item={item}
+              index={index}
+              centerIndex={iconCenterIndex}
+              progress={progress2}
+            />
+          ))}
+        </div>
 
-            return (
-              <motion.div
-                key={item.name}
-                onMouseEnter={() => soundFx.playTick(1200, 0.01)}
-                className="flex flex-col items-center justify-center p-4 rounded-xl bg-[#050914] border border-[#00F0FF]/20 shadow-[0_0_15px_rgba(0,240,255,0.05)] w-24 h-24 sm:w-28 sm:h-28 hover:border-[#00F0FF] transition-colors"
-                style={{ x, scale, y, transformOrigin: "center" }}
-              >
-                <span className="text-3xl sm:text-4xl mb-2">{item.icon}</span>
-                <span className="text-[10px] sm:text-xs font-mono text-slate-300 uppercase tracking-wider">
-                  {item.name}
-                </span>
-              </motion.div>
-            );
-          })}
+        <div className="mt-10 flex items-center justify-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500 sm:text-[10px]">
+          <span className="h-px w-6 bg-white/10" />
+          Tools · Platforms · Technologies
+          <span className="h-px w-6 bg-white/10" />
         </div>
       </div>
 
       {/* SVG Gradient Definition */}
-      <svg className="w-0 h-0 absolute" aria-hidden="true" focusable="false">
+      <svg
+        className="absolute h-0 w-0"
+        aria-hidden="true"
+        focusable="false"
+      >
         <defs>
-          <linearGradient id="cap-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+          <linearGradient
+            id="cap-gradient"
+            x1="0%"
+            y1="100%"
+            x2="100%"
+            y2="0%"
+          >
             <stop offset="0%" stopColor="#7ed957" />
             <stop offset="100%" stopColor="#ffb423" />
           </linearGradient>
