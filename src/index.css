@@ -183,3 +183,25 @@ body {
   80% { clip-path: inset(45% 0 35% 0); transform: translate(3px, -2px); }
   100% { clip-path: inset(5% 0 75% 0); transform: translate(-3px, 1px); }
 }
+
+/* ========================================================
+   GLOBAL SCROLLBAR HIDER (Maintains smooth scrolling)
+   ======================================================== */
+
+/* For Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  background: transparent !important;
+}
+
+/* For Internet Explorer, Edge, and Firefox */
+html,
+body {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
+  overflow-y: scroll;
+  /* Forces the scrollable layout to remain stable */
+}
