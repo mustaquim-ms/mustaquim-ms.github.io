@@ -194,14 +194,3 @@ body {
   width: 0px !important;
   background: transparent !important;
 }
-
-/* For Internet Explorer, Edge, and Firefox */
-html,
-body {
-  -ms-overflow-style: none !important;
-  /* IE and Edge */
-  scrollbar-width: none !important;
-  /* Firefox */
-  overflow-y: scroll;
-  /* Forces the scrollable layout to remain stable */
-}
