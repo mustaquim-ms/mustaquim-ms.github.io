@@ -1,14 +1,23 @@
-import React from 'react';
-import { RubiksCube3D } from './RubiksCube3D';
-import { soundFx } from '../utils/audio';
-import { ShieldCheck, FileDown, ArrowRight, Package, Terminal } from 'lucide-react';
+import {
+  ArrowRight,
+  FileDown,
+  Package,
+  ShieldCheck,
+  Terminal,
+} from "lucide-react";
+import React from "react";
+import { soundFx } from "../utils/audio";
+import { RubiksCube3D } from "./RubiksCube3D";
 
 interface HeaderHeroProps {
   scrollY: number;
   onOpenProducts: () => void;
 }
 
-export const HeaderHero: React.FC<HeaderHeroProps> = ({ scrollY, onOpenProducts }) => {
+export const HeaderHero: React.FC<HeaderHeroProps> = ({
+  scrollY,
+  onOpenProducts,
+}) => {
   return (
     <section
       id="about"
@@ -20,7 +29,7 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ scrollY, onOpenProducts 
           className="w-full h-full opacity-15"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px)`,
-            backgroundSize: '40px 40px',
+            backgroundSize: "40px 40px",
           }}
         />
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#7ed957]/10 rounded-full blur-[140px]" />
@@ -37,7 +46,10 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ scrollY, onOpenProducts 
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase leading-[1.08] mb-6 font-mono">
-            <span className="text-transparent" style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}>
+            <span
+              className="text-transparent"
+              style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.85)" }}
+            >
               Building Secure,
             </span>
             <br />
@@ -50,7 +62,10 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ scrollY, onOpenProducts 
 
           {/* Subtitle / Bio */}
           <p className="text-slate-300 text-base sm:text-lg font-mono leading-relaxed max-w-2xl border-l-2 border-[#ffb423] pl-4 py-1 mb-8">
-            Specializing in combining modern defensive cybersecurity, self-healing AIOps models, and enterprise IT strategy. Focused on architecting zero-trust infrastructure that maintains uptime, protects telemetry, and scales reliably.
+            Specializing in combining modern defensive cybersecurity,
+            self-healing AIOps models, and enterprise IT strategy. Focused on
+            architecting zero-trust infrastructure that maintains uptime,
+            protects telemetry, and scales reliably.
           </p>
 
           {/* Action Buttons */}
@@ -76,6 +91,16 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ scrollY, onOpenProducts 
             </a>
 
             <a
+              href="/assets/pdf/resume.pdf"
+              download="Resume.pdf"
+              onClick={() => soundFx.playTick(950, 0.03)}
+              className="px-4 py-2 text-xs font-mono font-bold tracking-wider text-slate-300 hover:text-white border border-white/15 hover:border-[#00F0FF]/50 rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
+            >
+              <FileDown className="w-3.5 h-3.5 text-[#00F0FF]" />
+              <span>My Resume</span>
+            </a>
+
+            <a
               href="mailto:mustaquimmahmad@gmail.com"
               className="px-4 py-2 text-xs font-mono font-bold tracking-wider text-slate-400 hover:text-white border border-white/10 hover:border-white/30 rounded-lg transition-colors flex items-center gap-2"
               onClick={() => soundFx.playTick(750, 0.02)}
@@ -88,20 +113,36 @@ export const HeaderHero: React.FC<HeaderHeroProps> = ({ scrollY, onOpenProducts 
           {/* Quantitative Proof Strip */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full pt-6 border-t border-white/10 font-mono">
             <div>
-              <div className="text-xl sm:text-2xl font-black text-white">500+</div>
-              <div className="text-[11px] text-slate-400 uppercase tracking-wider">Active Nodes</div>
+              <div className="text-xl sm:text-2xl font-black text-white">
+                500+
+              </div>
+              <div className="text-[11px] text-slate-400 uppercase tracking-wider">
+                Active Nodes
+              </div>
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-black text-[#7ed957]">99.98%</div>
-              <div className="text-[11px] text-slate-400 uppercase tracking-wider">Uptime Rate</div>
+              <div className="text-xl sm:text-2xl font-black text-[#7ed957]">
+                99.98%
+              </div>
+              <div className="text-[11px] text-slate-400 uppercase tracking-wider">
+                Uptime Rate
+              </div>
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-black text-[#00F0FF]">3 Papers</div>
-              <div className="text-[11px] text-slate-400 uppercase tracking-wider">Zenodo DOI</div>
+              <div className="text-xl sm:text-2xl font-black text-[#00F0FF]">
+                3 Papers
+              </div>
+              <div className="text-[11px] text-slate-400 uppercase tracking-wider">
+                Zenodo DOI
+              </div>
             </div>
             <div>
-              <div className="text-xl sm:text-2xl font-black text-[#ffb423]">Zero-Trust</div>
-              <div className="text-[11px] text-slate-400 uppercase tracking-wider">Architecture</div>
+              <div className="text-xl sm:text-2xl font-black text-[#ffb423]">
+                Zero-Trust
+              </div>
+              <div className="text-[11px] text-slate-400 uppercase tracking-wider">
+                Architecture
+              </div>
             </div>
           </div>
         </div>

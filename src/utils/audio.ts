@@ -12,13 +12,16 @@ class SoundController {
   }
 
   private initCtx() {
-    if (!this.ctx && typeof window !== 'undefined') {
-      const AudioCtxClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (!this.ctx && typeof window !== "undefined") {
+      const AudioCtxClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext })
+          .webkitAudioContext;
       if (AudioCtxClass) {
         this.ctx = new AudioCtxClass();
       }
     }
-    if (this.ctx && this.ctx.state === 'suspended') {
+    if (this.ctx && this.ctx.state === "suspended") {
       this.ctx.resume().catch(() => {});
     }
   }
@@ -49,10 +52,13 @@ class SoundController {
       osc.connect(gain);
       gain.connect(this.ctx.destination);
 
-      osc.type = 'sine';
+      osc.type = "sine";
       osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
       gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+      gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        this.ctx.currentTime + duration,
+      );
 
       osc.start();
       osc.stop(this.ctx.currentTime + duration);
@@ -72,11 +78,17 @@ class SoundController {
       osc.connect(gain);
       gain.connect(this.ctx.destination);
 
-      osc.type = 'triangle';
+      osc.type = "triangle";
       osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, this.ctx.currentTime + duration);
+      osc.frequency.exponentialRampToValueAtTime(
+        freq * 1.5,
+        this.ctx.currentTime + duration,
+      );
       gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+      gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        this.ctx.currentTime + duration,
+      );
 
       osc.start();
       osc.stop(this.ctx.currentTime + duration);
@@ -105,10 +117,13 @@ class SoundController {
         const gain = this.ctx.createGain();
         osc.connect(gain);
         gain.connect(this.ctx.destination);
-        osc.type = 'sawtooth';
+        osc.type = "sawtooth";
         osc.frequency.setValueAtTime(high ? 650 : 380, this.ctx.currentTime);
         gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.45);
+        gain.gain.exponentialRampToValueAtTime(
+          0.01,
+          this.ctx.currentTime + 0.45,
+        );
         osc.start();
         osc.stop(this.ctx.currentTime + 0.45);
         high = !high;

@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { soundFx } from '../utils/audio';
-import { Shield, Menu, X, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Menu, Shield, X } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { soundFx } from "../utils/audio";
 
 interface NavbarProps {
   isScrolled: boolean;
@@ -15,10 +15,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [logoError, setLogoError] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [sliderStyle, setSliderStyle] = useState<React.CSSProperties>({ opacity: 0 });
+  const [sliderStyle, setSliderStyle] = useState<React.CSSProperties>({
+    opacity: 0,
+  });
   const navLinksRef = useRef<HTMLUListElement>(null);
 
-  const handleLinkHover = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+  const handleLinkHover = (
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+  ) => {
     soundFx.playTick(1200, 0.015);
     const target = e.currentTarget;
     const parent = navLinksRef.current;
@@ -39,14 +43,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   const navItems = [
-    { label: 'Home', href: '#about', type: 'link' },
-    { label: 'Skills', href: '#skills', type: 'link' },
-    { label: 'Deployments', href: '#projects', type: 'link' },
-    { label: 'Research', href: '#research', type: 'link' },
-    { label: 'Career', href: '#experience', type: 'link' },
-    { label: 'Certs', href: '#certifications', type: 'link' },
-    { label: 'Blogs', onClick: onOpenBlogs, type: 'action' },
-    { label: 'Products', href: '/product.html', target: '_blank', type: 'external' },
+    { label: "Home", href: "#about", type: "link" },
+    { label: "Skills", href: "#skills", type: "link" },
+    { label: "Deployments", href: "#projects", type: "link" },
+    { label: "Research", href: "#research", type: "link" },
+    { label: "Career", href: "#experience", type: "link" },
+    { label: "Certs", href: "#certifications", type: "link" },
+    { label: "Blogs", onClick: onOpenBlogs, type: "action" },
+    {
+      label: "Products",
+      href: "/product.html",
+      target: "_blank",
+      type: "external",
+    },
   ];
 
   return (
@@ -54,8 +63,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       <header
         className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out ${
           isScrolled
-            ? 'top-4 w-14 h-14 p-1 rounded-full bg-[#010308]/95 border-2 border-[#7ed957] shadow-[0_0_30px_rgba(126,217,87,0.4)] flex items-center justify-center'
-            : 'top-6 w-[94%] max-w-[1240px] px-6 py-3.5 rounded-full bg-[#010308]/75 backdrop-blur-xl border border-[#00F0FF]/25 shadow-[0_15px_40px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(0,240,255,0.06)] flex items-center justify-between'
+            ? "top-4 w-14 h-14 p-1 rounded-full bg-[#010308]/95 border-2 border-[#7ed957] shadow-[0_0_30px_rgba(126,217,87,0.4)] flex items-center justify-center"
+            : "top-6 w-[94%] max-w-[1240px] px-6 py-3.5 rounded-full bg-[#010308]/75 backdrop-blur-xl border border-[#00F0FF]/25 shadow-[0_15px_40px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(0,240,255,0.06)] flex items-center justify-between"
         }`}
       >
         {/* Subtle decorative cyber corner notches (visible when expanded) */}
@@ -76,7 +85,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Logo Emblem Icon / Image */}
           <div
             className={`relative flex items-center justify-center rounded-full overflow-hidden bg-gradient-to-br from-[#050914] to-[#0d1627] border border-[#00F0FF]/40 shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all duration-500 ${
-              isScrolled ? 'w-11 h-11 rotate-360 border-[#7ed957] shadow-[0_0_20px_rgba(126,217,87,0.6)]' : 'w-9 h-9 group-hover:scale-105'
+              isScrolled
+                ? "w-11 h-11 rotate-360 border-[#7ed957] shadow-[0_0_20px_rgba(126,217,87,0.6)]"
+                : "w-9 h-9 group-hover:scale-105"
             }`}
           >
             {!logoError ? (
@@ -88,7 +99,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               />
             ) : (
               <>
-                <Shield className={`text-[#7ed957] transition-all duration-300 ${isScrolled ? 'w-5 h-5' : 'w-4 h-4'}`} />
+                <Shield
+                  className={`text-[#7ed957] transition-all duration-300 ${isScrolled ? "w-5 h-5" : "w-4 h-4"}`}
+                />
                 {/* Center Monogram */}
                 <span className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-black text-white">
                   M
@@ -104,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 MUSTAQUIM
               </span>
               <span className="text-[9px] font-mono tracking-widest text-[#8B9BB4] -mt-0.5">
-                CYBER & IT OPS
+                Cybersecurity and IT Engineer
               </span>
             </div>
           )}
@@ -126,7 +139,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {navItems.map((item) => (
                 <li key={item.label}>
-                  {item.type === 'link' ? (
+                  {item.type === "link" ? (
                     <a
                       href={item.href}
                       onMouseEnter={handleLinkHover}
@@ -134,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     >
                       {item.label}
                     </a>
-                  ) : item.type === 'external' ? (
+                  ) : item.type === "external" ? (
                     <a
                       href={item.href}
                       target="_blank"
@@ -181,7 +194,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="lg:hidden p-2 text-slate-300 hover:text-white bg-white/5 rounded-lg border border-white/10"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 text-[#7ed957]" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5 text-[#7ed957]" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         )}
@@ -202,11 +219,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Shield className="w-8 h-8 text-[#7ed957]" />
           </div>
 
-          <h2 className="text-xl font-mono font-black tracking-wider text-white mb-8">MUSTAQUIM AHMAD</h2>
+          <h2 className="text-xl font-mono font-black tracking-wider text-white mb-8">
+            MUSTAQUIM AHMAD
+          </h2>
 
           <div className="flex flex-col items-center gap-4 w-full max-w-xs">
             {navItems.map((item) =>
-              item.type === 'link' ? (
+              item.type === "link" ? (
                 <a
                   key={item.label}
                   href={item.href}
@@ -218,7 +237,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   {item.label}
                 </a>
-              ) : item.type === 'external' ? (
+              ) : item.type === "external" ? (
                 <a
                   key={item.label}
                   href={item.href}
@@ -241,7 +260,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   {item.label}
                 </button>
-              )
+              ),
             )}
 
             <a
